@@ -143,6 +143,30 @@ body.rtl .row b{text-align:left}body.rtl .progressline{direction:rtl}.rtl .sheet
 @media(max-width:430px){
   .lang{min-width:98px}.brand small{max-width:130px}.hero{padding:18px 14px}h1{font-size:28px}
 }
+
+/* Native mobile select popup readability */
+select option{
+  color:#101512 !important;
+  background:#ffffff !important;
+  font-weight:650;
+}
+select optgroup{
+  color:#101512 !important;
+  background:#ffffff !important;
+}
+.field select{
+  color:#edf4f0 !important;
+  color-scheme:dark;
+}
+
+
+.purpose-select{
+  appearance:auto;
+  background-color:#050a07 !important;
+  min-height:48px;
+}
+.purpose-select:invalid{color:#8a9890!important}
+
 </style>
 </head>
 <body>
@@ -296,7 +320,7 @@ body.rtl .row b{text-align:left}body.rtl .progressline{direction:rtl}.rtl .sheet
     <div class="sheet-top"><h2 id="modalTitle">Create a Raise</h2><button class="close" id="closeModal">×</button></div>
     <div class="field"><label id="fNameLabel">RAISE NAME</label><input id="fName" placeholder="e.g. Community Liquidity Raise"></div>
     <div class="field"><label id="fPurposeLabel">PURPOSE</label>
-      <select id="fPurpose">
+      <select id="fPurpose" class="purpose-select" aria-label="Purpose">
         <option value="Liquidity">Liquidity</option><option value="Development">Development</option>
         <option value="Community">Community</option><option value="Marketing">Marketing</option>
         <option value="Launch">Launch</option><option value="Other">Other</option>
@@ -442,4 +466,4 @@ $("language").onchange=e=>{lang=e.target.value;localStorage.setItem("noventra_ra
 apply();
 </script>
 </body>
-          </html>
+</html>
