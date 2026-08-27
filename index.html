@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#050706">
+<title>Noventra Raise</title>
+<script src="https://unpkg.com/@tonconnect/ui@3.0.2/dist/tonconnect-ui.min.js"></script>
+<style>
+:root{
+  --bg:#050706;--panel:#0b100e;--panel2:#101713;--line:#1c2b24;
+  --green:#2df58a;--green2:#19c968;--text:#f3f7f4;--muted:#7f8c86;
+  --gold:#d9b65c;--danger:#ff647c;
+}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 50% -10%,#123b28 0,#050706 38%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select,textarea{font:inherit}
+.app{max-width:520px;margin:auto;min-height:100vh;padding:18px 16px 40px}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:10px}.logo{width:38px;height:38px;border:1px solid #2b8e60;border-radius:12px;display:grid;place-items:center;background:#07110c;box-shadow:0 0 22px #19c96822;font-weight:900;color:var(--green)}
+.brand b{letter-spacing:.5px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+.connect{min-width:0}.connect button{border-radius:12px!important}
+.hero{border:1px solid #1c382b;border-radius:24px;background:linear-gradient(145deg,#0b1510,#080b09);padding:20px;box-shadow:0 20px 60px #0008}
+.kicker{color:var(--green);font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase}
+h1{font-size:31px;margin:8px 0 5px;letter-spacing:-1px}.desc{color:#a7b1ac;line-height:1.45;font-size:14px;margin:0 0 18px}
+.meta{display:flex;gap:8px;flex-wrap:wrap}.pill{border:1px solid var(--line);background:#0d1511;color:#b8c2bc;padding:7px 10px;border-radius:999px;font-size:11px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.stat{background:#0a0f0c;border:1px solid var(--line);border-radius:16px;padding:13px}.stat span{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}.stat strong{font-size:18px}
+.progress{height:10px;background:#07100b;border:1px solid #21402e;border-radius:99px;overflow:hidden;margin:17px 0 7px}.bar{height:100%;background:linear-gradient(90deg,#16b85f,#51ff9d);border-radius:99px;box-shadow:0 0 18px #2df58a88;width:0}
+.progressline{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}
+.actions{margin-top:16px}.amounts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.amt{border:1px solid var(--line);background:#101411;color:#e9efeb;border-radius:13px;padding:12px 5px;cursor:pointer}.amt.active{border-color:var(--green);color:var(--green);box-shadow:0 0 18px #2df58a18}
+.custom{width:100%;margin-top:8px;border:1px solid var(--line);background:#0b100d;color:#fff;border-radius:13px;padding:13px;outline:none}
+.send{width:100%;margin-top:10px;border:0;border-radius:16px;padding:16px;background:linear-gradient(100deg,#20df79,#72ffb2);color:#041009;font-weight:900;font-size:17px;cursor:pointer;box-shadow:0 12px 35px #20df7940}
+.send:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.section{margin-top:18px}.section h2{font-size:15px;margin:0 0 10px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #142019;font-size:12px}.row:last-child{border-bottom:0}.row span{color:var(--muted)}.row b{font-weight:650;text-align:right}
+.activity{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #142019}.activity:last-child{border-bottom:0}.dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);flex:none}.tx{min-width:0;flex:1}.tx b{font-size:12px}.tx small{display:block;color:var(--muted);margin-top:3px}.txamt{font-weight:800;color:var(--green);font-size:12px}
+.nav{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}.nav button{padding:12px;border-radius:13px;border:1px solid var(--line);background:#0b100d;color:#cbd4ce;cursor:pointer}.nav button.primary{border-color:#24583c;color:var(--green)}
+.footer{text-align:center;color:#58645e;font-size:10px;margin-top:22px;line-height:1.5}
+.modal{position:fixed;inset:0;background:#000b;display:none;align-items:flex-end;justify-content:center;padding:12px;z-index:20}.modal.open{display:flex}.sheet{width:min(520px,100%);background:#0b100e;border:1px solid #24402f;border-radius:24px;padding:18px;box-shadow:0 -20px 80px #000}
+.sheet h2{margin:0 0 14px}.field{margin:10px 0}.field label{display:block;color:#829087;font-size:11px;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;background:#070b09;border:1px solid var(--line);border-radius:12px;padding:12px;color:#fff;outline:none}.field textarea{min-height:78px;resize:vertical}.sheet-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.sheet-actions button{padding:13px;border-radius:12px;border:1px solid var(--line);background:#111713;color:#fff}.sheet-actions .create{background:var(--green);color:#031009;border:0;font-weight:900}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#111914;border:1px solid #2b513b;color:#eaf6ef;border-radius:12px;padding:11px 14px;font-size:12px;display:none;z-index:30;max-width:90%}
+.toast.show{display:block}
+@media(min-width:700px){body{padding:20px}.app{border:1px solid #142019;border-radius:28px;background:#050806}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="brand"><div class="logo">N</div><div><b>NOVENTRA</b><small>RAISE · ON-CHAIN FUNDING</small></div></div>
+    <div class="connect" id="ton-connect"></div>
+  </div>
+
+  <main class="hero">
+    <div class="kicker">Community Raise · NVR-7F29A</div>
+    <h1 id="raiseName">TON Community Build</h1>
+    <p class="desc" id="raiseDesc">A transparent community raise powered by TON. Every contribution is sent directly to the configured fund wallet.</p>
+    <div class="meta">
+      <span class="pill" id="purpose">Development</span><span class="pill">TON</span><span class="pill" id="status">ACTIVE</span>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span>RAISED</span><strong id="raised">0 TON</strong></div>
+      <div class="stat"><span>TARGET</span><strong id="target">100 TON</strong></div>
+      <div class="stat"><span>CONTRIBUTORS</span><strong id="contributors">0</strong></div>
+      <div class="stat"><span>TIME LEFT</span><strong id="timeLeft">Open</strong></div>
+    </div>
+
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="progressline"><span id="percent">0% funded</span><span id="remaining">100 TON remaining</span></div>
+
+    <div class="actions">
+      <div class="amounts">
+        <button class="amt" data-value="1">1 TON</button>
+        <button class="amt active" data-value="5">5 TON</button>
+        <button class="amt" data-value="10">10 TON</button>
+      </div>
+      <input class="custom" id="customAmount" type="number" min="0.1" step="0.1" placeholder="Custom amount (TON)">
+      <button class="send" id="sendBtn">Connect wallet to contribute</button>
+    </div>
+  </main>
+
+  <div class="nav">
+    <button class="primary" id="createBtn">＋ Create Raise</button>
+    <button id="settingsBtn">⚙ Raise Settings</button>
+  </div>
+
+  <section class="section">
+    <h2>ON-CHAIN DETAILS</h2>
+    <div class="card">
+      <div class="row"><span>Raise ID</span><b>NVR-7F29A</b></div>
+      <div class="row"><span>Fund wallet</span><b id="fundWallet">Not configured</b></div>
+      <div class="row"><span>Creator</span><b id="creatorWallet">Demo creator</b></div>
+      <div class="row"><span>Network</span><b>TON Mainnet</b></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>RECENT ACTIVITY</h2>
+    <div class="card" id="activity"></div>
+  </section>
+
+  <div class="footer">
+    NOVENTRA RAISE · Non-custodial interface<br>
+    Always verify the destination wallet before signing a transaction.
+  </div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="sheet">
+    <h2>Create a Raise</h2>
+    <div class="field"><label>RAISE NAME</label><input id="fName" placeholder="e.g. Community Liquidity Raise"></div>
+    <div class="field"><label>PURPOSE</label><select id="fPurpose"><option>Liquidity</option><option>Development</option><option>Community</option><option>Marketing</option><option>Launch</option><option>Other</option></select></div>
+    <div class="field"><label>TARGET (TON)</label><input id="fTarget" type="number" min="1" step="0.1" placeholder="100"></div>
+    <div class="field"><label>FUND WALLET ADDRESS</label><input id="fWallet" placeholder="EQ..."></div>
+    <div class="field"><label>DESCRIPTION</label><textarea id="fDesc" placeholder="What is this raise for?"></textarea></div>
+    <div class="sheet-actions"><button id="closeModal">Cancel</button><button class="create" id="saveRaise">Create Raise</button></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const CONFIG = {
+  manifestUrl: "https://getnoventra.org/tonconnect-manifest.json",
+  defaultRaise: {
+    id:"NVR-7F29A", name:"TON Community Build", purpose:"Development",
+    target:100, raised:0, contributors:0, wallet:"",
+    desc:"A transparent community raise powered by TON. Every contribution is sent directly to the configured fund wallet.",
+    deadline:null
+  }
+};
+
+let raise = JSON.parse(localStorage.getItem("noventra_raise_v1") || "null") || {...CONFIG.defaultRaise};
+let selected = 5;
+let txs = JSON.parse(localStorage.getItem("noventra_raise_txs_v1") || "[]");
+
+const $ = id => document.getElementById(id);
+function save(){localStorage.setItem("noventra_raise_v1",JSON.stringify(raise));localStorage.setItem("noventra_raise_txs_v1",JSON.stringify(txs))}
+function short(a){return a && a.length>12 ? a.slice(0,6)+"…"+a.slice(-5) : (a||"Not configured")}
+function toast(s){$("toast").textContent=s;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),2800)}
+function render(){
+  $("raiseName").textContent=raise.name;
+  $("raiseDesc").textContent=raise.desc;
+  $("purpose").textContent=raise.purpose;
+  $("raised").textContent=Number(raise.raised).toFixed(2)+" TON";
+  $("target").textContent=Number(raise.target).toFixed(2)+" TON";
+  $("contributors").textContent=raise.contributors||0;
+  $("fundWallet").textContent=short(raise.wallet);
+  const pct=raise.target ? Math.min(100,(raise.raised/raise.target)*100) : 0;
+  $("bar").style.width=pct+"%";$("percent").textContent=pct.toFixed(1)+"% funded";
+  $("remaining").textContent=Math.max(0,raise.target-raise.raised).toFixed(2)+" TON remaining";
+  $("sendBtn").textContent=raise.wallet ? `Send ${selected} TON` : "Configure fund wallet first";
+  $("status").textContent=pct>=100?"TARGET REACHED":"ACTIVE";
+  renderActivity();
+}
+function renderActivity(){
+  const box=$("activity");
+  if(!txs.length){box.innerHTML='<div style="color:#66736b;font-size:12px;padding:6px 0">No contributions yet. The first transaction will appear here.</div>';return}
+  box.innerHTML=txs.slice(0,8).map(x=>`<div class="activity"><div class="dot"></div><div class="tx"><b>${short(x.from)}</b><small>${new Date(x.time).toLocaleString()}</small></div><div class="txamt">+${Number(x.amount).toFixed(2)} TON</div></div>`).join("");
+}
+
+const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+  manifestUrl: CONFIG.manifestUrl,
+  buttonRootId: "ton-connect",
+  uiPreferences: { theme: "DARK", borderRadius: "m" }
+});
+
+tonConnectUI.onStatusChange(wallet=>{
+  if(wallet){
+    $("creatorWallet").textContent=short(wallet.account.address);
+    $("sendBtn").textContent=raise.wallet ? `Send ${selected} TON` : "Configure fund wallet first";
+  }else{
+    $("creatorWallet").textContent="Not connected";
+    $("sendBtn").textContent=raise.wallet ? `Connect wallet to contribute` : "Configure fund wallet first";
+  }
+});
+
+document.querySelectorAll(".amt").forEach(b=>b.onclick=()=>{
+  selected=Number(b.dataset.value);$("customAmount").value="";
+  document.querySelectorAll(".amt").forEach(x=>x.classList.remove("active"));b.classList.add("active");render();
+});
+$("customAmount").oninput=()=>{
+  const n=Number($("customAmount").value);
+  if(n>0){selected=n;document.querySelectorAll(".amt").forEach(x=>x.classList.remove("active"));render()}
+};
+
+$("sendBtn").onclick=async()=>{
+  if(!raise.wallet){toast("Set a fund wallet address first.");return}
+  if(!tonConnectUI.connected){await tonConnectUI.openModal();return}
+  const amount=Number(selected);
+  if(!amount || amount<=0){toast("Enter a valid TON amount.");return}
+  if(raise.raised>=raise.target){toast("This raise has reached its target.");return}
+  try{
+    await tonConnectUI.sendTransaction({
+      validUntil:Math.floor(Date.now()/1000)+300,
+      network:"-239",
+      messages:[{address:raise.wallet,amount:String(Math.round(amount*1e9))}]
+    });
+    const addr=tonConnectUI.account?.address || "Connected wallet";
+    raise.raised=Number(raise.raised)+amount;
+    raise.contributors=Number(raise.contributors)+1;
+    txs.unshift({from:addr,amount,time:Date.now()});
+    save();render();toast("Transaction submitted successfully.");
+  }catch(e){console.error(e);toast("Transaction cancelled or failed.")}
+};
+
+$("createBtn").onclick=()=>$("modal").classList.add("open");
+$("closeModal").onclick=()=>$("modal").classList.remove("open");
+$("settingsBtn").onclick=()=>{
+  $("fName").value=raise.name;$("fPurpose").value=raise.purpose;$("fTarget").value=raise.target;
+  $("fWallet").value=raise.wallet;$("fDesc").value=raise.desc;$("modal").classList.add("open");
+};
+$("saveRaise").onclick=()=>{
+  const name=$("fName").value.trim(), target=Number($("fTarget").value), wallet=$("fWallet").value.trim();
+  if(!name||!target||!wallet){toast("Name, target and fund wallet are required.");return}
+  raise={...raise,name,purpose:$("fPurpose").value,target,wallet,desc:$("fDesc").value.trim()||"A transparent community raise powered by TON."};
+  save();render();$("modal").classList.remove("open");toast("Raise configuration saved.");
+};
+render();
+</script>
+</body>
+</html>
