@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="google" content="notranslate">
 <meta name="theme-color" content="#030504">
-<meta name="apple-mobile-web-app-capable" content="yes">
 <title>Noventra Raise</title>
 
 <script src="https://unpkg.com/@tonconnect/ui@3.0.2/dist/tonconnect-ui.min.js"></script>
@@ -16,11 +15,11 @@
   --panel:#07100c;
   --panel2:#0a1510;
   --line:#173127;
-  --line2:#214637;
+  --line2:#24503b;
   --green:#28ed86;
   --green2:#10c967;
   --text:#f4f8f5;
-  --muted:#83918a;
+  --muted:#82918a;
   --soft:#b9c5bf;
   --gold:#d8bc6a;
   --red:#ff657b;
@@ -28,26 +27,24 @@
 
 *{
   box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
 }
 
-html{
-  margin:0;
-  padding:0;
-  background:var(--bg);
-  scroll-behavior:auto;
-}
-
+html,
 body{
   margin:0;
   padding:0;
-  min-height:100vh;
-  background:
-    radial-gradient(700px 400px at 50% -160px,rgba(40,237,134,.15),transparent 62%),
-    radial-gradient(500px 360px at 100% 25%,rgba(24,102,68,.10),transparent 68%),
-    var(--bg);
+  min-height:100%;
+  background:var(--bg);
   color:var(--text);
   font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(700px 400px at 50% -180px,rgba(40,237,134,.15),transparent 62%),
+    radial-gradient(500px 350px at 100% 25%,rgba(24,102,68,.10),transparent 68%),
+    var(--bg);
 }
 
 button,
@@ -64,27 +61,20 @@ button{
 .app{
   width:min(560px,100%);
   min-height:100vh;
-  margin:0 auto;
-  padding:10px 14px 112px;
+  margin:auto;
+  padding:8px 14px 110px;
 }
 
-/* =========================
-   HEADER
-========================= */
-
 .top{
-  position:relative;
+  position:sticky;
+  top:0;
   z-index:30;
   display:flex;
   flex-direction:column;
-  gap:10px;
-  padding:3px 0 15px;
-  background:linear-gradient(
-    180deg,
-    rgba(3,5,4,.98),
-    rgba(3,5,4,.92),
-    rgba(3,5,4,0)
-  );
+  gap:9px;
+  padding:4px 0 13px;
+  background:linear-gradient(#030504f8,#030504e8,transparent);
+  backdrop-filter:blur(10px);
 }
 
 .brand{
@@ -96,8 +86,8 @@ button{
 }
 
 .logo{
-  width:48px;
-  height:48px;
+  width:46px;
+  height:46px;
   flex:none;
   border-radius:15px;
   border:1px solid #2b7654;
@@ -105,7 +95,7 @@ button{
   place-items:center;
   background:linear-gradient(145deg,#0c1b14,#07100b);
   color:var(--green);
-  font-size:21px;
+  font-size:20px;
   font-weight:950;
   box-shadow:0 0 30px rgba(40,237,134,.10);
 }
@@ -113,7 +103,7 @@ button{
 .brand b{
   display:block;
   font-size:17px;
-  letter-spacing:1.35px;
+  letter-spacing:1.4px;
 }
 
 .brand small{
@@ -122,6 +112,9 @@ button{
   color:#6e7c75;
   font-size:8px;
   letter-spacing:.9px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .head-actions{
@@ -142,7 +135,6 @@ button{
   border:1px solid #1d3a2d;
   font-size:11px;
   font-weight:800;
-  outline:none;
 }
 
 #ton-connect{
@@ -155,15 +147,10 @@ button{
   width:100%!important;
   max-width:none!important;
   min-width:0!important;
-  height:44px!important;
   white-space:nowrap!important;
   overflow:hidden!important;
   text-overflow:ellipsis!important;
 }
-
-/* =========================
-   VIEWS
-========================= */
 
 .view{
   display:none!important;
@@ -173,40 +160,34 @@ button{
   display:block!important;
 }
 
-/* =========================
-   HERO
-========================= */
-
 .hero{
   position:relative;
   overflow:hidden;
   border:1px solid #1a3a2c;
   border-radius:27px;
-  padding:21px 17px 18px;
+  padding:22px 17px 18px;
   background:
     linear-gradient(145deg,rgba(10,25,17,.98),rgba(4,9,6,.99));
   box-shadow:
-    0 22px 70px rgba(0,0,0,.40),
+    0 24px 75px rgba(0,0,0,.40),
     inset 0 1px 0 rgba(255,255,255,.025);
 }
 
 .hero:after{
   content:"";
   position:absolute;
-  right:-80px;
+  right:-90px;
   top:-90px;
-  width:210px;
-  height:210px;
+  width:220px;
+  height:220px;
   border-radius:50%;
   background:rgba(40,237,134,.055);
-  filter:blur(45px);
+  filter:blur(42px);
   pointer-events:none;
 }
 
 .kicker,
 .eyebrow{
-  position:relative;
-  z-index:1;
   font-size:10px;
   letter-spacing:1.8px;
   color:#40f097;
@@ -215,47 +196,40 @@ button{
 }
 
 .title-row{
-  position:relative;
-  z-index:1;
   display:flex;
-  gap:10px;
   align-items:flex-start;
   justify-content:space-between;
+  gap:10px;
 }
 
 h1{
-  margin:8px 0 8px;
+  margin:7px 0 8px;
   font-size:31px;
-  line-height:1.05;
-  letter-spacing:-1.15px;
-  overflow-wrap:anywhere;
+  line-height:1.04;
+  letter-spacing:-1.1px;
 }
 
 .share-btn{
   flex:none;
-  margin-top:5px;
-  width:43px;
-  height:43px;
+  margin-top:7px;
+  width:44px;
+  height:44px;
   border-radius:14px;
   border:1px solid #254536;
   background:#08100c;
   color:#d8e4dd;
   cursor:pointer;
-  font-size:18px;
+  font-size:20px;
 }
 
 .desc{
-  position:relative;
-  z-index:1;
   margin:0 0 15px;
   color:#aab8b0;
   font-size:13px;
-  line-height:1.55;
+  line-height:1.52;
 }
 
 .meta{
-  position:relative;
-  z-index:1;
   display:flex;
   gap:7px;
   flex-wrap:wrap;
@@ -277,10 +251,6 @@ h1{
   background:#08150e;
 }
 
-/* =========================
-   STATS
-========================= */
-
 .stats{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -289,16 +259,16 @@ h1{
 }
 
 .stat{
-  min-width:0;
-  padding:14px;
+  padding:15px;
+  min-height:86px;
   border-radius:18px;
   border:1px solid #172e25;
-  background:rgba(4,9,6,.56);
+  background:rgba(4,9,6,.60);
 }
 
 .stat span{
   display:block;
-  margin-bottom:6px;
+  margin-bottom:7px;
   color:var(--muted);
   font-size:10px;
   letter-spacing:.5px;
@@ -307,14 +277,8 @@ h1{
 .stat strong{
   display:block;
   font-size:21px;
-  letter-spacing:-.4px;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  letter-spacing:-.5px;
 }
-
-/* =========================
-   PROGRESS
-========================= */
 
 .progress{
   height:10px;
@@ -331,20 +295,16 @@ h1{
   background:linear-gradient(90deg,#16b85f,#55ffa4);
   border-radius:99px;
   box-shadow:0 0 18px rgba(40,237,134,.5);
-  transition:width .35s ease;
+  transition:width .4s ease;
 }
 
 .progressline{
   display:flex;
   justify-content:space-between;
-  gap:10px;
+  gap:8px;
   color:#718077;
   font-size:10px;
 }
-
-/* =========================
-   ONCHAIN STATUS
-========================= */
 
 .onchain-status{
   display:flex;
@@ -352,7 +312,7 @@ h1{
   gap:8px;
   margin-top:13px;
   padding:10px 11px;
-  min-height:43px;
+  min-height:44px;
   border:1px solid #173529;
   border-radius:13px;
   background:#06100b;
@@ -365,14 +325,14 @@ h1{
   height:7px;
   flex:none;
   border-radius:50%;
-  background:#27e984;
-  box-shadow:0 0 12px #27e984;
+  background:var(--green);
+  box-shadow:0 0 12px var(--green);
 }
 
 .onchain-status button{
   margin-left:auto;
-  width:27px;
-  height:27px;
+  width:28px;
+  height:28px;
   flex:none;
   border:1px solid #214534;
   border-radius:9px;
@@ -380,19 +340,6 @@ h1{
   color:#35ed8d;
   cursor:pointer;
 }
-
-.onchain-status.syncing .onchain-dot{
-  animation:pulse 1s infinite;
-}
-
-@keyframes pulse{
-  0%,100%{opacity:.35}
-  50%{opacity:1}
-}
-
-/* =========================
-   ACTIONS
-========================= */
 
 .actions{
   margin-top:17px;
@@ -405,7 +352,7 @@ h1{
 }
 
 .amt{
-  padding:13px 5px;
+  height:50px;
   border-radius:14px;
   border:1px solid #183329;
   background:#09110d;
@@ -437,13 +384,13 @@ h1{
 .field input:focus,
 .field textarea:focus,
 .field select:focus{
-  border-color:#2a6648;
+  border-color:#2b7654;
   box-shadow:0 0 0 3px rgba(40,237,134,.06);
 }
 
 .send{
   width:100%;
-  min-height:55px;
+  height:55px;
   margin-top:10px;
   border:0;
   border-radius:16px;
@@ -484,10 +431,6 @@ h1{
   background:linear-gradient(180deg,#091711,#07110c);
 }
 
-/* =========================
-   SECTIONS
-========================= */
-
 .section{
   margin-top:19px;
 }
@@ -496,20 +439,19 @@ h1{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
+  gap:8px;
   margin-bottom:9px;
 }
 
 .section-head h2{
   margin:0;
   font-size:12px;
-  letter-spacing:.85px;
+  letter-spacing:.9px;
 }
 
 .section-head button{
-  flex:none;
-  background:none;
   border:0;
+  background:none;
   color:var(--green);
   font-size:10px;
   font-weight:850;
@@ -526,6 +468,7 @@ h1{
 .row{
   display:flex;
   justify-content:space-between;
+  align-items:flex-start;
   gap:14px;
   padding:13px 0;
   border-bottom:1px solid #13251e;
@@ -542,33 +485,24 @@ h1{
 }
 
 .row b{
-  max-width:65%;
+  max-width:68%;
   text-align:right;
   word-break:break-word;
-  overflow-wrap:anywhere;
 }
-
-#explorerLink{
-  color:#35ed8d;
-  text-decoration:none;
-}
-
-/* =========================
-   VERIFIED
-========================= */
 
 .verified-row b{
   color:var(--green);
 }
 
 .sync-row b{
+  color:#c3cec8;
   font-size:10px;
-  color:#a8b6ae;
 }
 
-/* =========================
-   ACTIVITY
-========================= */
+#explorerLink{
+  color:#35ed8d;
+  text-decoration:none;
+}
 
 .activity{
   display:flex;
@@ -599,8 +533,6 @@ h1{
 .tx b{
   display:block;
   font-size:11px;
-  overflow:hidden;
-  text-overflow:ellipsis;
 }
 
 .tx small{
@@ -608,6 +540,9 @@ h1{
   margin-top:3px;
   color:#66736c;
   font-size:9px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
 .txamt{
@@ -618,82 +553,18 @@ h1{
 }
 
 .empty{
-  padding:13px 0;
+  padding:18px 5px;
   color:#66736c;
   font-size:11px;
   text-align:center;
 }
 
-/* =========================
-   HOME / EXPLORE
-========================= */
-
-.home-panel .hero{
-  padding:25px 19px 20px;
-}
-
-.home-title{
-  position:relative;
-  z-index:1;
-  font-size:32px;
-  line-height:1.08;
-  letter-spacing:-1.4px;
-  margin:8px 0 9px;
-}
-
-.home-copy{
-  position:relative;
-  z-index:1;
-  margin:0;
-  color:#aebbb4;
-  line-height:1.52;
-  font-size:13px;
-  max-width:480px;
-}
-
-.quick{
-  position:relative;
-  z-index:1;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:17px;
-}
-
-.quick .action-btn{
-  min-height:67px;
-  padding:13px 14px;
-  text-align:left;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.quick strong{
-  display:block;
-  font-size:14px;
-}
-
-.quick small{
-  display:block;
-  margin-top:4px;
-  color:#718078;
-  font-size:10px;
-  line-height:1.25;
-}
-
 .raise-card{
   border:1px solid #193329;
-  border-radius:20px;
-  padding:15px;
+  border-radius:19px;
+  padding:14px;
   background:linear-gradient(150deg,#09130e,#050a07);
   margin-bottom:9px;
-  cursor:pointer;
-  transition:transform .15s ease,border-color .15s ease;
-}
-
-.raise-card:active{
-  transform:scale(.99);
 }
 
 .raise-head{
@@ -707,9 +578,9 @@ h1{
 }
 
 .raise-head span{
-  font-size:10px;
   color:var(--green);
-  white-space:nowrap;
+  font-size:10px;
+  font-weight:850;
 }
 
 .raise-meta{
@@ -721,15 +592,53 @@ h1{
   font-size:10px;
 }
 
-/* =========================
-   BOTTOM NAV
-========================= */
+.home-title{
+  margin:8px 0;
+  font-size:31px;
+  line-height:1.07;
+  letter-spacing:-1.3px;
+}
+
+.home-copy{
+  margin:0;
+  color:#a8b6ae;
+  line-height:1.5;
+  font-size:13px;
+}
+
+.quick{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:17px;
+}
+
+.quick .action-btn{
+  min-height:68px;
+  padding:13px 14px;
+  text-align:left;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.quick strong{
+  font-size:14px;
+}
+
+.quick small{
+  display:block;
+  margin-top:4px;
+  color:#718078;
+  font-size:10px;
+  line-height:1.25;
+}
 
 .bottom{
   position:fixed;
   z-index:40;
   left:50%;
-  bottom:max(9px,env(safe-area-inset-bottom));
+  bottom:max(10px,env(safe-area-inset-bottom));
   transform:translateX(-50%);
   width:min(540px,calc(100% - 18px));
   padding:6px;
@@ -738,7 +647,7 @@ h1{
   gap:6px;
   border:1px solid #1c3529;
   border-radius:21px;
-  background:rgba(5,11,8,.95);
+  background:rgba(5,11,8,.94);
   backdrop-filter:blur(18px);
   box-shadow:0 16px 45px rgba(0,0,0,.50);
 }
@@ -750,7 +659,7 @@ h1{
   background:transparent;
   color:#82918a;
   font-size:10px;
-  font-weight:800;
+  font-weight:850;
   cursor:pointer;
 }
 
@@ -761,23 +670,19 @@ h1{
 
 .nav-icon{
   display:block;
-  font-size:16px;
   margin-bottom:2px;
+  font-size:16px;
 }
-
-/* =========================
-   MODAL
-========================= */
 
 .modal{
   position:fixed;
   inset:0;
-  z-index:80;
+  z-index:60;
   display:none;
   align-items:flex-end;
   justify-content:center;
   padding:9px;
-  background:rgba(0,0,0,.75);
+  background:rgba(0,0,0,.76);
   backdrop-filter:blur(8px);
 }
 
@@ -787,7 +692,7 @@ h1{
 
 .sheet{
   width:min(560px,100%);
-  max-height:91vh;
+  max-height:92vh;
   overflow:auto;
   padding:18px;
   border-radius:27px 27px 22px 22px;
@@ -810,14 +715,14 @@ h1{
 }
 
 .close{
-  width:39px;
-  height:39px;
-  flex:none;
+  width:40px;
+  height:40px;
   border-radius:12px;
   border:1px solid #20392c;
   background:#08100c;
   color:#cbd7d0;
   cursor:pointer;
+  font-size:22px;
 }
 
 .field{
@@ -846,7 +751,7 @@ h1{
 }
 
 .field textarea{
-  min-height:90px;
+  min-height:95px;
   resize:vertical;
 }
 
@@ -858,14 +763,7 @@ select optgroup{
 }
 
 .field select{
-  color:#edf4f0!important;
   color-scheme:dark;
-}
-
-.purpose-select{
-  appearance:auto;
-  background-color:#050a07!important;
-  min-height:48px;
 }
 
 .sheet-actions{
@@ -876,7 +774,7 @@ select optgroup{
 }
 
 .sheet-actions button{
-  height:50px;
+  height:51px;
   border-radius:14px;
   border:1px solid #1d362b;
   background:#0a120d;
@@ -890,18 +788,14 @@ select optgroup{
   color:#031008;
 }
 
-/* =========================
-   TOAST
-========================= */
-
 .toast{
   position:fixed;
   z-index:100;
   left:50%;
-  bottom:78px;
+  bottom:82px;
   transform:translateX(-50%);
   display:none;
-  width:min(90%,420px);
+  width:min(90%,430px);
   padding:12px 14px;
   border:1px solid #2b523e;
   border-radius:13px;
@@ -916,14 +810,6 @@ select optgroup{
   display:block;
 }
 
-/* =========================
-   RTL
-========================= */
-
-body.rtl{
-  direction:rtl;
-}
-
 body.rtl .row b{
   text-align:left;
 }
@@ -936,49 +822,11 @@ body.rtl .sheet{
   text-align:right;
 }
 
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:520px){
-  .app{
-    padding-top:7px;
-    padding-left:12px;
-    padding-right:12px;
-  }
-
-  .brand{
-    width:100%;
-  }
-
-  .brand small{
-    max-width:230px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-
-  .hero{
-    border-radius:25px;
-  }
-
-  h1{
-    font-size:29px;
-  }
-
-  .home-title{
-    font-size:30px;
-  }
-
-  .row{
-    padding:12px 0;
-  }
-}
-
 @media(max-width:380px){
+
   .app{
-    padding-left:10px;
-    padding-right:10px;
+    padding-left:11px;
+    padding-right:11px;
   }
 
   .head-actions{
@@ -987,11 +835,10 @@ body.rtl .sheet{
 
   .lang{
     width:104px;
-    font-size:10px;
   }
 
   .home-title{
-    font-size:27px;
+    font-size:28px;
   }
 
   .quick{
@@ -1005,18 +852,6 @@ body.rtl .sheet{
   .nav-btn{
     font-size:9px;
   }
-
-  .stats{
-    gap:7px;
-  }
-
-  .stat{
-    padding:12px;
-  }
-
-  .stat strong{
-    font-size:19px;
-  }
 }
 </style>
 </head>
@@ -1029,6 +864,7 @@ body.rtl .sheet{
 
   <div class="brand">
     <div class="logo">N</div>
+
     <div>
       <b>NOVENTRA</b>
       <small>RAISE · ON-CHAIN FUNDING</small>
@@ -1037,7 +873,7 @@ body.rtl .sheet{
 
   <div class="head-actions">
 
-    <select id="language" class="lang" aria-label="Select language">
+    <select id="language" class="lang">
       <option value="en">🇬🇧 English</option>
       <option value="tr">🇹🇷 Türkçe</option>
       <option value="ru">🇷🇺 Русский</option>
@@ -1055,20 +891,24 @@ body.rtl .sheet{
 
 </header>
 
-<!-- ================= HOME ================= -->
 
-<main id="homeView" class="view home-panel active">
+<!-- HOME -->
+
+<main id="homeView" class="view active">
 
   <section class="hero">
 
-    <div class="eyebrow">NOVENTRA RAISE</div>
+    <div class="eyebrow">
+      NOVENTRA RAISE
+    </div>
 
     <div class="home-title" id="homeTitle">
       On-chain funding, built differently.
     </div>
 
     <p class="home-copy" id="homeCopy">
-      Create transparent TON raises, contribute directly from your wallet, and keep the entire funding flow simple and verifiable.
+      Create transparent TON raises, contribute directly from your wallet,
+      and keep the entire funding flow simple and verifiable.
     </p>
 
     <div class="quick">
@@ -1086,6 +926,7 @@ body.rtl .sheet{
     </div>
 
   </section>
+
 
   <section class="section">
 
@@ -1112,365 +953,378 @@ body.rtl .sheet{
 
 </main>
 
-<!-- ================= RAISE ================= -->
+
+<!-- RAISE -->
 
 <main id="raiseView" class="view">
 
-<section class="hero">
+  <section class="hero">
 
-  <div class="kicker" id="kicker">
-    COMMUNITY RAISE · NVR-7F29A
-  </div>
-
-  <div class="title-row">
-
-    <h1 id="raiseName">
-      Vaelor Liquidity
-    </h1>
-
-    <button class="share-btn" id="shareBtn" aria-label="Share">
-      ↗
-    </button>
-
-  </div>
-
-  <p class="desc" id="raiseDesc">
-    A transparent TON liquidity raise for the Vaelor ecosystem.
-  </p>
-
-  <div class="meta">
-
-    <span class="pill green" id="purpose">
-      Liquidity
-    </span>
-
-    <span class="pill">
-      TON
-    </span>
-
-    <span class="pill" id="status">
-      ACTIVE
-    </span>
-
-  </div>
-
-  <div class="stats">
-
-    <div class="stat">
-      <span id="labelRaised">RAISED</span>
-      <strong id="raised">0.00 TON</strong>
+    <div class="kicker" id="kicker">
+      Community Raise · NVR-7F29A
     </div>
 
-    <div class="stat">
-      <span id="labelTarget">TARGET</span>
-      <strong id="target">100.00 TON</strong>
-    </div>
+    <div class="title-row">
 
-    <div class="stat">
-      <span id="labelContributors">CONTRIBUTORS</span>
-      <strong id="contributors">0</strong>
-    </div>
+      <h1 id="raiseName">
+        Vaelor Liquidity
+      </h1>
 
-    <div class="stat">
-      <span id="labelTime">TIME LEFT</span>
-      <strong id="timeLeft">Open</strong>
-    </div>
-
-  </div>
-
-  <div class="progress">
-    <div class="bar" id="bar"></div>
-  </div>
-
-  <div class="progressline">
-    <span id="percent">0.0% funded</span>
-    <span id="remaining">100.00 TON remaining</span>
-  </div>
-
-  <div class="onchain-status" id="onchainStatus">
-
-    <span class="onchain-dot"></span>
-
-    <span id="onchainStatusText">
-      TON Mainnet · Ready
-    </span>
-
-    <button id="refreshChain" type="button">
-      ↻
-    </button>
-
-  </div>
-
-  <div class="actions">
-
-    <div class="amounts">
-
-      <button class="amt" data-value="1">
-        1 TON
-      </button>
-
-      <button class="amt active" data-value="5">
-        5 TON
-      </button>
-
-      <button class="amt" data-value="10">
-        10 TON
+      <button class="share-btn" id="shareBtn">
+        ↗
       </button>
 
     </div>
 
-    <input
-      class="custom"
-      id="customAmount"
-      type="number"
-      min="0.1"
-      step="0.1"
-      placeholder="Custom amount (TON)"
-    >
 
-    <button class="send" id="sendBtn">
-      Connect wallet to contribute
-    </button>
+    <p class="desc" id="raiseDesc">
+      This raise is dedicated to establishing and strengthening Vaelor's
+      initial liquidity on the TON ecosystem.
+    </p>
 
-    <div class="grid2">
 
-      <button class="action-btn primary" id="raiseSettings">
+    <div class="meta">
+
+      <span class="pill green" id="purpose">
+        Liquidity
+      </span>
+
+      <span class="pill">
+        TON
+      </span>
+
+      <span class="pill" id="status">
+        ACTIVE
+      </span>
+
+    </div>
+
+
+    <div class="stats">
+
+      <div class="stat">
+        <span id="labelRaised">RAISED</span>
+        <strong id="raised">0.00 TON</strong>
+      </div>
+
+      <div class="stat">
+        <span id="labelTarget">TARGET</span>
+        <strong id="target">100.00 TON</strong>
+      </div>
+
+      <div class="stat">
+        <span id="labelContributors">CONTRIBUTORS</span>
+        <strong id="contributors">0</strong>
+      </div>
+
+      <div class="stat">
+        <span id="labelTime">TIME LEFT</span>
+        <strong id="timeLeft">Open</strong>
+      </div>
+
+    </div>
+
+
+    <div class="progress">
+      <div class="bar" id="bar"></div>
+    </div>
+
+    <div class="progressline">
+      <span id="percent">0.0% funded</span>
+      <span id="remaining">100.00 TON remaining</span>
+    </div>
+
+
+    <div class="onchain-status">
+
+      <span class="onchain-dot"></span>
+
+      <span id="onchainStatusText">
+        TON Mainnet · Ready
+      </span>
+
+      <button id="refreshChain">
+        ↻
+      </button>
+
+    </div>
+
+
+    <div class="actions">
+
+      <div class="amounts">
+
+        <button class="amt" data-value="1">
+          1 TON
+        </button>
+
+        <button class="amt active" data-value="5">
+          5 TON
+        </button>
+
+        <button class="amt" data-value="10">
+          10 TON
+        </button>
+
+      </div>
+
+
+      <input
+        class="custom"
+        id="customAmount"
+        type="number"
+        min="0.1"
+        step="0.1"
+        placeholder="Custom amount (TON)"
+      >
+
+
+      <button class="send" id="sendBtn">
+        Connect wallet to contribute
+      </button>
+
+
+      <div class="grid2">
+
+        <button class="action-btn primary" id="raiseSettings">
+          ⚙ Raise Settings
+        </button>
+
+        <button class="action-btn" id="backHome">
+          ⌂ Home
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ON CHAIN DETAILS -->
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <h2 id="detailsTitle">
+        ON-CHAIN DETAILS
+      </h2>
+
+      <button id="copyId">
+        Copy ID
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="row">
+        <span>Raise ID</span>
+        <b id="detailRaiseId">NVR-7F29A</b>
+      </div>
+
+      <div class="row">
+        <span>Fund wallet</span>
+        <b id="fundWallet">Not configured</b>
+      </div>
+
+      <div class="row">
+        <span>Creator</span>
+        <b id="creatorWallet">Not connected</b>
+      </div>
+
+      <div class="row">
+        <span>Network</span>
+        <b>TON Mainnet</b>
+      </div>
+
+      <div class="row verified-row">
+        <span>Verified raised</span>
+        <b id="verifiedRaised">0.00 TON</b>
+      </div>
+
+      <div class="row sync-row">
+        <span>Last sync</span>
+        <b id="lastSync">—</b>
+      </div>
+
+      <div class="row">
+        <span>Explorer</span>
+        <b>
+          <a
+            id="explorerLink"
+            href="#"
+            target="_blank"
+            rel="noopener"
+          >
+            View fund wallet ↗
+          </a>
+        </b>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ACTIVITY -->
+
+  <section class="section">
+
+    <div class="section-head">
+
+      <h2 id="activityTitle">
+        RECENT ACTIVITY
+      </h2>
+
+      <button id="clearActivity">
+        Clear
+      </button>
+
+    </div>
+
+
+    <div class="card" id="activity">
+
+      <div class="empty">
+        No confirmed contributions yet.
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- EXPLORE -->
+
+<main id="exploreView" class="view">
+
+  <section class="hero">
+
+    <div class="eyebrow">
+      NOVENTRA RAISE
+    </div>
+
+    <div class="home-title" id="exploreTitle">
+      Explore active raises
+    </div>
+
+    <p class="home-copy" id="exploreCopy">
+      Browse funding pages shared by the community.
+    </p>
+
+    <div class="quick">
+
+      <button class="action-btn primary" id="exploreCreate">
+        ＋ Create Raise
+      </button>
+
+      <button class="action-btn" id="exploreOpenFeatured">
+        Open Featured
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <div class="section-head">
+      <h2>ACTIVE RAISES</h2>
+    </div>
+
+    <div class="raise-card">
+
+      <div class="raise-head">
+        <b>Vaelor Liquidity</b>
+        <span>ACTIVE</span>
+      </div>
+
+      <div class="raise-meta">
+        <span>Liquidity</span>
+        <span id="exploreRaiseAmount">0 / 100 TON</span>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- MY RAISES -->
+
+<main id="mineView" class="view">
+
+  <section class="hero">
+
+    <div class="eyebrow">
+      MY NOVENTRA
+    </div>
+
+    <div class="home-title" id="mineTitle">
+      My raises
+    </div>
+
+    <p class="home-copy" id="mineCopy">
+      Manage your raise configuration and connected wallet activity.
+    </p>
+
+    <div class="quick">
+
+      <button class="action-btn primary" id="mineCreate">
+        ＋ Create Raise
+      </button>
+
+      <button class="action-btn" id="mineSettings">
         ⚙ Raise Settings
       </button>
 
-      <button class="action-btn" id="backHome">
-        ⌂ Home
-      </button>
+    </div>
+
+  </section>
+
+
+  <section class="section">
+
+    <div class="section-head">
+      <h2>CURRENT RAISE</h2>
+    </div>
+
+    <div class="raise-card">
+
+      <div class="raise-head">
+        <b id="mineRaiseName">
+          Vaelor Liquidity
+        </b>
+        <span>ACTIVE</span>
+      </div>
+
+      <div class="raise-meta">
+        <span id="mineRaised">
+          0 TON raised
+        </span>
+
+        <span id="mineContributors">
+          0 contributors
+        </span>
+      </div>
 
     </div>
 
-  </div>
-
-</section>
-
-<!-- ON CHAIN DETAILS -->
-
-<section class="section">
-
-  <div class="section-head">
-
-    <h2 id="detailsTitle">
-      ON-CHAIN DETAILS
-    </h2>
-
-    <button id="copyId">
-      Copy ID
-    </button>
-
-  </div>
-
-  <div class="card">
-
-    <div class="row">
-      <span id="labelRaiseId">Raise ID</span>
-      <b id="detailRaiseId">NVR-7F29A</b>
-    </div>
-
-    <div class="row">
-      <span id="labelFundWallet">Fund wallet</span>
-      <b id="fundWallet">Not configured</b>
-    </div>
-
-    <div class="row">
-      <span id="labelCreator">Creator</span>
-      <b id="creatorWallet">Not connected</b>
-    </div>
-
-    <div class="row">
-      <span id="labelNetwork">Network</span>
-      <b id="networkName">TON Mainnet</b>
-    </div>
-
-    <div class="row verified-row">
-      <span>Verified raised</span>
-      <b id="verifiedRaised">0.00 TON</b>
-    </div>
-
-    <div class="row sync-row">
-      <span>Last sync</span>
-      <b id="lastSync">—</b>
-    </div>
-
-    <div class="row">
-
-      <span id="labelExplorer">
-        Explorer
-      </span>
-
-      <b>
-        <a
-          id="explorerLink"
-          href="#"
-          target="_blank"
-          rel="noopener"
-        >
-          View fund wallet ↗
-        </a>
-      </b>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ACTIVITY -->
-
-<section class="section">
-
-  <div class="section-head">
-
-    <h2 id="activityTitle">
-      RECENT ACTIVITY
-    </h2>
-
-    <button id="clearDemo">
-      Clear
-    </button>
-
-  </div>
-
-  <div class="card" id="activity">
-
-    <div class="empty">
-      No confirmed contributions yet.
-    </div>
-
-  </div>
-
-</section>
-
-</main>
-
-<!-- ================= EXPLORE ================= -->
-
-<main id="exploreView" class="view explore-panel">
-
-<section class="hero">
-
-  <div class="eyebrow">
-    NOVENTRA RAISE
-  </div>
-
-  <div class="home-title" id="exploreTitle">
-    Explore active raises
-  </div>
-
-  <p class="home-copy" id="exploreCopy">
-    Browse funding pages shared by the community.
-  </p>
-
-  <div class="quick">
-
-    <button class="action-btn primary" id="exploreCreate">
-      ＋ Create Raise
-    </button>
-
-    <button class="action-btn" id="exploreOpenFeatured">
-      Open Featured
-    </button>
-
-  </div>
-
-</section>
-
-<section class="section">
-
-  <div class="section-head">
-    <h2 id="activeTitle">ACTIVE RAISES</h2>
-  </div>
-
-  <div class="raise-card">
-
-    <div class="raise-head">
-      <b>Vaelor Liquidity</b>
-      <span>ACTIVE</span>
-    </div>
-
-    <div class="raise-meta">
-      <span>Liquidity</span>
-      <span id="exploreVaelorAmount">0 / 100 TON</span>
-    </div>
-
-  </div>
-
-</section>
-
-</main>
-
-<!-- ================= MY RAISES ================= -->
-
-<main id="mineView" class="view mine-panel">
-
-<section class="hero">
-
-  <div class="eyebrow">
-    MY NOVENTRA
-  </div>
-
-  <div class="home-title" id="mineTitle">
-    My raises
-  </div>
-
-  <p class="home-copy" id="mineCopy">
-    Manage your raise configuration and connected wallet activity.
-  </p>
-
-  <div class="quick">
-
-    <button class="action-btn primary" id="mineCreate">
-      ＋ Create Raise
-    </button>
-
-    <button class="action-btn" id="mineSettings">
-      ⚙ Raise Settings
-    </button>
-
-  </div>
-
-</section>
-
-<section class="section">
-
-  <div class="section-head">
-    <h2 id="mineRaiseTitle">
-      CURRENT RAISE
-    </h2>
-  </div>
-
-  <div class="raise-card">
-
-    <div class="raise-head">
-      <b>Vaelor Liquidity</b>
-      <span>ACTIVE</span>
-    </div>
-
-    <div class="raise-meta">
-
-      <span id="mineRaised">
-        0 TON raised
-      </span>
-
-      <span id="mineContributors">
-        0 contributors
-      </span>
-
-    </div>
-
-  </div>
-
-</section>
+  </section>
 
 </main>
 
 </div>
 
-<!-- ================= NAV ================= -->
+
+<!-- BOTTOM NAV -->
 
 <nav class="bottom">
 
@@ -1496,7 +1350,8 @@ body.rtl .sheet{
 
 </nav>
 
-<!-- ================= MODAL ================= -->
+
+<!-- CREATE / SETTINGS -->
 
 <div class="modal" id="modal">
 
@@ -1514,45 +1369,57 @@ body.rtl .sheet{
 
     </div>
 
+
     <div class="field">
 
-      <label id="fNameLabel">
-        RAISE NAME
-      </label>
+      <label>RAISE NAME</label>
 
       <input
         id="fName"
-        placeholder="e.g. Community Liquidity Raise"
+        placeholder="e.g. Vaelor Liquidity"
       >
 
     </div>
 
+
     <div class="field">
 
-      <label id="fPurposeLabel">
-        PURPOSE
-      </label>
+      <label>PURPOSE</label>
 
-      <select
-        id="fPurpose"
-        class="purpose-select"
-        aria-label="Purpose"
-      >
-        <option value="Liquidity">Liquidity</option>
-        <option value="Development">Development</option>
-        <option value="Community">Community</option>
-        <option value="Marketing">Marketing</option>
-        <option value="Launch">Launch</option>
-        <option value="Other">Other</option>
+      <select id="fPurpose">
+
+        <option value="Liquidity">
+          Liquidity
+        </option>
+
+        <option value="Development">
+          Development
+        </option>
+
+        <option value="Community">
+          Community
+        </option>
+
+        <option value="Marketing">
+          Marketing
+        </option>
+
+        <option value="Launch">
+          Launch
+        </option>
+
+        <option value="Other">
+          Other
+        </option>
+
       </select>
 
     </div>
 
+
     <div class="field">
 
-      <label id="fTargetLabel">
-        TARGET (TON)
-      </label>
+      <label>TARGET (TON)</label>
 
       <input
         id="fTarget"
@@ -1564,24 +1431,22 @@ body.rtl .sheet{
 
     </div>
 
+
     <div class="field">
 
-      <label id="fWalletLabel">
-        FUND WALLET ADDRESS
-      </label>
+      <label>FUND WALLET ADDRESS</label>
 
       <input
         id="fWallet"
-        placeholder="EQ..."
+        placeholder="UQ..."
       >
 
     </div>
 
+
     <div class="field">
 
-      <label id="fDescLabel">
-        DESCRIPTION
-      </label>
+      <label>DESCRIPTION</label>
 
       <textarea
         id="fDesc"
@@ -1589,6 +1454,7 @@ body.rtl .sheet{
       ></textarea>
 
     </div>
+
 
     <div class="sheet-actions">
 
@@ -1606,650 +1472,377 @@ body.rtl .sheet{
 
 </div>
 
+
 <div class="toast" id="toast"></div>
+
 
 <script>
 
 /* =========================================================
    NOVENTRA RAISE
    REAL TON MAINNET VERSION
-========================================================= */
+   ========================================================= */
+
 
 const CONFIG = {
 
   manifestUrl:
     "https://getnoventra.org/tonconnect-manifest.json",
 
-  fundWallet:
-    "UQCcfNVqBX6jYxZGvq7iQPQ5-EGETS0t4eRRfC-nGJqbJj8N",
-
-  raiseId:
-    "NVR-7F29A",
-
-  target:
-    100,
+  tonApi:
+    "https://tonapi.io/v2",
 
   network:
-    "TON Mainnet",
-
-  tonApi:
-    "https://tonapi.io/v2"
+    "-239"
 
 };
 
+
 /* =========================================================
    TRANSLATIONS
-========================================================= */
+   ========================================================= */
 
 const I18N = {
 
 en:{
-dir:"ltr",
-k:"Community Raise · NVR-7F29A",
-raised:"RAISED",
-target:"TARGET",
-contributors:"CONTRIBUTORS",
-time:"TIME LEFT",
-funded:"% funded",
-remaining:"remaining",
-active:"ACTIVE",
-reached:"TARGET REACHED",
-open:"Open",
-home:"Home",
-explore:"Explore",
-raise:"Raise",
-mine:"My Raises",
-create:"＋ Create Raise",
-settings:"⚙ Raise Settings",
-details:"ON-CHAIN DETAILS",
-copy:"Copy ID",
-activity:"RECENT ACTIVITY",
-clear:"Clear",
-no:"No confirmed contributions yet.",
-modal:"Create a Raise",
-name:"RAISE NAME",
-namePh:"e.g. Community Liquidity Raise",
-purpose:"PURPOSE",
-targetLabel:"TARGET (TON)",
-wallet:"FUND WALLET ADDRESS",
-desc:"DESCRIPTION",
-descPh:"What is this raise for?",
-cancel:"Cancel",
-save:"Create Raise",
-custom:"Custom amount (TON)",
-connect:"Connect wallet to contribute",
-configure:"Configure fund wallet first",
-not:"Not configured",
-notConn:"Not connected",
-network:"TON Mainnet",
-send:"Send",
-submitted:"Transaction submitted successfully.",
-failed:"Transaction cancelled or failed.",
-invalid:"Enter a valid TON amount.",
-required:"Name, target and fund wallet are required.",
-saved:"Raise configuration saved.",
-copied:"Copied.",
-shareFail:"Share unavailable. ID copied instead.",
-featured:"FEATURED RAISE",
-featureOpen:"Open →",
-homeTitle:"On-chain funding, built differently.",
-homeCopy:"Create transparent TON raises, contribute directly from your wallet, and keep the entire funding flow simple and verifiable.",
-featuredRaised:"0 TON raised",
-featuredTarget:"100 TON target",
-exploreTitle:"Explore active raises",
-exploreCopy:"Browse funding pages shared by the community.",
-activeTitle:"ACTIVE RAISES",
-mineTitle:"My raises",
-mineCopy:"Manage your raise configuration and connected wallet activity.",
-mineRaiseTitle:"CURRENT RAISE",
-contributorsShort:"contributors",
-clearToast:"Local activity cleared."
+  dir:"ltr",
+  home:"Home",
+  explore:"Explore",
+  raise:"Raise",
+  mine:"My Raises",
+  create:"＋ Create Raise",
+  settings:"⚙ Raise Settings",
+  connect:"Connect wallet to contribute",
+  send:"Send",
+  cancel:"Cancel",
+  save:"Create Raise",
+  copy:"Copy ID",
+  clear:"Clear",
+  active:"ACTIVE",
+  reached:"TARGET REACHED",
+  details:"ON-CHAIN DETAILS",
+  activity:"RECENT ACTIVITY",
+  modal:"Create a Raise",
+  configure:"Configure fund wallet first",
+  not:"Not configured",
+  notConn:"Not connected",
+  network:"TON Mainnet",
+  submitted:"Transaction submitted successfully.",
+  failed:"Transaction cancelled or failed.",
+  invalid:"Enter a valid TON amount.",
+  required:"Name, target and fund wallet are required.",
+  saved:"Raise configuration saved.",
+  copied:"Copied.",
+  no:"No confirmed contributions yet.",
+  featured:"FEATURED RAISE",
+  open:"Open →",
+  homeTitle:"On-chain funding, built differently.",
+  homeCopy:"Create transparent TON raises, contribute directly from your wallet, and keep the entire funding flow simple and verifiable.",
+  contributors:"contributors"
 },
 
 tr:{
-dir:"ltr",
-k:"Topluluk Fonu · NVR-7F29A",
-raised:"TOPLANAN",
-target:"HEDEF",
-contributors:"KATKICILAR",
-time:"KALAN SÜRE",
-funded:"% fonlandı",
-remaining:"kaldı",
-active:"AÇIK",
-reached:"HEDEFE ULAŞILDI",
-open:"Açık",
-home:"Ana Sayfa",
-explore:"Keşfet",
-raise:"Fon",
-mine:"Fonlarım",
-create:"＋ Fon Oluştur",
-settings:"⚙ Fon Ayarları",
-details:"ZİNCİR ÜZERİNDEKİ AYRINTILAR",
-copy:"Kimliği Kopyala",
-activity:"SON AKTİVİTELER",
-clear:"Temizle",
-no:"Henüz doğrulanmış katkı yok.",
-modal:"Fon Oluştur",
-name:"FON ADI",
-namePh:"örn. Topluluk Likidite Fonu",
-purpose:"AMAÇ",
-targetLabel:"HEDEF (TON)",
-wallet:"FON CÜZDANI ADRESİ",
-desc:"AÇIKLAMA",
-descPh:"Bu fon ne için kullanılacak?",
-cancel:"İptal",
-save:"Fon Oluştur",
-custom:"Özel miktar (TON)",
-connect:"Katkı yapmak için cüzdanı bağlayın",
-configure:"Önce fon cüzdanını yapılandırın",
-not:"Yapılandırılmamış",
-notConn:"Bağlı değil",
-network:"TON Ana Ağı",
-send:"Gönder",
-submitted:"İşlem başarıyla gönderildi.",
-failed:"İşlem iptal edildi veya başarısız oldu.",
-invalid:"Geçerli bir TON miktarı girin.",
-required:"Fon adı, hedef ve fon cüzdanı zorunludur.",
-saved:"Fon ayarları kaydedildi.",
-copied:"Kopyalandı.",
-shareFail:"Paylaşım kullanılamıyor. Kimlik kopyalandı.",
-featured:"ÖNE ÇIKAN FON",
-featureOpen:"Aç →",
-homeTitle:"Zincir üzerinde, farklı bir fonlama.",
-homeCopy:"Şeffaf TON fonları oluşturun, cüzdanınızdan doğrudan katkı yapın ve fonlama akışını sade ve doğrulanabilir tutun.",
-featuredRaised:"0 TON toplandı",
-featuredTarget:"100 TON hedef",
-exploreTitle:"Aktif fonları keşfet",
-exploreCopy:"Topluluk tarafından paylaşılan fon sayfalarına göz atın.",
-activeTitle:"AKTİF FONLAR",
-mineTitle:"Fonlarım",
-mineCopy:"Fon ayarlarınızı ve bağlı cüzdan hareketlerinizi yönetin.",
-mineRaiseTitle:"MEVCUT FON",
-contributorsShort:"katkıcı",
-clearToast:"Yerel aktivite temizlendi."
+  dir:"ltr",
+  home:"Ana Sayfa",
+  explore:"Keşfet",
+  raise:"Fon",
+  mine:"Fonlarım",
+  create:"＋ Fon Oluştur",
+  settings:"⚙ Fon Ayarları",
+  connect:"Katkı yapmak için cüzdanı bağlayın",
+  send:"Gönder",
+  cancel:"İptal",
+  save:"Fon Oluştur",
+  copy:"Kimliği Kopyala",
+  clear:"Temizle",
+  active:"AÇIK",
+  reached:"HEDEFE ULAŞILDI",
+  details:"ZİNCİR ÜZERİNDEKİ AYRINTILAR",
+  activity:"SON AKTİVİTELER",
+  modal:"Fon Oluştur",
+  configure:"Önce fon cüzdanını yapılandırın",
+  not:"Yapılandırılmamış",
+  notConn:"Bağlı değil",
+  network:"TON Ana Ağı",
+  submitted:"İşlem başarıyla gönderildi.",
+  failed:"İşlem iptal edildi veya başarısız oldu.",
+  invalid:"Geçerli bir TON miktarı girin.",
+  required:"Fon adı, hedef ve fon cüzdanı zorunludur.",
+  saved:"Fon ayarları kaydedildi.",
+  copied:"Kopyalandı.",
+  no:"Henüz doğrulanmış katkı yok.",
+  featured:"ÖNE ÇIKAN FON",
+  open:"Aç →",
+  homeTitle:"Zincir üzerinde, farklı bir fonlama.",
+  homeCopy:"Şeffaf TON fonları oluşturun, cüzdanınızdan doğrudan katkı yapın ve tüm fonlama akışını doğrulanabilir tutun.",
+  contributors:"katkıcı"
 },
 
 ru:{
-dir:"ltr",
-home:"Главная",
-explore:"Обзор",
-raise:"Сбор",
-mine:"Мои сборы",
-create:"＋ Создать сбор",
-settings:"⚙ Настройки сбора",
-connect:"Подключите кошелёк",
-send:"Отправить",
-cancel:"Отмена",
-save:"Создать сбор",
-copy:"Копировать ID",
-clear:"Очистить",
-featured:"РЕКОМЕНДУЕМЫЙ СБОР",
-featureOpen:"Открыть →",
-activity:"ПОСЛЕДНИЕ ОПЕРАЦИИ",
-details:"ДЕТАЛИ В БЛОКЧЕЙНЕ",
-modal:"Создать сбор",
-name:"НАЗВАНИЕ СБОРА",
-purpose:"ЦЕЛЬ",
-targetLabel:"ЦЕЛЬ (TON)",
-wallet:"АДРЕС КОШЕЛЬКА ФОНДА",
-desc:"ОПИСАНИЕ",
-custom:"Своя сумма (TON)",
-purposeMap:{
-Liquidity:"Ликвидность",
-Development:"Разработка",
-Community:"Сообщество",
-Marketing:"Маркетинг",
-Launch:"Запуск",
-Other:"Другое"
-},
-k:"Сбор сообщества · NVR-7F29A",
-raised:"СОБРАНО",
-target:"ЦЕЛЬ",
-contributors:"УЧАСТНИКИ",
-time:"ОСТАЛОСЬ",
-funded:"% собрано",
-remaining:"осталось",
-active:"АКТИВЕН",
-reached:"ЦЕЛЬ ДОСТИГНУТА",
-open:"Открыт",
-no:"Пока нет подтверждённых взносов.",
-not:"Не настроен",
-notConn:"Не подключён",
-configure:"Сначала настройте кошелёк фонда",
-network:"TON Mainnet",
-submitted:"Транзакция успешно отправлена.",
-failed:"Транзакция отменена или завершилась ошибкой.",
-invalid:"Введите корректную сумму TON.",
-required:"Название, цель и кошелёк фонда обязательны.",
-saved:"Настройки сбора сохранены.",
-copied:"Скопировано.",
-shareFail:"Поделиться невозможно. ID скопирован.",
-homeTitle:"Ончейн-финансирование, сделанное иначе.",
-homeCopy:"Создавайте прозрачные сборы TON и принимайте взносы напрямую из кошелька.",
-featuredRaised:"Собрано 0 TON",
-featuredTarget:"Цель 100 TON",
-exploreTitle:"Активные сборы",
-exploreCopy:"Смотрите страницы сборов сообщества.",
-activeTitle:"АКТИВНЫЕ СБОРЫ",
-mineTitle:"Мои сборы",
-mineCopy:"Управляйте настройками сборов и активностью кошелька.",
-mineRaiseTitle:"ТЕКУЩИЙ СБОР",
-contributorsShort:"участников"
+  dir:"ltr",
+  home:"Главная",
+  explore:"Обзор",
+  raise:"Сбор",
+  mine:"Мои сборы",
+  create:"＋ Создать сбор",
+  settings:"⚙ Настройки",
+  connect:"Подключите кошелёк",
+  send:"Отправить",
+  cancel:"Отмена",
+  save:"Создать сбор",
+  copy:"Копировать ID",
+  clear:"Очистить",
+  active:"АКТИВЕН",
+  reached:"ЦЕЛЬ ДОСТИГНУТА",
+  details:"ДЕТАЛИ БЛОКЧЕЙНА",
+  activity:"ПОСЛЕДНИЕ ОПЕРАЦИИ",
+  modal:"Создать сбор",
+  configure:"Сначала настройте кошелёк фонда",
+  not:"Не настроен",
+  notConn:"Не подключён",
+  network:"TON Mainnet",
+  submitted:"Транзакция успешно отправлена.",
+  failed:"Транзакция отменена или завершилась ошибкой.",
+  invalid:"Введите корректную сумму TON.",
+  required:"Название, цель и кошелёк обязательны.",
+  saved:"Настройки сохранены.",
+  copied:"Скопировано.",
+  no:"Подтверждённых взносов пока нет.",
+  featured:"РЕКОМЕНДУЕМЫЙ СБОР",
+  open:"Открыть →",
+  homeTitle:"Ончейн-финансирование, сделанное иначе.",
+  homeCopy:"Создавайте прозрачные сборы TON и принимайте взносы напрямую из кошелька.",
+  contributors:"участников"
 },
 
 zh:{
-dir:"ltr",
-home:"首页",
-explore:"探索",
-raise:"募资",
-mine:"我的募资",
-create:"＋ 创建募资",
-settings:"⚙ 募资设置",
-connect:"连接钱包后参与",
-send:"发送",
-cancel:"取消",
-save:"创建募资",
-copy:"复制 ID",
-clear:"清除",
-featured:"精选募资",
-featureOpen:"打开 →",
-activity:"最近活动",
-details:"链上详情",
-modal:"创建募资",
-name:"募资名称",
-purpose:"用途",
-targetLabel:"目标（TON）",
-wallet:"资金钱包地址",
-desc:"描述",
-custom:"自定义金额（TON）",
-purposeMap:{
-Liquidity:"流动性",
-Development:"开发",
-Community:"社区",
-Marketing:"营销",
-Launch:"上线",
-Other:"其他"
-},
-k:"社区募资 · NVR-7F29A",
-raised:"已筹集",
-target:"目标",
-contributors:"参与者",
-time:"剩余时间",
-funded:"% 已完成",
-remaining:"剩余",
-active:"进行中",
-reached:"已达到目标",
-open:"开放中",
-no:"暂无已确认贡献。",
-not:"未设置",
-notConn:"未连接",
-configure:"请先设置资金钱包",
-network:"TON 主网",
-submitted:"交易已成功提交。",
-failed:"交易已取消或失败。",
-invalid:"请输入有效的 TON 金额。",
-required:"募资名称、目标和资金钱包为必填项。",
-saved:"募资设置已保存。",
-copied:"已复制。",
-shareFail:"无法分享，已复制 ID。",
-homeTitle:"重新定义链上募资。",
-homeCopy:"创建透明的 TON 募资，让用户直接从钱包参与。",
-featuredRaised:"已筹集 0 TON",
-featuredTarget:"目标 100 TON",
-exploreTitle:"探索活跃募资",
-exploreCopy:"浏览社区分享的募资页面。",
-activeTitle:"活跃募资",
-mineTitle:"我的募资",
-mineCopy:"管理募资设置和钱包活动。",
-mineRaiseTitle:"当前募资",
-contributorsShort:"参与者"
+  dir:"ltr",
+  home:"首页",
+  explore:"探索",
+  raise:"募资",
+  mine:"我的募资",
+  create:"＋ 创建募资",
+  settings:"⚙ 募资设置",
+  connect:"连接钱包后参与",
+  send:"发送",
+  cancel:"取消",
+  save:"创建募资",
+  copy:"复制 ID",
+  clear:"清除",
+  active:"进行中",
+  reached:"已达到目标",
+  details:"链上详情",
+  activity:"最近活动",
+  modal:"创建募资",
+  configure:"请先设置资金钱包",
+  not:"未设置",
+  notConn:"未连接",
+  network:"TON 主网",
+  submitted:"交易已成功提交。",
+  failed:"交易已取消或失败。",
+  invalid:"请输入有效的 TON 金额。",
+  required:"名称、目标和资金钱包为必填项。",
+  saved:"设置已保存。",
+  copied:"已复制。",
+  no:"暂无已确认的贡献。",
+  featured:"精选募资",
+  open:"打开 →",
+  homeTitle:"重新定义链上募资。",
+  homeCopy:"创建透明的 TON 募资，让用户直接从钱包参与。",
+  contributors:"参与者"
 },
 
 ar:{
-dir:"rtl",
-home:"الرئيسية",
-explore:"استكشاف",
-raise:"تمويل",
-mine:"تمويلاتي",
-create:"＋ إنشاء تمويل",
-settings:"⚙ إعدادات التمويل",
-connect:"اربط محفظتك للمساهمة",
-send:"إرسال",
-cancel:"إلغاء",
-save:"إنشاء تمويل",
-copy:"نسخ المعرّف",
-clear:"مسح",
-featured:"تمويل مميز",
-featureOpen:"فتح ←",
-activity:"آخر النشاطات",
-details:"تفاصيل على السلسلة",
-modal:"إنشاء تمويل",
-name:"اسم التمويل",
-purpose:"الغرض",
-targetLabel:"الهدف (TON)",
-wallet:"عنوان محفظة التمويل",
-desc:"الوصف",
-custom:"مبلغ مخصص (TON)",
-purposeMap:{
-Liquidity:"السيولة",
-Development:"التطوير",
-Community:"المجتمع",
-Marketing:"التسويق",
-Launch:"الإطلاق",
-Other:"أخرى"
-},
-k:"تمويل المجتمع · NVR-7F29A",
-raised:"المجموع",
-target:"الهدف",
-contributors:"المساهمون",
-time:"الوقت المتبقي",
-funded:"% ممول",
-remaining:"متبقي",
-active:"نشط",
-reached:"تم الوصول إلى الهدف",
-open:"مفتوح",
-no:"لا توجد مساهمات مؤكدة بعد.",
-not:"غير مُعد",
-notConn:"غير متصل",
-configure:"قم بإعداد محفظة التمويل أولاً",
-network:"شبكة TON الرئيسية",
-submitted:"تم إرسال المعاملة بنجاح.",
-failed:"تم إلغاء المعاملة أو فشلت.",
-invalid:"أدخل مبلغ TON صالحاً.",
-required:"اسم التمويل والهدف ومحفظة التمويل مطلوبة.",
-saved:"تم حفظ الإعدادات.",
-copied:"تم النسخ.",
-shareFail:"تعذر المشاركة. تم نسخ المعرّف.",
-homeTitle:"تمويل على السلسلة، بطريقة مختلفة.",
-homeCopy:"أنشئ تمويلات شفافة على TON وساهم مباشرة من محفظتك.",
-featuredRaised:"تم جمع 0 TON",
-featuredTarget:"الهدف 100 TON",
-exploreTitle:"استكشاف التمويلات النشطة",
-exploreCopy:"تصفح صفحات التمويل المجتمعية.",
-activeTitle:"التمويلات النشطة",
-mineTitle:"تمويلاتي",
-mineCopy:"أدر إعدادات التمويل ونشاط المحفظة.",
-mineRaiseTitle:"التمويل الحالي",
-contributorsShort:"مساهم"
+  dir:"rtl",
+  home:"الرئيسية",
+  explore:"استكشاف",
+  raise:"تمويل",
+  mine:"تمويلاتي",
+  create:"＋ إنشاء تمويل",
+  settings:"⚙ إعدادات التمويل",
+  connect:"اربط محفظتك للمساهمة",
+  send:"إرسال",
+  cancel:"إلغاء",
+  save:"إنشاء تمويل",
+  copy:"نسخ المعرّف",
+  clear:"مسح",
+  active:"نشط",
+  reached:"تم الوصول إلى الهدف",
+  details:"تفاصيل على السلسلة",
+  activity:"آخر النشاطات",
+  modal:"إنشاء تمويل",
+  configure:"قم بإعداد محفظة التمويل أولاً",
+  not:"غير مُعد",
+  notConn:"غير متصل",
+  network:"شبكة TON الرئيسية",
+  submitted:"تم إرسال المعاملة بنجاح.",
+  failed:"تم إلغاء المعاملة أو فشلت.",
+  invalid:"أدخل مبلغ TON صالحاً.",
+  required:"الاسم والهدف والمحفظة مطلوبة.",
+  saved:"تم حفظ الإعدادات.",
+  copied:"تم النسخ.",
+  no:"لا توجد مساهمات مؤكدة بعد.",
+  featured:"تمويل مميز",
+  open:"فتح ←",
+  homeTitle:"تمويل على السلسلة، بطريقة مختلفة.",
+  homeCopy:"أنشئ تمويلات شفافة على TON وساهم مباشرة من محفظتك.",
+  contributors:"مساهم"
 },
 
 es:{
-dir:"ltr",
-home:"Inicio",
-explore:"Explorar",
-raise:"Financiación",
-mine:"Mis fondos",
-create:"＋ Crear financiación",
-settings:"⚙ Ajustes",
-connect:"Conecta tu billetera",
-send:"Enviar",
-cancel:"Cancelar",
-save:"Crear financiación",
-copy:"Copiar ID",
-clear:"Limpiar",
-featured:"FINANCIACIÓN DESTACADA",
-featureOpen:"Abrir →",
-activity:"ACTIVIDAD RECIENTE",
-details:"DETALLES ON-CHAIN",
-modal:"Crear financiación",
-name:"NOMBRE",
-purpose:"PROPÓSITO",
-targetLabel:"OBJETIVO (TON)",
-wallet:"BILLETERA DEL FONDO",
-desc:"DESCRIPCIÓN",
-custom:"Cantidad personalizada (TON)",
-purposeMap:{
-Liquidity:"Liquidez",
-Development:"Desarrollo",
-Community:"Comunidad",
-Marketing:"Marketing",
-Launch:"Lanzamiento",
-Other:"Otro"
-},
-k:"Financiación comunitaria · NVR-7F29A",
-raised:"RECAUDADO",
-target:"OBJETIVO",
-contributors:"COLABORADORES",
-time:"TIEMPO RESTANTE",
-funded:"% financiado",
-remaining:"restante",
-active:"ACTIVO",
-reached:"OBJETIVO ALCANZADO",
-open:"Abierto",
-no:"Aún no hay contribuciones confirmadas.",
-not:"No configurada",
-notConn:"No conectada",
-configure:"Configura primero la billetera",
-network:"TON Mainnet",
-submitted:"Transacción enviada correctamente.",
-failed:"La transacción fue cancelada o falló.",
-invalid:"Introduce una cantidad válida.",
-required:"Nombre, objetivo y billetera son obligatorios.",
-saved:"Configuración guardada.",
-copied:"Copiado.",
-shareFail:"No se puede compartir. ID copiado.",
-homeTitle:"Financiación on-chain, de otra manera.",
-homeCopy:"Crea fondos transparentes en TON y contribuye directamente desde tu billetera.",
-featuredRaised:"0 TON recaudados",
-featuredTarget:"Objetivo 100 TON",
-exploreTitle:"Explorar fondos activos",
-exploreCopy:"Descubre páginas de financiación comunitarias.",
-activeTitle:"FONDOS ACTIVOS",
-mineTitle:"Mis fondos",
-mineCopy:"Gestiona la configuración y actividad de tu billetera.",
-mineRaiseTitle:"FONDO ACTUAL",
-contributorsShort:"colaboradores"
+  dir:"ltr",
+  home:"Inicio",
+  explore:"Explorar",
+  raise:"Financiación",
+  mine:"Mis fondos",
+  create:"＋ Crear financiación",
+  settings:"⚙ Ajustes",
+  connect:"Conecta tu billetera",
+  send:"Enviar",
+  cancel:"Cancelar",
+  save:"Crear financiación",
+  copy:"Copiar ID",
+  clear:"Limpiar",
+  active:"ACTIVO",
+  reached:"OBJETIVO ALCANZADO",
+  details:"DETALLES ON-CHAIN",
+  activity:"ACTIVIDAD RECIENTE",
+  modal:"Crear financiación",
+  configure:"Configura primero la billetera",
+  not:"No configurada",
+  notConn:"No conectada",
+  network:"TON Mainnet",
+  submitted:"Transacción enviada correctamente.",
+  failed:"La transacción fue cancelada o falló.",
+  invalid:"Introduce una cantidad válida.",
+  required:"Nombre, objetivo y billetera son obligatorios.",
+  saved:"Configuración guardada.",
+  copied:"Copiado.",
+  no:"Aún no hay contribuciones confirmadas.",
+  featured:"FINANCIACIÓN DESTACADA",
+  open:"Abrir →",
+  homeTitle:"Financiación on-chain, de otra manera.",
+  homeCopy:"Crea fondos transparentes en TON y contribuye directamente desde tu billetera.",
+  contributors:"colaboradores"
 },
 
 fr:{
-dir:"ltr",
-home:"Accueil",
-explore:"Explorer",
-raise:"Collecte",
-mine:"Mes collectes",
-create:"＋ Créer une collecte",
-settings:"⚙ Paramètres",
-connect:"Connectez votre portefeuille",
-send:"Envoyer",
-cancel:"Annuler",
-save:"Créer la collecte",
-copy:"Copier l’ID",
-clear:"Effacer",
-featured:"COLLECTE À LA UNE",
-featureOpen:"Ouvrir →",
-activity:"ACTIVITÉ RÉCENTE",
-details:"DÉTAILS ON-CHAIN",
-modal:"Créer une collecte",
-name:"NOM",
-purpose:"OBJECTIF",
-targetLabel:"OBJECTIF (TON)",
-wallet:"PORTEFEUILLE DU FONDS",
-desc:"DESCRIPTION",
-custom:"Montant personnalisé (TON)",
-purposeMap:{
-Liquidity:"Liquidité",
-Development:"Développement",
-Community:"Communauté",
-Marketing:"Marketing",
-Launch:"Lancement",
-Other:"Autre"
-},
-k:"Collecte communautaire · NVR-7F29A",
-raised:"COLLECTÉ",
-target:"OBJECTIF",
-contributors:"CONTRIBUTEURS",
-time:"TEMPS RESTANT",
-funded:"% financé",
-remaining:"restant",
-active:"ACTIF",
-reached:"OBJECTIF ATTEINT",
-open:"Ouvert",
-no:"Aucune contribution confirmée.",
-not:"Non configuré",
-notConn:"Non connecté",
-configure:"Configurez d’abord le portefeuille",
-network:"TON Mainnet",
-submitted:"Transaction envoyée avec succès.",
-failed:"Transaction annulée ou échouée.",
-invalid:"Saisissez un montant TON valide.",
-required:"Nom, objectif et portefeuille obligatoires.",
-saved:"Paramètres enregistrés.",
-copied:"Copié.",
-shareFail:"Partage indisponible. ID copié.",
-homeTitle:"Le financement on-chain, autrement.",
-homeCopy:"Créez des collectes transparentes sur TON et contribuez directement depuis votre portefeuille.",
-featuredRaised:"0 TON collecté",
-featuredTarget:"Objectif 100 TON",
-exploreTitle:"Explorer les collectes actives",
-exploreCopy:"Parcourez les collectes de la communauté.",
-activeTitle:"COLLECTES ACTIVES",
-mineTitle:"Mes collectes",
-mineCopy:"Gérez vos paramètres et l’activité de votre portefeuille.",
-mineRaiseTitle:"COLLECTE ACTUELLE",
-contributorsShort:"contributeurs"
+  dir:"ltr",
+  home:"Accueil",
+  explore:"Explorer",
+  raise:"Collecte",
+  mine:"Mes collectes",
+  create:"＋ Créer une collecte",
+  settings:"⚙ Paramètres",
+  connect:"Connectez votre portefeuille",
+  send:"Envoyer",
+  cancel:"Annuler",
+  save:"Créer la collecte",
+  copy:"Copier l’ID",
+  clear:"Effacer",
+  active:"ACTIF",
+  reached:"OBJECTIF ATTEINT",
+  details:"DÉTAILS ON-CHAIN",
+  activity:"ACTIVITÉ RÉCENTE",
+  modal:"Créer une collecte",
+  configure:"Configurez d’abord le portefeuille",
+  not:"Non configuré",
+  notConn:"Non connecté",
+  network:"TON Mainnet",
+  submitted:"Transaction envoyée avec succès.",
+  failed:"Transaction annulée ou échouée.",
+  invalid:"Saisissez un montant TON valide.",
+  required:"Nom, objectif et portefeuille obligatoires.",
+  saved:"Paramètres enregistrés.",
+  copied:"Copié.",
+  no:"Aucune contribution confirmée.",
+  featured:"COLLECTE À LA UNE",
+  open:"Ouvrir →",
+  homeTitle:"Le financement on-chain, autrement.",
+  homeCopy:"Créez des collectes transparentes sur TON et contribuez directement depuis votre portefeuille.",
+  contributors:"contributeurs"
 },
 
 de:{
-dir:"ltr",
-home:"Start",
-explore:"Entdecken",
-raise:"Fundraiser",
-mine:"Meine Funds",
-create:"＋ Fundraiser erstellen",
-settings:"⚙ Einstellungen",
-connect:"Wallet verbinden",
-send:"Senden",
-cancel:"Abbrechen",
-save:"Fundraiser erstellen",
-copy:"ID kopieren",
-clear:"Löschen",
-featured:"EMPFOHLENER FUNDRAISER",
-featureOpen:"Öffnen →",
-activity:"LETZTE AKTIVITÄTEN",
-details:"ON-CHAIN-DETAILS",
-modal:"Fundraiser erstellen",
-name:"NAME",
-purpose:"ZWECK",
-targetLabel:"ZIEL (TON)",
-wallet:"FUND-WALLET",
-desc:"BESCHREIBUNG",
-custom:"Eigener Betrag (TON)",
-purposeMap:{
-Liquidity:"Liquidität",
-Development:"Entwicklung",
-Community:"Community",
-Marketing:"Marketing",
-Launch:"Launch",
-Other:"Andere"
-},
-k:"Community-Fundraising · NVR-7F29A",
-raised:"GESAMMELT",
-target:"ZIEL",
-contributors:"BEITRAGENDEN",
-time:"VERBLEIBEND",
-funded:"% finanziert",
-remaining:"verbleibend",
-active:"AKTIV",
-reached:"ZIEL ERREICHT",
-open:"Offen",
-no:"Noch keine bestätigten Beiträge.",
-not:"Nicht konfiguriert",
-notConn:"Nicht verbunden",
-configure:"Zuerst Fund-Wallet konfigurieren",
-network:"TON Mainnet",
-submitted:"Transaktion erfolgreich gesendet.",
-failed:"Transaktion abgebrochen oder fehlgeschlagen.",
-invalid:"Gültigen TON-Betrag eingeben.",
-required:"Name, Ziel und Fund-Wallet sind erforderlich.",
-saved:"Einstellungen gespeichert.",
-copied:"Kopiert.",
-shareFail:"Teilen nicht möglich. ID kopiert.",
-homeTitle:"On-chain-Finanzierung, anders gedacht.",
-homeCopy:"Erstelle transparente TON-Fundraiser und unterstütze direkt aus deiner Wallet.",
-featuredRaised:"0 TON gesammelt",
-featuredTarget:"Ziel 100 TON",
-exploreTitle:"Aktive Fundraiser entdecken",
-exploreCopy:"Community-Fundraiser durchsuchen.",
-activeTitle:"AKTIVE FUNDRAISER",
-mineTitle:"Meine Fundraiser",
-mineCopy:"Verwalte Fundraiser-Einstellungen und Wallet-Aktivitäten.",
-mineRaiseTitle:"AKTUELLER FUNDRAISER",
-contributorsShort:"Beiträge"
+  dir:"ltr",
+  home:"Start",
+  explore:"Entdecken",
+  raise:"Fundraiser",
+  mine:"Meine Funds",
+  create:"＋ Fundraiser erstellen",
+  settings:"⚙ Einstellungen",
+  connect:"Wallet verbinden",
+  send:"Senden",
+  cancel:"Abbrechen",
+  save:"Fundraiser erstellen",
+  copy:"ID kopieren",
+  clear:"Löschen",
+  active:"AKTIV",
+  reached:"ZIEL ERREICHT",
+  details:"ON-CHAIN-DETAILS",
+  activity:"LETZTE AKTIVITÄTEN",
+  modal:"Fundraiser erstellen",
+  configure:"Zuerst Fund-Wallet konfigurieren",
+  not:"Nicht konfiguriert",
+  notConn:"Nicht verbunden",
+  network:"TON Mainnet",
+  submitted:"Transaktion erfolgreich gesendet.",
+  failed:"Transaktion abgebrochen oder fehlgeschlagen.",
+  invalid:"Gültigen TON-Betrag eingeben.",
+  required:"Name, Ziel und Fund-Wallet sind erforderlich.",
+  saved:"Einstellungen gespeichert.",
+  copied:"Kopiert.",
+  no:"Noch keine bestätigten Beiträge.",
+  featured:"EMPFOHLENER FUNDRAISER",
+  open:"Öffnen →",
+  homeTitle:"On-chain-Finanzierung, anders gedacht.",
+  homeCopy:"Erstelle transparente TON-Fundraiser und unterstütze direkt aus deiner Wallet.",
+  contributors:"Beiträge"
 },
 
 ja:{
-dir:"ltr",
-home:"ホーム",
-explore:"探索",
-raise:"レイズ",
-mine:"マイ・レイズ",
-create:"＋ レイズを作成",
-settings:"⚙ レイズ設定",
-connect:"ウォレットを接続",
-send:"送信",
-cancel:"キャンセル",
-save:"レイズを作成",
-copy:"IDをコピー",
-clear:"クリア",
-featured:"注目のレイズ",
-featureOpen:"開く →",
-activity:"最近のアクティビティ",
-details:"オンチェーン詳細",
-modal:"レイズを作成",
-name:"レイズ名",
-purpose:"目的",
-targetLabel:"目標（TON）",
-wallet:"ファンドウォレット",
-desc:"説明",
-custom:"任意の金額（TON）",
-purposeMap:{
-Liquidity:"流動性",
-Development:"開発",
-Community:"コミュニティ",
-Marketing:"マーケティング",
-Launch:"ローンチ",
-Other:"その他"
-},
-k:"コミュニティ・レイズ · NVR-7F29A",
-raised:"調達額",
-target:"目標",
-contributors:"参加者",
-time:"残り時間",
-funded:"% 達成",
-remaining:"残り",
-active:"募集中",
-reached:"目標達成",
-open:"公開中",
-no:"まだ確認済みの支援はありません。",
-not:"未設定",
-notConn:"未接続",
-configure:"先にファンドウォレットを設定してください",
-network:"TON メインネット",
-submitted:"トランザクションを送信しました。",
-failed:"トランザクションがキャンセルまたは失敗しました。",
-invalid:"有効なTON金額を入力してください。",
-required:"名前、目標、ウォレットは必須です。",
-saved:"設定を保存しました。",
-copied:"コピーしました。",
-shareFail:"共有できません。IDをコピーしました。",
-homeTitle:"オンチェーン資金調達を、もっとスマートに。",
-homeCopy:"透明なTONレイズを作成し、ウォレットから直接参加できます。",
-featuredRaised:"0 TON 調達",
-featuredTarget:"目標 100 TON",
-exploreTitle:"募集中のレイズを探索",
-exploreCopy:"コミュニティのレイズを閲覧します。",
-activeTitle:"募集中のレイズ",
-mineTitle:"マイ・レイズ",
-mineCopy:"レイズ設定とウォレットの活動を管理します。",
-mineRaiseTitle:"現在のレイズ",
-contributorsShort:"参加者"
+  dir:"ltr",
+  home:"ホーム",
+  explore:"探索",
+  raise:"レイズ",
+  mine:"マイ・レイズ",
+  create:"＋ レイズを作成",
+  settings:"⚙ レイズ設定",
+  connect:"ウォレットを接続",
+  send:"送信",
+  cancel:"キャンセル",
+  save:"レイズを作成",
+  copy:"IDをコピー",
+  clear:"クリア",
+  active:"募集中",
+  reached:"目標達成",
+  details:"オンチェーン詳細",
+  activity:"最近のアクティビティ",
+  modal:"レイズを作成",
+  configure:"先にファンドウォレットを設定してください",
+  not:"未設定",
+  notConn:"未接続",
+  network:"TON メインネット",
+  submitted:"トランザクションを送信しました。",
+  failed:"トランザクションがキャンセルまたは失敗しました。",
+  invalid:"有効なTON金額を入力してください。",
+  required:"名前、目標、ウォレットは必須です。",
+  saved:"設定を保存しました。",
+  copied:"コピーしました。",
+  no:"確認済みの支援はまだありません。",
+  featured:"注目のレイズ",
+  open:"開く →",
+  homeTitle:"オンチェーン資金調達を、もっとスマートに。",
+  homeCopy:"透明なTONレイズを作成し、ウォレットから直接参加できます。",
+  contributors:"参加者"
 }
 
 };
 
+
 /* =========================================================
    STATE
-========================================================= */
+   ========================================================= */
 
 let lang =
   localStorage.getItem("noventra_raise_lang") || "en";
@@ -2258,94 +1851,8 @@ if(!I18N[lang]){
   lang="en";
 }
 
+
 let selected=5;
-
-let storedRaise =
-  JSON.parse(
-    localStorage.getItem("noventra_raise_premium") || "null"
-  );
-
-let raise =
-  storedRaise || {
-
-    id:CONFIG.raiseId,
-
-    name:"Vaelor Liquidity",
-
-    purpose:"Liquidity",
-
-    target:CONFIG.target,
-
-    raised:0,
-
-    contributors:0,
-
-    wallet:CONFIG.fundWallet,
-
-    desc:
-      "A transparent TON liquidity raise for the Vaelor ecosystem.",
-
-    createdAt:Date.now(),
-
-    chainStartTime:Date.now(),
-
-    verifiedRaised:0,
-
-    verifiedContributors:0,
-
-    lastSync:0
-
-  };
-
-/*
-  Force the official Vaelor wallet when the old
-  demo configuration is still stored.
-*/
-
-if(
-  !raise.wallet ||
-  raise.wallet === "" ||
-  raise.wallet === "Not configured"
-){
-  raise.wallet=CONFIG.fundWallet;
-}
-
-if(!raise.id){
-  raise.id=CONFIG.raiseId;
-}
-
-if(!raise.name){
-  raise.name="Vaelor Liquidity";
-}
-
-if(!raise.purpose){
-  raise.purpose="Liquidity";
-}
-
-if(!raise.target){
-  raise.target=CONFIG.target;
-}
-
-if(
-  raise.desc &&
-  (
-    raise.desc.includes("Vaelor Liquidity Raise") ||
-    raise.desc.includes("Target: 100 TON") ||
-    raise.desc.includes("All raised funds")
-  )
-){
-  raise.desc =
-    "A transparent TON liquidity raise for the Vaelor ecosystem.";
-}
-
-if(!raise.chainStartTime){
-  raise.chainStartTime=Date.now();
-}
-
-let txs =
-  JSON.parse(
-    localStorage.getItem("noventra_raise_activity") || "[]"
-  );
 
 let walletAddress="";
 
@@ -2353,15 +1860,72 @@ let tonConnectUI=null;
 
 let chainTransactions=[];
 
+
+/* =========================================================
+   RAISE
+   ========================================================= */
+
+let raise =
+  JSON.parse(
+    localStorage.getItem(
+      "noventra_raise_premium"
+    ) || "null"
+  ) || {
+
+    id:"NVR-7F29A",
+
+    name:"Vaelor Liquidity",
+
+    purpose:"Liquidity",
+
+    target:100,
+
+    raised:0,
+
+    verifiedRaised:0,
+
+    contributors:0,
+
+    verifiedContributors:0,
+
+    wallet:
+      "UQCcfNVqBX6jYxZGvq7iQPQ5-EGETS0t4eRRfC-nGJqbJj8N",
+
+    desc:
+      "This raise is dedicated to establishing and strengthening Vaelor's initial liquidity on the TON ecosystem.",
+
+    lastSync:0
+
+  };
+
+
+/*
+ * Make sure the real fund wallet remains configured.
+ */
+
+if(
+  !raise.wallet ||
+  raise.wallet === "EQ..."
+){
+
+  raise.wallet =
+    "UQCcfNVqBX6jYxZGvq7iQPQ5-EGETS0t4eRRfC-nGJqbJj8N";
+
+}
+
+
 /* =========================================================
    HELPERS
-========================================================= */
+   ========================================================= */
 
-const $ = id =>
-  document.getElementById(id);
+const $ =
+  id => document.getElementById(id);
 
-const t = () =>
-  I18N[lang];
+
+function t(){
+  return I18N[lang];
+}
+
 
 function save(){
 
@@ -2370,66 +1934,55 @@ function save(){
     JSON.stringify(raise)
   );
 
-  localStorage.setItem(
-    "noventra_raise_activity",
-    JSON.stringify(txs)
+}
+
+
+function short(address){
+
+  if(!address){
+    return t().not;
+  }
+
+  const s=String(address);
+
+  if(s.length<=14){
+    return s;
+  }
+
+  return (
+    s.slice(0,6) +
+    "…" +
+    s.slice(-6)
   );
 
 }
 
-function short(address){
 
-  if(
-    address &&
-    address.length>14
-  ){
-    return (
-      address.slice(0,7) +
-      "…" +
-      address.slice(-7)
-    );
+function normalizeTonAddress(address){
+
+  if(!address){
+    return "";
   }
 
-  return address || t().not;
+  return String(address)
+    .trim()
+    .toLowerCase()
+    .split("?")[0];
 
 }
 
-function formatTon(value){
 
-  const n=Number(value||0);
+function escapeHtml(value){
 
-  if(!Number.isFinite(n)){
-    return "0.00";
-  }
-
-  return n.toFixed(2);
-
-}
-
-function formatDate(timestamp){
-
-  if(!timestamp){
-    return "—";
-  }
-
-  try{
-
-    return new Date(timestamp)
-      .toLocaleString(
-        lang==="tr"
-          ? "tr-TR"
-          : lang==="en"
-            ? "en-US"
-            : undefined
-      );
-
-  }catch(e){
-
-    return new Date(timestamp).toLocaleString();
-
-  }
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 }
+
 
 function toast(message){
 
@@ -2451,30 +2004,47 @@ function toast(message){
 
 }
 
-function setOnchainStatus(text,syncing=false){
 
-  const box=$("onchainStatus");
+function formatTon(value){
 
-  const el=$("onchainStatusText");
+  const n=Number(value)||0;
 
-  if(el){
-    el.textContent=text;
+  return n.toFixed(2)+" TON";
+
+}
+
+
+function formatDate(timestamp){
+
+  if(!timestamp){
+    return "—";
   }
 
-  if(box){
-    box.classList.toggle(
-      "syncing",
-      syncing
-    );
+  try{
+
+    return new Date(timestamp)
+      .toLocaleString(
+        lang==="tr"
+          ? "tr-TR"
+          : lang==="en"
+            ? "en-US"
+            : undefined
+      );
+
+  }catch(e){
+
+    return "—";
+
   }
 
 }
 
+
 /* =========================================================
    LANGUAGE
-========================================================= */
+   ========================================================= */
 
-function apply(){
+function applyLanguage(){
 
   const x=t();
 
@@ -2489,15 +2059,53 @@ function apply(){
 
   $("language").value=lang;
 
-  $("kicker").textContent=x.k;
+  $("navHome").textContent=x.home;
+  $("navExplore").textContent=x.explore;
+  $("navRaise").textContent=x.raise;
+  $("navMine").textContent=x.mine;
 
-  $("labelRaised").textContent=x.raised;
+  $("homeTitle").textContent=x.homeTitle;
+  $("homeCopy").textContent=x.homeCopy;
 
-  $("labelTarget").textContent=x.target;
+  $("featuredTitle").textContent=x.featured;
+  $("featuredOpen").textContent=x.open;
 
-  $("labelContributors").textContent=x.contributors;
+  $("exploreTitle").textContent=
+    lang==="tr"
+      ? "Aktif fonları keşfet"
+      : "Explore active raises";
 
-  $("labelTime").textContent=x.time;
+  $("exploreCopy").textContent=
+    lang==="tr"
+      ? "Topluluk tarafından paylaşılan fon sayfalarına göz atın."
+      : "Browse funding pages shared by the community.";
+
+  $("mineTitle").textContent=
+    lang==="tr"
+      ? "Fonlarım"
+      : "My raises";
+
+  $("mineCopy").textContent=
+    lang==="tr"
+      ? "Fon ayarlarınızı ve bağlı cüzdan hareketlerinizi yönetin."
+      : "Manage your raise configuration and connected wallet activity.";
+
+  $("kicker").textContent=
+    lang==="tr"
+      ? "Topluluk Fonu · "+raise.id
+      : "Community Raise · "+raise.id;
+
+  $("labelRaised").textContent=
+    lang==="tr" ? "TOPLANAN" : "RAISED";
+
+  $("labelTarget").textContent=
+    lang==="tr" ? "HEDEF" : "TARGET";
+
+  $("labelContributors").textContent=
+    lang==="tr" ? "KATKICILAR" : "CONTRIBUTORS";
+
+  $("labelTime").textContent=
+    lang==="tr" ? "KALAN SÜRE" : "TIME LEFT";
 
   $("detailsTitle").textContent=x.details;
 
@@ -2505,50 +2113,19 @@ function apply(){
 
   $("activityTitle").textContent=x.activity;
 
-  $("clearDemo").textContent=x.clear;
+  $("clearActivity").textContent=x.clear;
 
   $("modalTitle").textContent=x.modal;
 
-  $("fNameLabel").textContent=x.name;
+  $("raiseSettings").textContent=x.settings;
 
-  $("fName").placeholder=
-    x.namePh || "";
-
-  $("fPurposeLabel").textContent=
-    x.purpose;
-
-  $("fTargetLabel").textContent=
-    x.targetLabel;
-
-  $("fWalletLabel").textContent=
-    x.wallet;
-
-  $("fDescLabel").textContent=
-    x.desc;
-
-  $("fDesc").placeholder=
-    x.descPh || "";
-
-  $("cancelModal").textContent=
-    x.cancel;
-
-  $("saveRaise").textContent=
-    x.save;
+  $("backHome").textContent=
+    "⌂ "+x.home;
 
   $("customAmount").placeholder=
-    x.custom;
-
-  $("homeTitle").textContent=
-    x.homeTitle;
-
-  $("homeCopy").textContent=
-    x.homeCopy;
-
-  $("featuredTitle").textContent=
-    x.featured;
-
-  $("featuredOpen").textContent=
-    x.featureOpen;
+    lang==="tr"
+      ? "Özel miktar (TON)"
+      : "Custom amount (TON)";
 
   $("homeCreate")
     .querySelector("strong")
@@ -2557,31 +2134,13 @@ function apply(){
   $("homeExplore")
     .querySelector("strong")
     .textContent=
-      "⌕ " + x.explore;
-
-  $("exploreTitle").textContent=
-    x.exploreTitle;
-
-  $("exploreCopy").textContent=
-    x.exploreCopy;
-
-  $("activeTitle").textContent=
-    x.activeTitle;
-
-  $("mineTitle").textContent=
-    x.mineTitle;
-
-  $("mineCopy").textContent=
-    x.mineCopy;
-
-  $("mineRaiseTitle").textContent=
-    x.mineRaiseTitle;
+      "⌕ "+x.explore;
 
   $("exploreCreate").textContent=
     x.create;
 
   $("exploreOpenFeatured").textContent=
-    x.featureOpen;
+    x.open;
 
   $("mineCreate").textContent=
     x.create;
@@ -2589,44 +2148,17 @@ function apply(){
   $("mineSettings").textContent=
     x.settings;
 
-  $("raiseSettings").textContent=
-    x.settings;
-
-  $("backHome").textContent=
-    "⌂ " + x.home;
-
-  $("navHome").textContent=
-    x.home;
-
-  $("navExplore").textContent=
-    x.explore;
-
-  $("navRaise").textContent=
-    x.raise;
-
-  $("navMine").textContent=
-    x.mine;
-
-  document
-    .querySelectorAll("#fPurpose option")
-    .forEach(option=>{
-
-      const map =
-        x.purposeMap || {};
-
-      option.textContent =
-        map[option.value] ||
-        option.value;
-
-    });
+  $("creatorWallet").textContent=
+    walletAddress || x.notConn;
 
   render();
 
 }
 
+
 /* =========================================================
    RENDER
-========================================================= */
+   ========================================================= */
 
 function render(){
 
@@ -2640,105 +2172,28 @@ function render(){
 
   $("raiseDesc").textContent=
     raise.desc ||
-    "A transparent TON liquidity raise for the Vaelor ecosystem.";
+    x.homeCopy;
 
   $("purpose").textContent=
-    (
-      x.purposeMap &&
-      x.purposeMap[raise.purpose]
-    ) ||
     raise.purpose;
 
-  const verified =
-    Number.isFinite(
-      Number(raise.verifiedRaised)
-    )
-      ? Number(raise.verifiedRaised)
-      : Number(raise.raised||0);
-
-  const target=
-    Number(raise.target||0);
-
   $("raised").textContent=
-    formatTon(verified) +
-    " TON";
+    formatTon(raise.raised);
 
   $("target").textContent=
-    formatTon(target) +
-    " TON";
+    formatTon(raise.target);
+
+  $("verifiedRaised").textContent=
+    formatTon(
+      raise.verifiedRaised || 0
+    );
 
   $("contributors").textContent=
     Number(
-      raise.verifiedContributors ||
-      raise.contributors ||
+      raise.verifiedContributors ??
+      raise.contributors ??
       0
     );
-
-  $("verifiedRaised").textContent=
-    formatTon(verified) +
-    " TON";
-
-  const pct=
-    target
-      ? Math.min(
-          100,
-          (verified/target)*100
-        )
-      : 0;
-
-  $("bar").style.width=
-    pct+"%";
-
-  $("percent").textContent=
-    pct.toFixed(1) +
-    x.funded;
-
-  $("remaining").textContent=
-    formatTon(
-      Math.max(
-        0,
-        target-verified
-      )
-    ) +
-    " TON " +
-    x.remaining;
-
-  $("status").textContent=
-    pct>=100
-      ? x.reached
-      : x.active;
-
-  $("featuredName").textContent=
-    raise.name;
-
-  $("featuredRaised").textContent=
-    formatTon(verified) +
-    " TON raised";
-
-  $("featuredTarget").textContent=
-    formatTon(target) +
-    " TON target";
-
-  $("mineRaised").textContent=
-    formatTon(verified) +
-    " TON raised";
-
-  $("mineContributors").textContent=
-    (
-      Number(
-        raise.verifiedContributors ||
-        raise.contributors ||
-        0
-      )
-    ) +
-    " " +
-    x.contributorsShort;
-
-  $("exploreVaelorAmount").textContent=
-    formatTon(verified) +
-    " / " +
-    formatTon(target) +
-    " TON";
 
   $("fundWallet").textContent=
     short(raise.wallet);
@@ -2747,18 +2202,138 @@ function render(){
     walletAddress ||
     x.notConn;
 
-  $("lastSync").textContent=
-    raise.lastSync
-      ? formatDate(raise.lastSync)
-      : "—";
+
+  const target=
+    Number(raise.target)||0;
+
+  const raised=
+    Number(raise.raised)||0;
+
+  const pct=
+    target>0
+      ? Math.min(
+          100,
+          (raised/target)*100
+        )
+      : 0;
+
+
+  $("bar").style.width=
+    pct+"%";
+
+  $("percent").textContent=
+    pct.toFixed(1)+"% "+
+    (
+      lang==="tr"
+        ? "fonlandı"
+        : "funded"
+    );
+
+
+  const remaining=
+    Math.max(
+      0,
+      target-raised
+    );
+
+
+  $("remaining").textContent=
+    formatTon(remaining)+
+    " "+
+    (
+      lang==="tr"
+        ? "kaldı"
+        : "remaining"
+    );
+
+
+  $("status").textContent=
+    pct>=100
+      ? x.reached
+      : x.active;
+
+
+  $("timeLeft").textContent=
+    pct>=100
+      ? x.reached
+      : "Open";
+
+
+  $("featuredName").textContent=
+    raise.name;
+
+  $("featuredRaised").textContent=
+    formatTon(raised)+
+    (
+      lang==="tr"
+        ? " toplandı"
+        : " raised"
+    );
+
+  $("featuredTarget").textContent=
+    formatTon(target)+
+    (
+      lang==="tr"
+        ? " hedef"
+        : " target"
+    );
+
+
+  $("mineRaiseName").textContent=
+    raise.name;
+
+  $("mineRaised").textContent=
+    formatTon(raised)+
+    (
+      lang==="tr"
+        ? " toplandı"
+        : " raised"
+    );
+
+  $("mineContributors").textContent=
+    (
+      raise.verifiedContributors ??
+      raise.contributors ??
+      0
+    )+
+    " "+
+    x.contributors;
+
+
+  $("exploreRaiseAmount").textContent=
+    (
+      Number(raised).toFixed(2)
+    )+
+    " / "+
+    (
+      Number(target).toFixed(2)
+    )+
+    " TON";
+
 
   $("sendBtn").textContent=
-    raise.wallet
-      ? x.send +
-        " " +
-        selected +
-        " TON"
-      : x.configure;
+    !raise.wallet
+      ? x.configure
+      : (
+          Number(raise.raised)>=target
+            ? x.reached
+            : x.send+" "+selected+" TON"
+        );
+
+
+  if(raise.lastSync){
+
+    $("lastSync").textContent=
+      formatDate(
+        raise.lastSync
+      );
+
+  }else{
+
+    $("lastSync").textContent="—";
+
+  }
+
 
   setExplorer();
 
@@ -2766,34 +2341,59 @@ function render(){
 
 }
 
+
 /* =========================================================
-   ACTIVITY RENDER
-========================================================= */
+   ACTIVITY
+   ========================================================= */
 
 function renderActivity(){
 
-  const box=
-    $("activity");
+  const box=$("activity");
 
-  if(!box){
-    return;
-  }
+  const list=
+    Array.isArray(chainTransactions)
+      ? chainTransactions
+      : [];
 
-  if(!chainTransactions.length){
+
+  if(!list.length){
 
     box.innerHTML=
-      '<div class="empty">' +
-      t().no +
+      '<div class="empty">'+
+      t().no+
       "</div>";
 
     return;
 
   }
 
+
   box.innerHTML=
-    chainTransactions
-      .slice(0,12)
+    list
+      .slice(0,20)
       .map(tx=>{
+
+        const sender=
+          escapeHtml(
+            short(tx.from)
+          );
+
+        const amount=
+          Number(tx.amount||0)
+            .toFixed(2);
+
+        const date=
+          escapeHtml(
+            formatDate(tx.time)
+          );
+
+        const hash=
+          tx.hash
+            ? escapeHtml(
+                short(tx.hash)
+              )
+            : "";
+
 
         return `
           <div class="activity">
@@ -2802,20 +2402,26 @@ function renderActivity(){
 
             <div class="tx">
 
-              <b>${escapeHtml(
-                short(tx.from)
-              )}</b>
+              <b>${sender}</b>
 
               <small>
-                ${escapeHtml(
-                  formatDate(tx.time)
-                )}
+                ${date}
               </small>
+
+              ${
+                hash
+                  ? `
+                    <small>
+                      TX ${hash}
+                    </small>
+                  `
+                  : ""
+              }
 
             </div>
 
             <div class="txamt">
-              +${formatTon(tx.amount)} TON
+              +${amount} TON
             </div>
 
           </div>
@@ -2826,24 +2432,10 @@ function renderActivity(){
 
 }
 
-/* =========================================================
-   SECURITY
-========================================================= */
-
-function escapeHtml(value){
-
-  return String(value ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
 
 /* =========================================================
    EXPLORER
-========================================================= */
+   ========================================================= */
 
 function setExplorer(){
 
@@ -2855,35 +2447,595 @@ function setExplorer(){
   }
 
   const address=
-    (
-      raise.wallet ||
-      CONFIG.fundWallet ||
-      ""
+    String(
+      raise.wallet||""
     ).trim();
+
 
   if(address){
 
     link.href=
-      "https://tonviewer.com/" +
+      "https://tonviewer.com/"+
       encodeURIComponent(address);
 
     link.textContent=
-      "View fund wallet ↗";
+      lang==="tr"
+        ? "Fon cüzdanını görüntüle ↗"
+        : "View fund wallet ↗";
 
   }else{
 
     link.href="#";
 
-    link.textContent=
-      "View on-chain ↗";
+  }
+
+}
+
+
+/* =========================================================
+   ONCHAIN STATUS
+   ========================================================= */
+
+function setOnchainStatus(
+  text,
+  loading=false
+){
+
+  const el=
+    $("onchainStatusText");
+
+  if(el){
+    el.textContent=text;
+  }
+
+
+  const dot=
+    document.querySelector(
+      ".onchain-dot"
+    );
+
+
+  if(dot){
+
+    dot.style.background=
+      loading
+        ? "#d8bc6a"
+        : "#27e984";
+
+    dot.style.boxShadow=
+      loading
+        ? "0 0 12px #d8bc6a"
+        : "0 0 12px #27e984";
 
   }
 
 }
 
+
 /* =========================================================
-   VIEW NAVIGATION
-========================================================= */
+   TON TRANSACTION VALUE
+   ========================================================= */
+
+function getMessageValue(msg){
+
+  if(!msg){
+    return 0;
+  }
+
+
+  /*
+   * TonAPI normally returns:
+   *
+   * in_msg.value = "100000000"
+   *
+   * which is nanotons.
+   */
+
+
+  if(
+    typeof msg.value === "string" ||
+    typeof msg.value === "number"
+  ){
+
+    const n=
+      Number(msg.value);
+
+    if(
+      Number.isFinite(n) &&
+      n>0
+    ){
+
+      return n;
+
+    }
+
+  }
+
+
+  /*
+   * Compatibility with alternate API structures.
+   */
+
+  if(
+    msg.value &&
+    typeof msg.value === "object"
+  ){
+
+    const candidates=[
+      msg.value.coins,
+      msg.value.amount,
+      msg.value.value
+    ];
+
+
+    for(
+      const candidate
+      of candidates
+    ){
+
+      const n=
+        Number(candidate);
+
+      if(
+        Number.isFinite(n) &&
+        n>0
+      ){
+
+        return n;
+
+      }
+
+    }
+
+  }
+
+
+  return 0;
+
+}
+
+
+/* =========================================================
+   REAL TON MAINNET SYNC
+   ========================================================= */
+
+async function refreshOnChain(){
+
+  const address=
+    String(
+      raise.wallet||""
+    ).trim();
+
+
+  if(!address){
+
+    setOnchainStatus(
+      t().configure
+    );
+
+    return;
+
+  }
+
+
+  setOnchainStatus(
+    "TON Mainnet · Reading blockchain…",
+    true
+  );
+
+
+  try{
+
+    const url=
+      CONFIG.tonApi+
+      "/blockchain/accounts/"+
+      encodeURIComponent(address)+
+      "/transactions?limit=100";
+
+
+    const response=
+      await fetch(
+        url,
+        {
+          method:"GET",
+          headers:{
+            "Accept":"application/json"
+          },
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "TonAPI HTTP "+
+        response.status
+      );
+
+    }
+
+
+    const data=
+      await response.json();
+
+
+    const transactions=
+      Array.isArray(
+        data.transactions
+      )
+        ? data.transactions
+        : [];
+
+
+    const walletNormalized=
+      normalizeTonAddress(
+        address
+      );
+
+
+    let total=0;
+
+    const contributors=
+      new Set();
+
+    const incoming=[];
+
+
+    /*
+     * Read blockchain transactions.
+     */
+
+    for(
+      const tx
+      of transactions
+    ){
+
+      if(!tx){
+        continue;
+      }
+
+
+      /*
+       * Incoming message.
+       */
+
+      const msg=
+        tx.in_msg;
+
+
+      if(!msg){
+        continue;
+      }
+
+
+      /*
+       * Ignore bounced transactions.
+       */
+
+      if(
+        msg.bounced===true
+      ){
+
+        continue;
+
+      }
+
+
+      if(
+        tx.description &&
+        tx.description.aborted===true
+      ){
+
+        continue;
+
+      }
+
+
+      /*
+       * Extract nanotons.
+       */
+
+      const nano=
+        getMessageValue(
+          msg
+        );
+
+
+      if(
+        !Number.isFinite(nano) ||
+        nano<=0
+      ){
+
+        continue;
+
+      }
+
+
+      /*
+       * Convert nanotons → TON.
+       */
+
+      const amount=
+        nano / 1000000000;
+
+
+      if(
+        !Number.isFinite(amount) ||
+        amount<=0
+      ){
+
+        continue;
+
+      }
+
+
+      /*
+       * Source wallet.
+       */
+
+      const source=
+        typeof msg.source === "string"
+          ? msg.source
+          : (
+              msg.source?.address ||
+              msg.source?.account_address ||
+              ""
+            );
+
+
+      /*
+       * Destination wallet.
+       */
+
+      const destination=
+        typeof msg.destination === "string"
+          ? msg.destination
+          : (
+              msg.destination?.address ||
+              msg.destination?.account_address ||
+              ""
+            );
+
+
+      /*
+       * We are reading the fund wallet's account.
+       *
+       * Only reject an explicit destination mismatch.
+       */
+
+      if(
+        destination &&
+        walletNormalized
+      ){
+
+        const destinationNormalized=
+          normalizeTonAddress(
+            destination
+          );
+
+
+        if(
+          destinationNormalized &&
+          destinationNormalized !==
+            walletNormalized
+        ){
+
+          continue;
+
+        }
+
+      }
+
+
+      /*
+       * Contributor set.
+       */
+
+      if(source){
+
+        contributors.add(
+          normalizeTonAddress(
+            source
+          )
+        );
+
+      }
+
+
+      /*
+       * Transaction timestamp.
+       */
+
+      const time=
+        Number(tx.utime||0) *
+        1000;
+
+
+      /*
+       * Transaction hash.
+       */
+
+      const hash=
+        tx?.transaction_id?.hash ||
+        tx?.hash ||
+        "";
+
+
+      const lt=
+        tx?.transaction_id?.lt ||
+        tx?.lt ||
+        "";
+
+
+      total += amount;
+
+
+      incoming.push({
+
+        from:
+          source ||
+          "TON Wallet",
+
+        amount,
+
+        time:
+          time || Date.now(),
+
+        hash,
+
+        lt
+
+      });
+
+    }
+
+
+    /*
+     * Newest first.
+     */
+
+    incoming.sort(
+      (a,b)=>
+        Number(b.time)-
+        Number(a.time)
+    );
+
+
+    /*
+     * Remove duplicates.
+     */
+
+    const unique=[];
+
+    const seen=
+      new Set();
+
+
+    for(
+      const tx
+      of incoming
+    ){
+
+      const key=
+        tx.hash
+          ? "hash:"+tx.hash
+          : (
+              tx.from+
+              "|" +
+              tx.amount+
+              "|" +
+              tx.time
+            );
+
+
+      if(
+        seen.has(key)
+      ){
+
+        continue;
+
+      }
+
+
+      seen.add(key);
+
+      unique.push(tx);
+
+    }
+
+
+    chainTransactions=
+      unique;
+
+
+    /*
+     * Blockchain becomes source of truth.
+     *
+     * No local demo amount.
+     */
+
+    const target=
+      Number(
+        raise.target
+      ) || Infinity;
+
+
+    raise.verifiedRaised=
+      Math.min(
+        total,
+        target
+      );
+
+
+    raise.verifiedContributors=
+      contributors.size;
+
+
+    raise.raised=
+      raise.verifiedRaised;
+
+
+    raise.contributors=
+      raise.verifiedContributors;
+
+
+    raise.lastSync=
+      Date.now();
+
+
+    save();
+
+
+    /*
+     * Status.
+     */
+
+    if(unique.length){
+
+      setOnchainStatus(
+        "TON Mainnet · "+
+        unique.length+
+        " confirmed contribution"+
+        (
+          unique.length===1
+            ? ""
+            : "s"
+        )
+      );
+
+    }else{
+
+      setOnchainStatus(
+        "TON Mainnet · 0 confirmed contributions"
+      );
+
+    }
+
+
+    render();
+
+
+  }catch(error){
+
+    console.error(
+      "Noventra TON sync failed:",
+      error
+    );
+
+
+    setOnchainStatus(
+      "TON Mainnet · Chain data unavailable"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 
 function showView(id){
 
@@ -2891,20 +3043,13 @@ function showView(id){
     .querySelectorAll(".view")
     .forEach(view=>{
 
-      const visible=
-        view.id===id;
-
       view.classList.toggle(
         "active",
-        visible
+        view.id===id
       );
 
-      view.style.display=
-        visible
-          ? "block"
-          : "none";
-
     });
+
 
   document
     .querySelectorAll(".nav-btn")
@@ -2917,22 +3062,18 @@ function showView(id){
 
     });
 
-  /*
-    Critical mobile fix:
-    always return to the real document top.
-  */
 
-  window.scrollTo(0,0);
-
-  document.documentElement.scrollTop=0;
-
-  document.body.scrollTop=0;
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
 
+
 /* =========================================================
    TON CONNECT
-========================================================= */
+   ========================================================= */
 
 try{
 
@@ -2952,7 +3093,8 @@ try{
 
         restoreConnection:true,
 
-        language:lang,
+        language:
+          lang,
 
         uiPreferences:{
           theme:"DARK",
@@ -2960,6 +3102,7 @@ try{
         }
 
       });
+
 
     tonConnectUI.onStatusChange(
       wallet=>{
@@ -2984,9 +3127,10 @@ try{
 
 }
 
+
 /* =========================================================
    AMOUNT BUTTONS
-========================================================= */
+   ========================================================= */
 
 document
   .querySelectorAll(".amt")
@@ -2999,15 +3143,23 @@ document
           button.dataset.value
         );
 
+
       $("customAmount").value="";
+
 
       document
         .querySelectorAll(".amt")
-        .forEach(x=>
-          x.classList.remove("active")
-        );
+        .forEach(item=>{
+          item.classList.remove(
+            "active"
+          );
+        });
 
-      button.classList.add("active");
+
+      button.classList.add(
+        "active"
+      );
+
 
       render();
 
@@ -3015,22 +3167,31 @@ document
 
   });
 
+
 $("customAmount").oninput=()=>{
 
-  const value=
+  const amount=
     Number(
       $("customAmount").value
     );
 
-  if(value>0){
 
-    selected=value;
+  if(
+    Number.isFinite(amount) &&
+    amount>0
+  ){
+
+    selected=amount;
+
 
     document
       .querySelectorAll(".amt")
-      .forEach(x=>
-        x.classList.remove("active")
-      );
+      .forEach(button=>{
+        button.classList.remove(
+          "active"
+        );
+      });
+
 
     render();
 
@@ -3038,632 +3199,264 @@ $("customAmount").oninput=()=>{
 
 };
 
+
 /* =========================================================
-   REAL TON TRANSACTION
-========================================================= */
+   SEND REAL TON TRANSACTION
+   ========================================================= */
 
 $("sendBtn").onclick=
-  async()=>{
+async()=>{
 
-    const x=t();
+  const x=t();
 
-    if(!raise.wallet){
 
-      toast(x.configure);
+  if(!raise.wallet){
 
-      return;
-
-    }
-
-    if(!tonConnectUI){
-
-      toast(
-        "TON Connect unavailable."
-      );
-
-      return;
-
-    }
-
-    if(!tonConnectUI.connected){
-
-      await tonConnectUI.openModal();
-
-      return;
-
-    }
-
-    const amount=
-      Number(selected);
-
-    if(
-      !amount ||
-      amount<=0
-    ){
-
-      toast(x.invalid);
-
-      return;
-
-    }
-
-    const verified=
-      Number(
-        raise.verifiedRaised || 0
-      );
-
-    if(
-      verified>=
-      Number(raise.target)
-    ){
-
-      toast(x.reached);
-
-      return;
-
-    }
-
-    let destination=
-      raise.wallet.trim();
-
-    try{
-
-      if(
-        window.TON_CONNECT_UI?.toUserFriendlyAddress &&
-        destination.includes(":")
-      ){
-
-        destination=
-          window.TON_CONNECT_UI
-            .toUserFriendlyAddress(
-              destination,
-              true
-            );
-
-      }
-
-    }catch(e){}
-
-    if(
-      !/^(EQ|UQ|kQ|0Q)[A-Za-z0-9_-]{46,48}$/
-        .test(destination)
-    ){
-
-      toast(
-        "Invalid TON fund wallet address."
-      );
-
-      return;
-
-    }
-
-    const btn=
-      $("sendBtn");
-
-    btn.disabled=true;
-
-    btn.textContent=
-      "Waiting for wallet…";
-
-    try{
-
-      const result=
-        await tonConnectUI.sendTransaction({
-
-          validUntil:
-            Math.floor(
-              Date.now()/1000
-            ) + 300,
-
-          network:"-239",
-
-          messages:[
-            {
-              address:destination,
-
-              amount:
-                String(
-                  Math.round(
-                    amount*1e9
-                  )
-                )
-            }
-          ]
-
-        });
-
-      txs.unshift({
-
-        from:
-          walletAddress ||
-          "Connected wallet",
-
-        amount,
-
-        time:
-          Date.now(),
-
-        status:
-          "submitted",
-
-        boc:
-          result?.boc || ""
-
-      });
-
-      save();
-
-      setOnchainStatus(
-        "Transaction submitted · syncing chain…",
-        true
-      );
-
-      toast(
-        x.submitted
-      );
-
-      setTimeout(
-        refreshOnChain,
-        3500
-      );
-
-    }catch(error){
-
-      console.error(
-        "Transaction error",
-        error
-      );
-
-      toast(
-        x.failed
-      );
-
-      setOnchainStatus(
-        "Transaction cancelled or failed",
-        false
-      );
-
-    }finally{
-
-      btn.disabled=false;
-
-      render();
-
-    }
-
-  };
-
-/* =========================================================
-   REAL ON-CHAIN READER
-========================================================= */
-
-async function refreshOnChain(){
-
-  const address=
-    (
-      raise.wallet ||
-      CONFIG.fundWallet ||
-      ""
-    ).trim();
-
-  if(!address){
-
-    setOnchainStatus(
-      t().configure
+    toast(
+      x.configure
     );
 
     return;
 
   }
 
-  setExplorer();
 
-  setOnchainStatus(
-    "Reading TON Mainnet…",
-    true
-  );
+  if(!tonConnectUI){
+
+    toast(
+      "TON Connect unavailable."
+    );
+
+    return;
+
+  }
+
+
+  if(!tonConnectUI.connected){
+
+    try{
+
+      await tonConnectUI.openModal();
+
+    }catch(error){
+
+      console.error(error);
+
+    }
+
+    return;
+
+  }
+
+
+  const amount=
+    Number(selected);
+
+
+  if(
+    !Number.isFinite(amount) ||
+    amount<=0
+  ){
+
+    toast(
+      x.invalid
+    );
+
+    return;
+
+  }
+
+
+  if(
+    Number(raise.raised) >=
+    Number(raise.target)
+  ){
+
+    toast(
+      x.reached
+    );
+
+    return;
+
+  }
+
+
+  let destination=
+    raise.wallet.trim();
+
+
+  /*
+   * Convert raw TON address to friendly
+   * when possible.
+   */
 
   try{
 
-    /*
-      TonAPI endpoint:
-      /blockchain/accounts/{address}/transactions
-    */
-
-    const url=
-      CONFIG.tonApi +
-      "/blockchain/accounts/" +
-      encodeURIComponent(address) +
-      "/transactions?limit=100";
-
-    const response=
-      await fetch(
-        url,
-        {
-          method:"GET",
-          headers:{
-            "Accept":"application/json"
-          },
-          cache:"no-store"
-        }
-      );
-
-    if(!response.ok){
-
-      throw new Error(
-        "TonAPI " +
-        response.status
-      );
-
-    }
-
-    const data=
-      await response.json();
-
-    const transactions=
-      Array.isArray(
-        data.transactions
-      )
-        ? data.transactions
-        : [];
-
-    const contributions=[];
-
-    const contributors=
-      new Set();
-
-    let total=0;
-
-    /*
-      We inspect inbound TON messages.
-
-      TonAPI may return:
-      transaction.in_msg.value
-      or nested message/value formats.
-    */
-
-    for(
-      const tx of transactions
+    if(
+      window.TON_CONNECT_UI &&
+      window.TON_CONNECT_UI
+        .toUserFriendlyAddress &&
+      destination.includes(":")
     ){
 
-      const inMsg=
-        tx?.in_msg;
-
-      if(!inMsg){
-        continue;
-      }
-
-      const valueNano=
-        extractNanoValue(
-          inMsg
-        );
-
-      if(
-        !valueNano ||
-        valueNano<=0
-      ){
-        continue;
-      }
-
-      const amount=
-        valueNano /
-        1e9;
-
-      if(
-        !Number.isFinite(amount) ||
-        amount<=0
-      ){
-        continue;
-      }
-
-      /*
-        Ignore tiny TON storage/deposit
-        amounts below 0.000001 TON.
-      */
-
-      if(amount<0.000001){
-        continue;
-      }
-
-      const from=
-        extractSender(
-          inMsg
-        );
-
-      /*
-        Only count transactions that actually
-        entered the configured fund wallet.
-      */
-
-      const destination=
-        extractDestination(
-          inMsg
-        );
-
-      if(
-        destination &&
-        !sameAddress(
-          destination,
-          address
-        )
-      ){
-        continue;
-      }
-
-      /*
-        Respect raise start time when available.
-      */
-
-      const txTime=
-        extractTxTime(tx);
-
-      if(
-        raise.chainStartTime &&
-        txTime &&
-        txTime <
-        Number(raise.chainStartTime)
-      ){
-        continue;
-      }
-
-      total += amount;
-
-      if(from){
-        contributors.add(from);
-      }
-
-      contributions.push({
-
-        from:
-          from ||
-          "TON wallet",
-
-        amount,
-
-        time:
-          txTime ||
-          Date.now(),
-
-        hash:
-          tx?.hash ||
-          "",
-
-        lt:
-          tx?.lt ||
-          ""
-
-      });
+      destination=
+        window.TON_CONNECT_UI
+          .toUserFriendlyAddress(
+            destination,
+            true
+          );
 
     }
-
-    /*
-      Sort newest first.
-    */
-
-    contributions.sort(
-      (a,b)=>
-        Number(b.time) -
-        Number(a.time)
-    );
-
-    /*
-      Never exceed target in UI.
-    */
-
-    const verifiedRaised=
-      Math.min(
-        Number(raise.target || 0),
-        total
-      );
-
-    raise.verifiedRaised=
-      verifiedRaised;
-
-    raise.verifiedContributors=
-      contributors.size;
-
-    raise.raised=
-      verifiedRaised;
-
-    raise.contributors=
-      contributors.size;
-
-    raise.lastSync=
-      Date.now();
-
-    chainTransactions=
-      contributions;
-
-    save();
-
-    setOnchainStatus(
-      "TON Mainnet · " +
-      contributions.length +
-      " confirmed contribution" +
-      (
-        contributions.length===1
-          ? ""
-          : "s"
-      ),
-      false
-    );
-
-    render();
 
   }catch(error){
 
     console.warn(
-      "On-chain refresh failed",
+      "Address conversion failed",
       error
     );
 
-    setOnchainStatus(
-      "TON Mainnet · chain data unavailable",
-      false
-    );
-
   }
 
-}
 
-/* =========================================================
-   TONAPI PARSERS
-========================================================= */
-
-function extractNanoValue(message){
-
-  if(!message){
-    return 0;
-  }
-
-  const direct=
-    Number(
-      message.value
-    );
+  /*
+   * TON friendly address validation.
+   */
 
   if(
-    Number.isFinite(direct) &&
-    direct>0
-  ){
-    return direct;
-  }
-
-  const candidates=[
-
-    message?.value?.coins,
-    message?.value?.amount,
-    message?.value?.value,
-
-    message?.coins,
-    message?.amount,
-
-    message?.payload?.value,
-    message?.payload?.coins
-
-  ];
-
-  for(
-    const candidate of candidates
+    !/^(EQ|UQ|kQ|0Q)[A-Za-z0-9_-]{46,48}$/
+      .test(destination)
   ){
 
-    const n=
-      Number(candidate);
+    toast(
+      "Invalid TON fund wallet address."
+    );
 
-    if(
-      Number.isFinite(n) &&
-      n>0
-    ){
-      return n;
-    }
+    return;
 
   }
 
-  return 0;
 
-}
+  const button=
+    $("sendBtn");
 
-function extractSender(message){
 
-  if(!message){
-    return "";
+  button.disabled=true;
+
+  button.textContent=
+    "Waiting for wallet…";
+
+
+  try{
+
+    /*
+     * Amount must be nanotons.
+     */
+
+    const nanoAmount=
+      Math.round(
+        amount *
+        1000000000
+      );
+
+
+    const result=
+      await tonConnectUI
+        .sendTransaction({
+
+          validUntil:
+            Math.floor(
+              Date.now()/1000
+            )+300,
+
+          network:
+            CONFIG.network,
+
+          messages:[{
+
+            address:
+              destination,
+
+            amount:
+              String(
+                nanoAmount
+              )
+
+          }]
+
+        });
+
+
+    console.log(
+      "TON transaction result:",
+      result
+    );
+
+
+    setOnchainStatus(
+      "Transaction submitted · waiting for confirmation"
+    );
+
+
+    toast(
+      x.submitted
+    );
+
+
+    /*
+     * Do NOT locally increase raised.
+     *
+     * Blockchain must confirm it.
+     */
+
+    setTimeout(
+      refreshOnChain,
+      5000
+    );
+
+
+    setTimeout(
+      refreshOnChain,
+      15000
+    );
+
+
+    setTimeout(
+      refreshOnChain,
+      30000
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "TON transaction failed:",
+      error
+    );
+
+
+    toast(
+      x.failed
+    );
+
+
+    setOnchainStatus(
+      "TON Mainnet · Transaction cancelled or failed"
+    );
+
+  }finally{
+
+    button.disabled=false;
+
+    render();
+
   }
 
-  return (
-    message.source ||
-    message.sender ||
-    message.from ||
-    message?.source?.address ||
-    message?.sender?.address ||
-    ""
-  );
+};
 
-}
-
-function extractDestination(message){
-
-  if(!message){
-    return "";
-  }
-
-  return (
-    message.destination ||
-    message.to ||
-    message?.destination?.address ||
-    message?.to?.address ||
-    ""
-  );
-
-}
-
-function extractTxTime(tx){
-
-  if(!tx){
-    return 0;
-  }
-
-  const raw=
-    tx.utime ||
-    tx.timestamp ||
-    tx.created_at ||
-    tx.createdAt ||
-    0;
-
-  const n=
-    Number(raw);
-
-  if(!n){
-    return 0;
-  }
-
-  /*
-    TONAPI utime is usually seconds.
-  */
-
-  return n<10000000000
-    ? n*1000
-    : n;
-
-}
-
-function normalizeAddress(address){
-
-  return String(address || "")
-    .trim()
-    .toLowerCase();
-
-}
-
-function sameAddress(a,b){
-
-  if(!a || !b){
-    return false;
-  }
-
-  const A=
-    normalizeAddress(a);
-
-  const B=
-    normalizeAddress(b);
-
-  if(A===B){
-    return true;
-  }
-
-  /*
-    Friendly / raw address forms may differ.
-    Compare by raw address when possible.
-  */
-
-  return (
-    A.replace(/^0:/,"") ===
-    B.replace(/^0:/,"")
-  );
-
-}
 
 /* =========================================================
    MODAL
-========================================================= */
+   ========================================================= */
 
 function openModal(prefill=true){
 
@@ -3687,26 +3480,25 @@ function openModal(prefill=true){
   }else{
 
     $("fName").value="";
-
-    $("fPurpose").value=
-      "Liquidity";
-
-    $("fTarget").value=
-      "100";
+    $("fPurpose").value="Liquidity";
+    $("fTarget").value="100";
 
     $("fWallet").value=
-      CONFIG.fundWallet;
+      raise.wallet ||
+      "";
 
     $("fDesc").value=
-      "A transparent TON liquidity raise for the Vaelor ecosystem.";
+      "This raise is dedicated to establishing and strengthening Vaelor's initial liquidity on the TON ecosystem.";
 
   }
+
 
   $("modal")
     .classList
     .add("open");
 
 }
+
 
 function closeModal(){
 
@@ -3716,9 +3508,136 @@ function closeModal(){
 
 }
 
+
 /* =========================================================
-   MODAL BUTTONS
-========================================================= */
+   CREATE RAISE
+   ========================================================= */
+
+$("saveRaise").onclick=()=>{
+
+  const name=
+    $("fName")
+      .value
+      .trim();
+
+
+  const target=
+    Number(
+      $("fTarget").value
+    );
+
+
+  const wallet=
+    $("fWallet")
+      .value
+      .trim();
+
+
+  const description=
+    $("fDesc")
+      .value
+      .trim();
+
+
+  if(
+    !name ||
+    !target ||
+    !wallet
+  ){
+
+    toast(
+      t().required
+    );
+
+    return;
+
+  }
+
+
+  let normalizedWallet=
+    wallet;
+
+
+  try{
+
+    if(
+      window.TON_CONNECT_UI &&
+      window.TON_CONNECT_UI
+        .toUserFriendlyAddress &&
+      wallet.includes(":")
+    ){
+
+      normalizedWallet=
+        window.TON_CONNECT_UI
+          .toUserFriendlyAddress(
+            wallet,
+            true
+          );
+
+    }
+
+  }catch(error){
+
+    console.warn(error);
+
+  }
+
+
+  /*
+   * Preserve verified blockchain data.
+   */
+
+  raise={
+    ...raise,
+
+    name,
+
+    purpose:
+      $("fPurpose").value,
+
+    target,
+
+    wallet:
+      normalizedWallet,
+
+    desc:
+      description ||
+      raise.desc
+
+  };
+
+
+  save();
+
+  render();
+
+  closeModal();
+
+  showView(
+    "raiseView"
+  );
+
+
+  toast(
+    t().saved
+  );
+
+
+  /*
+   * Immediately verify new fund wallet.
+   */
+
+  setTimeout(
+    refreshOnChain,
+    500
+  );
+
+};
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
 
 $("homeCreate").onclick=
   ()=>openModal(false);
@@ -3741,123 +3660,6 @@ $("closeModal").onclick=
 $("cancelModal").onclick=
   closeModal;
 
-/* =========================================================
-   SAVE RAISE
-========================================================= */
-
-$("saveRaise").onclick=
-  ()=>{
-
-    const x=t();
-
-    const name=
-      $("fName")
-        .value
-        .trim();
-
-    const target=
-      Number(
-        $("fTarget").value
-      );
-
-    const wallet=
-      $("fWallet")
-        .value
-        .trim();
-
-    if(
-      !name ||
-      !target ||
-      !wallet
-    ){
-
-      toast(
-        x.required
-      );
-
-      return;
-
-    }
-
-    let normalizedWallet=
-      wallet;
-
-    try{
-
-      if(
-        window.TON_CONNECT_UI?.toUserFriendlyAddress &&
-        wallet.includes(":")
-      ){
-
-        normalizedWallet=
-          window.TON_CONNECT_UI
-            .toUserFriendlyAddress(
-              wallet,
-              true
-            );
-
-      }
-
-    }catch(e){}
-
-    raise={
-
-      ...raise,
-
-      id:CONFIG.raiseId,
-
-      name,
-
-      purpose:
-        $("fPurpose").value,
-
-      target,
-
-      wallet:
-        normalizedWallet,
-
-      desc:
-        $("fDesc")
-          .value
-          .trim() ||
-        "A transparent TON liquidity raise for the Vaelor ecosystem."
-
-    };
-
-    /*
-      Do not reset verified blockchain data
-      when editing settings.
-    */
-
-    save();
-
-    render();
-
-    closeModal();
-
-    showView(
-      "raiseView"
-    );
-
-    toast(
-      x.saved
-    );
-
-    /*
-      Immediately verify the configured wallet.
-    */
-
-    setTimeout(
-      refreshOnChain,
-      400
-    );
-
-  };
-
-/* =========================================================
-   HOME / FEATURED
-========================================================= */
-
 $("backHome").onclick=
   ()=>showView("homeView");
 
@@ -3870,201 +3672,252 @@ $("featuredCard").onclick=
 $("exploreOpenFeatured").onclick=
   ()=>showView("raiseView");
 
+
 /* =========================================================
-   COPY
-========================================================= */
+   SHARE
+   ========================================================= */
 
-$("copyId").onclick=
-  async()=>{
+$("shareBtn").onclick=
+async()=>{
 
-    try{
+  const text=
+    "Noventra Raise · "+
+    raise.name+
+    " · "+
+    raise.id;
 
-      await navigator.clipboard.writeText(
-        raise.id
-      );
+
+  try{
+
+    if(
+      navigator.share
+    ){
+
+      await navigator.share({
+
+        title:
+          "Noventra Raise",
+
+        text,
+
+        url:
+          location.href
+
+      });
+
+    }else{
+
+      await navigator.clipboard
+        .writeText(
+          text
+        );
 
       toast(
         t().copied
       );
 
-    }catch(e){
+    }
 
-      toast(
+  }catch(error){
+
+    console.warn(
+      "Share cancelled",
+      error
+    );
+
+  }
+
+};
+
+
+/* =========================================================
+   COPY ID
+   ========================================================= */
+
+$("copyId").onclick=
+async()=>{
+
+  try{
+
+    await navigator.clipboard
+      .writeText(
         raise.id
       );
 
-    }
+    toast(
+      t().copied
+    );
 
-  };
+  }catch(error){
 
-/* =========================================================
-   SHARE
-========================================================= */
+    toast(
+      raise.id
+    );
 
-$("shareBtn").onclick=
-  async()=>{
+  }
 
-    const text=
-      "Noventra Raise · " +
-      raise.name +
-      " · " +
-      raise.id;
+};
 
-    try{
-
-      if(
-        navigator.share
-      ){
-
-        await navigator.share({
-
-          title:
-            "Noventra Raise",
-
-          text,
-
-          url:
-            location.href
-
-        });
-
-      }else{
-
-        await navigator.clipboard.writeText(
-          text
-        );
-
-        toast(
-          t().shareFail
-        );
-
-      }
-
-    }catch(e){}
-
-  };
 
 /* =========================================================
    CLEAR LOCAL ACTIVITY
-========================================================= */
+   ========================================================= */
 
-$("clearDemo").onclick=
-  ()=>{
+$("clearActivity").onclick=()=>{
 
-    txs=[];
+  /*
+   * Only clears UI cache.
+   *
+   * Blockchain data will return
+   * after the next synchronization.
+   */
 
-    /*
-      IMPORTANT:
-      Blockchain verified data is NOT deleted.
-      Only old local demo activity is cleared.
-    */
+  chainTransactions=[];
 
-    save();
+  render();
 
-    render();
+  toast(
+    lang==="tr"
+      ? "Yerel görünüm temizlendi. Zincir verisi tekrar senkronize edilebilir."
+      : "Local view cleared. Blockchain data can be synchronized again."
+  );
 
-    toast(
-      t().clearToast
-    );
+};
 
-  };
 
 /* =========================================================
-   REFRESH
-========================================================= */
+   MANUAL SYNC
+   ========================================================= */
 
 $("refreshChain").onclick=
   refreshOnChain;
 
+
 /* =========================================================
    NAVIGATION
-========================================================= */
+   ========================================================= */
 
 document
   .querySelectorAll(".nav-btn")
   .forEach(button=>{
 
-    button.onclick=
-      ()=>{
-        showView(
-          button.dataset.view
-        );
-      };
+    button.onclick=()=>{
+
+      showView(
+        button.dataset.view
+      );
+
+    };
 
   });
 
+
 /* =========================================================
-   LANGUAGE SWITCH
-========================================================= */
+   LANGUAGE CHANGE
+   ========================================================= */
 
 $("language").onchange=
-  event=>{
+event=>{
 
-    lang=
-      event.target.value;
+  lang=
+    event.target.value;
 
-    localStorage.setItem(
-      "noventra_raise_lang",
-      lang
-    );
 
-    if(tonConnectUI){
+  localStorage.setItem(
+    "noventra_raise_lang",
+    lang
+  );
 
-      try{
 
-        tonConnectUI.uiOptions={
-          language:lang
-        };
+  if(tonConnectUI){
 
-      }catch(e){}
+    try{
+
+      tonConnectUI.uiOptions={
+        language:lang
+      };
+
+    }catch(error){
+
+      console.warn(error);
 
     }
 
-    apply();
+  }
 
-  };
+
+  applyLanguage();
+
+};
+
 
 /* =========================================================
-   INITIALIZE
-========================================================= */
-
-save();
+   INITIALIZATION
+   ========================================================= */
 
 showView(
   "homeView"
 );
 
-apply();
+applyLanguage();
 
 setExplorer();
 
-/*
-  Give the UI a moment to paint,
-  then read the real TON Mainnet wallet.
-*/
-
-setTimeout(
-  ()=>{
-    refreshOnChain();
-  },
-  700
-);
 
 /*
-  Auto-sync every 30 seconds while
-  the page is open.
-*/
+ * First real blockchain sync.
+ */
+
+if(raise.wallet){
+
+  setTimeout(
+    refreshOnChain,
+    1200
+  );
+
+}
+
+
+/*
+ * Automatic real blockchain synchronization.
+ *
+ * Every 15 seconds.
+ */
 
 setInterval(
   ()=>{
+
     if(
-      document.visibilityState ===
-      "visible"
+      raise.wallet
     ){
+
       refreshOnChain();
+
     }
+
   },
-  30000
+  15000
+);
+
+
+/*
+ * Extra verification when page becomes visible again.
+ */
+
+document.addEventListener(
+  "visibilitychange",
+  ()=>{
+
+    if(
+      !document.hidden &&
+      raise.wallet
+    ){
+
+      refreshOnChain();
+
+    }
+
+  }
 );
 
 </script>
