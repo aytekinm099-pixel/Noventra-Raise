@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" translate="no">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="google" content="notranslate">
 <meta name="theme-color" content="#030504">
 <title>Noventra Raise</title>
 <script src="https://unpkg.com/@tonconnect/ui@3.0.2/dist/tonconnect-ui.min.js"></script>
@@ -246,8 +247,38 @@ select optgroup{
   .nav-btn{font-size:9px}
 }
 
+
+@media(max-width:520px){
+  .app{padding-top:8px}
+  .top{
+    display:flex;flex-direction:column;align-items:stretch;gap:9px;
+    padding:4px 0 13px
+  }
+  .brand{width:100%;padding:2px 3px}
+  .brand b{font-size:16px}
+  .brand small{max-width:230px}
+  .head-actions{width:100%;display:grid;grid-template-columns:112px minmax(0,1fr);gap:7px}
+  .lang{width:112px;min-width:0}
+  #ton-connect{width:100%;max-width:none}
+  #ton-connect button{width:100%!important;max-width:none!important}
+  .home-panel .hero{padding:22px 17px 18px}
+  .home-title{font-size:30px;line-height:1.08}
+  .quick{grid-template-columns:1fr 1fr}
+}
+@media(max-width:380px){
+  .head-actions{grid-template-columns:104px minmax(0,1fr)}
+  .lang{width:104px;font-size:10px}
+  .home-title{font-size:27px}
+  .quick{grid-template-columns:1fr}
+}
+
 </style>
-</head>
+<style>
+.onchain-status{display:flex;align-items:center;gap:8px;margin-top:12px;padding:10px 11px;border:1px solid #173529;border-radius:13px;background:#06100b;color:#83918a;font-size:9px}
+.onchain-dot{width:7px;height:7px;border-radius:50%;background:#27e984;box-shadow:0 0 12px #27e984;flex:none}
+.onchain-status button{margin-left:auto;width:26px;height:26px;border:1px solid #214534;border-radius:9px;background:#09130e;color:#35ed8d;cursor:pointer}
+#explorerLink{color:#35ed8d;text-decoration:none}
+</style></head>
 <body>
 <div class="app">
   <header class="top">
@@ -291,7 +322,7 @@ select optgroup{
     </section>
   </main>
 
-  <main id="raiseView" class="view">
+  <main id="raiseView" class="view" style="display:none">
     <section class="hero raise-view-card">
       <div class="kicker" id="kicker">Community Raise · NVR-7F29A</div>
       <div class="title-row">
@@ -312,6 +343,7 @@ select optgroup{
 
       <div class="progress"><div class="bar" id="bar"></div></div>
       <div class="progressline"><span id="percent">0% funded</span><span id="remaining">100 TON remaining</span></div>
+      <div class="onchain-status" id="onchainStatus"><span class="onchain-dot"></span><span id="onchainStatusText">TON Mainnet · Ready for real transactions</span><button id="refreshChain" type="button">↻</button></div>
 
       <div class="actions">
         <div class="amounts">
@@ -335,6 +367,7 @@ select optgroup{
         <div class="row"><span id="labelFundWallet">Fund wallet</span><b id="fundWallet">Not configured</b></div>
         <div class="row"><span id="labelCreator">Creator</span><b id="creatorWallet">Not connected</b></div>
         <div class="row"><span id="labelNetwork">Network</span><b id="networkName">TON Mainnet</b></div>
+        <div class="row"><span id="labelExplorer">Explorer</span><b><a id="explorerLink" href="#" target="_blank" rel="noopener">View on-chain ↗</a></b></div>
       </div>
     </section>
 
@@ -344,7 +377,7 @@ select optgroup{
     </section>
   </main>
 
-  <main id="exploreView" class="view explore-panel">
+  <main id="exploreView" class="view explore-panel" style="display:none">
     <section class="hero">
       <div class="eyebrow">NOVENTRA RAISE</div>
       <div class="home-title" id="exploreTitle">Explore active raises</div>
@@ -367,7 +400,7 @@ select optgroup{
     </section>
   </main>
 
-  <main id="mineView" class="view mine-panel">
+  <main id="mineView" class="view mine-panel" style="display:none">
     <section class="hero">
       <div class="eyebrow">MY NOVENTRA</div>
       <div class="home-title" id="mineTitle">My raises</div>
@@ -473,6 +506,7 @@ function render(){
   $("mineRaised").textContent=x.featuredRaised.replace("0 TON",Number(raise.raised).toFixed(2)+" TON");$("mineContributors").textContent=(raise.contributors||0)+" "+x.contributorsShort;
   $("sendBtn").textContent=raise.wallet?x.send+" "+selected+" TON":x.configure;
   $("creatorWallet").textContent=walletAddress||x.notConn;
+  setExplorer();
   renderActivity();
 }
 function renderActivity(){
@@ -482,8 +516,11 @@ function renderActivity(){
 }
 
 function showView(id){
-  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
-  $(id).classList.add("active");
+  document.querySelectorAll(".view").forEach(v=>{
+    const visible=v.id===id;
+    v.classList.toggle("active",visible);
+    v.style.display=visible ? "block" : "none";
+  });
   document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.view===id));
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -492,7 +529,10 @@ let walletAddress="";
 let tonConnectUI=null;
 try{
   if(window.TON_CONNECT_UI&&window.TON_CONNECT_UI.TonConnectUI){
-    tonConnectUI=new TON_CONNECT_UI.TonConnectUI({manifestUrl:CONFIG.manifestUrl,buttonRootId:"ton-connect",uiPreferences:{theme:"DARK",borderRadius:"m"}});
+    tonConnectUI=new TON_CONNECT_UI.TonConnectUI({
+      manifestUrl:CONFIG.manifestUrl, buttonRootId:"ton-connect", restoreConnection:true,
+      language:lang, uiPreferences:{theme:"DARK",borderRadius:"m"}
+    });
     tonConnectUI.onStatusChange(w=>{
       walletAddress=w?.account?.address||"";
       render();
@@ -511,12 +551,47 @@ $("sendBtn").onclick=async()=>{
   const amount=Number(selected);
   if(!amount||amount<=0){toast(x.invalid);return}
   if(Number(raise.raised)>=Number(raise.target)){toast(x.reached);return}
+  let destination=raise.wallet.trim();
   try{
-    await tonConnectUI.sendTransaction({validUntil:Math.floor(Date.now()/1000)+300,network:"-239",messages:[{address:raise.wallet,amount:String(Math.round(amount*1e9))}]});
-    raise.raised=Number(raise.raised)+amount;raise.contributors=Number(raise.contributors)+1;
-    txs.unshift({from:walletAddress||"Connected wallet",amount,time:Date.now()});save();render();toast(x.submitted);
-  }catch(e){toast(x.failed)}
+    if(window.TON_CONNECT_UI?.toUserFriendlyAddress && destination.includes(":"))
+      destination=window.TON_CONNECT_UI.toUserFriendlyAddress(destination,true);
+  }catch(e){}
+  if(!/^(EQ|UQ|kQ|0Q)[A-Za-z0-9_-]{46,48}$/.test(destination)){
+    toast("Invalid TON fund wallet address.");return;
+  }
+  const btn=$("sendBtn"); btn.disabled=true; btn.textContent="Waiting for wallet…";
+  try{
+    const result=await tonConnectUI.sendTransaction({
+      validUntil:Math.floor(Date.now()/1000)+300,
+      network:"-239",
+      messages:[{address:destination,amount:String(Math.round(amount*1e9))}]
+    });
+    txs.unshift({from:walletAddress||"Connected wallet",amount,time:Date.now(),status:"submitted",boc:result?.boc||""});
+    save(); render(); setOnchainStatus("Transaction submitted · awaiting chain confirmation");
+    toast(x.submitted); setTimeout(refreshOnChain,3500);
+  }catch(e){
+    console.error(e); toast(x.failed); setOnchainStatus("Transaction cancelled or failed");
+  }finally{btn.disabled=false;render();}
 };
+
+function setOnchainStatus(text){const el=$("onchainStatusText");if(el)el.textContent=text}
+function setExplorer(){
+  const link=$("explorerLink"); if(!link)return;
+  const addr=(raise.wallet||"").trim();
+  if(addr){link.href="https://tonviewer.com/"+encodeURIComponent(addr);link.textContent="View fund wallet ↗"}
+}
+async function refreshOnChain(){
+  setExplorer();
+  if(!raise.wallet){setOnchainStatus(t().configure);return}
+  setOnchainStatus("Reading TON Mainnet…");
+  try{
+    const r=await fetch("https://tonapi.io/v2/blockchain/accounts/"+encodeURIComponent(raise.wallet)+"/transactions?limit=20");
+    if(!r.ok)throw new Error("TonAPI "+r.status);
+    const data=await r.json();
+    const list=Array.isArray(data.transactions)?data.transactions:[];
+    setOnchainStatus("TON Mainnet · "+list.length+" recent transactions");
+  }catch(e){console.warn("On-chain refresh failed",e);setOnchainStatus("TON Mainnet · chain data unavailable")}
+}
 
 function openModal(prefill=true){
   if(prefill){$("fName").value=raise.name;$("fPurpose").value=raise.purpose;$("fTarget").value=raise.target;$("fWallet").value=raise.wallet;$("fDesc").value=raise.desc}
@@ -528,7 +603,7 @@ $("closeModal").onclick=closeModal;$("cancelModal").onclick=closeModal;
 $("saveRaise").onclick=()=>{
   const x=t(),name=$("fName").value.trim(),target=Number($("fTarget").value),wallet=$("fWallet").value.trim();
   if(!name||!target||!wallet){toast(x.required);return}
-  raise={...raise,name,purpose:$("fPurpose").value,target,wallet,desc:$("fDesc").value.trim()||x.homeCopy};save();render();closeModal();showView("raiseView");toast(x.saved);
+  let normalizedWallet=wallet;try{if(window.TON_CONNECT_UI?.toUserFriendlyAddress&&wallet.includes(":"))normalizedWallet=window.TON_CONNECT_UI.toUserFriendlyAddress(wallet,true)}catch(e){};raise={...raise,name,purpose:$("fPurpose").value,target,wallet:normalizedWallet,desc:$("fDesc").value.trim()||x.homeCopy};save();render();closeModal();showView("raiseView");toast(x.saved);
 };
 $("backHome").onclick=()=>showView("homeView");
 $("featuredOpen").onclick=()=>showView("raiseView");$("featuredCard").onclick=()=>showView("raiseView");$("exploreOpenFeatured").onclick=()=>showView("raiseView");
@@ -539,10 +614,14 @@ $("shareBtn").onclick=async()=>{
   try{if(navigator.share){await navigator.share({title:"Noventra Raise",text,url:location.href})}else{await navigator.clipboard.writeText(text);toast(t().shareFail)}}catch(e){}
 };
 $("clearDemo").onclick=()=>{txs=[];save();render();toast(t().clearToast)};
+$("refreshChain").onclick=refreshOnChain;
 
 document.querySelectorAll(".nav-btn").forEach(b=>b.onclick=()=>showView(b.dataset.view));
-$("language").onchange=e=>{lang=e.target.value;localStorage.setItem("noventra_raise_lang",lang);apply()};
+$("language").onchange=e=>{lang=e.target.value;localStorage.setItem("noventra_raise_lang",lang);if(tonConnectUI){try{tonConnectUI.uiOptions={language:lang}}catch(e){}}apply()};
+showView("homeView");
 apply();
+setExplorer();
+if(raise.wallet)setTimeout(refreshOnChain,1200);
 </script>
 </body>
 </html>
