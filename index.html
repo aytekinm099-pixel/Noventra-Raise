@@ -46,6 +46,85 @@ body.rtl .progressline{direction:rtl}
 body.rtl .sheet{text-align:right}
 body.rtl .field input,body.rtl .field textarea,body.rtl .field select{text-align:right}
 @media(min-width:700px){body{padding:20px}.app{border:1px solid #142019;border-radius:28px;background:#050806}}
+
+/* NOVENTRA RAISE — PREMIUM UI */
+:root{
+  --bg:#030504;--panel:#08100c;--panel2:#0c1510;--line:#193126;
+  --green:#28ed86;--green2:#12c86b;--text:#f4f8f5;--muted:#84928b;
+  --soft:#b8c5be;--gold:#d8bb6a;--danger:#ff647c;
+}
+body{
+  background:
+    radial-gradient(700px 420px at 50% -120px,rgba(40,237,134,.14),transparent 62%),
+    radial-gradient(500px 320px at 100% 25%,rgba(22,103,67,.10),transparent 65%),
+    #030504;
+}
+.app{max-width:560px;padding:16px 14px 34px}
+.top{gap:10px;margin-bottom:14px;position:sticky;top:0;z-index:10;padding:4px 0 10px;
+  background:linear-gradient(#030504f2,#030504d8,transparent)}
+.brand{gap:10px;min-width:0}
+.logo{
+  width:42px;height:42px;border-radius:14px;
+  border:1px solid #2a7653;background:linear-gradient(145deg,#0c1c14,#07100b);
+  box-shadow:0 0 28px rgba(40,237,134,.10);font-size:19px
+}
+.brand b{font-size:15px;letter-spacing:1px}.brand small{font-size:9px;letter-spacing:.8px;color:#6e7d75}
+.connect{gap:6px}
+.lang{
+  min-width:124px;height:42px;padding:0 11px;border-radius:13px;
+  border:1px solid #1e3a2d;background:#08100c;color:#ecf3ee;
+  font-size:12px;font-weight:750;box-shadow:0 8px 28px rgba(0,0,0,.25)
+}
+#ton-connect{min-width:0}
+.hero{
+  position:relative;overflow:hidden;border:1px solid #1a3a2b;border-radius:28px;
+  background:linear-gradient(160deg,rgba(13,26,19,.96),rgba(5,10,7,.98));
+  padding:21px 18px 18px;box-shadow:0 24px 80px rgba(0,0,0,.45)
+}
+.hero:before{
+  content:"";position:absolute;inset:-80px -80px auto auto;width:200px;height:200px;border-radius:50%;
+  background:rgba(40,237,134,.07);filter:blur(45px);pointer-events:none
+}
+.kicker{font-size:10px;letter-spacing:1.8px;color:#43f39a}
+h1{font-size:30px;line-height:1.08;margin:7px 0 7px}
+.desc{font-size:13px;color:#aab8b0;margin-bottom:14px}
+.meta{gap:7px}.pill{font-size:10px;padding:7px 9px;background:#09140e}
+.stats{gap:9px;margin-top:14px}.stat{padding:14px;border-radius:17px;background:rgba(4,9,6,.55)}
+.stat span{font-size:10px}.stat strong{font-size:20px}
+.progress{margin:17px 0 7px;height:9px}
+.progressline{font-size:10px}
+.actions{margin-top:17px}
+.amounts{gap:8px}.amt{padding:13px 5px;border-radius:14px;background:#0a110d}
+.custom{margin-top:9px;padding:14px;border-radius:14px;background:#070c09}
+.send{margin-top:10px;padding:16px;border-radius:15px;font-size:16px}
+.nav{margin-top:12px;gap:8px}
+.nav button{padding:13px;border-radius:14px;background:#070c09}
+.section{margin-top:19px}.section h2{font-size:12px;letter-spacing:.6px;color:#dce7e1;margin-bottom:9px}
+.card{padding:14px;border-radius:18px;background:linear-gradient(160deg,#08100c,#060b08)}
+.row{padding:12px 0;font-size:12px}
+.row b{max-width:58%;word-break:break-word}
+.activity{padding:12px 0}
+.footer{font-size:9px;color:#68766f;margin-top:18px}
+.modal{padding:10px}
+.sheet{
+  width:min(560px,100%);max-height:92vh;overflow:auto;
+  background:linear-gradient(160deg,#0a120e,#060a08);
+  border:1px solid #28503c;border-radius:28px;padding:18px;
+  box-shadow:0 -18px 80px rgba(0,0,0,.62)
+}
+.sheet h2{font-size:24px;margin-bottom:15px}
+.field{margin:11px 0}.field label{font-size:9px;letter-spacing:.9px;font-weight:800;color:#809087}
+.field input,.field select,.field textarea{
+  padding:13px 14px;border-radius:14px;background:#050a07;border:1px solid #1b3227;color:#f0f5f2
+}
+.field textarea{min-height:86px}
+.sheet-actions{gap:9px;margin-top:16px}.sheet-actions button{padding:14px;border-radius:14px}
+.sheet-actions .create{box-shadow:0 10px 26px rgba(40,237,134,.20)}
+@media(max-width:430px){
+  .top{align-items:flex-start}.brand small{max-width:145px}.lang{min-width:105px}
+  h1{font-size:27px}.hero{padding:18px 15px}.stats{grid-template-columns:1fr 1fr}
+}
+
 </style>
 </head>
 <body>
@@ -66,18 +145,18 @@ body.rtl .field input,body.rtl .field textarea,body.rtl .field select{text-align
   </div>
 
   <main class="hero">
-    <div class="kicker" id="kicker"></div>
-    <h1 id="raiseName"></h1>
-    <p class="desc" id="raiseDesc"></p>
+    <div class="kicker" id="kicker">Community Raise · NVR-7F29A</div>
+    <h1 id="raiseName">TON Community Build</h1>
+    <p class="desc" id="raiseDesc">A transparent community raise powered by TON. Every contribution is sent directly to the configured fund wallet.</p>
     <div class="meta">
-      <span class="pill" id="purpose"></span><span class="pill">TON</span><span class="pill" id="status"></span>
+      <span class="pill" id="purpose">Development</span><span class="pill">TON</span><span class="pill" id="status">ACTIVE</span>
     </div>
 
     <div class="stats">
-      <div class="stat"><span id="labelRaised"></span><strong id="raised">0 TON</strong></div>
-      <div class="stat"><span id="labelTarget"></span><strong id="target">100 TON</strong></div>
-      <div class="stat"><span id="labelContributors"></span><strong id="contributors">0</strong></div>
-      <div class="stat"><span id="labelTime"></span><strong id="timeLeft">Open</strong></div>
+      <div class="stat"><span id="labelRaised">RAISED</span><strong id="raised">0 TON</strong></div>
+      <div class="stat"><span id="labelTarget">TARGET</span><strong id="target">100 TON</strong></div>
+      <div class="stat"><span id="labelContributors">CONTRIBUTORS</span><strong id="contributors">0</strong></div>
+      <div class="stat"><span id="labelTime">TIME LEFT</span><strong id="timeLeft">Open</strong></div>
     </div>
 
     <div class="progress"><div class="bar" id="bar"></div></div>
@@ -90,12 +169,12 @@ body.rtl .field input,body.rtl .field textarea,body.rtl .field select{text-align
         <button class="amt" data-value="10">10 TON</button>
       </div>
       <input class="custom" id="customAmount" type="number" min="0.1" step="0.1">
-      <button class="send" id="sendBtn"></button>
+      <button class="send" id="sendBtn">Connect wallet to contribute</button>
     </div>
   </main>
 
   <div class="nav">
-    <button class="primary" id="createBtn"></button>
+    <button class="primary" id="createBtn">＋ Create Raise</button>
     <button id="settingsBtn">⚙ Fon Ayarları</button>
   </div>
 
@@ -122,13 +201,13 @@ body.rtl .field input,body.rtl .field textarea,body.rtl .field select{text-align
 
 <div class="modal" id="modal">
   <div class="sheet">
-    <h2 id="modalTitle"></h2>
-    <div class="field"><label id="fNameLabel"></label><input id="fName"></div>
-    <div class="field"><label id="fPurposeLabel"></label><select id="fPurpose"><option value="Liquidity"></option><option value="Development"></option><option value="Community"></option><option value="Marketing"></option><option value="Launch"></option><option value="Other"></option></select></div>
-    <div class="field"><label id="fTargetLabel"></label><input id="fTarget" type="number" min="1" step="0.1"></div>
-    <div class="field"><label id="fWalletLabel"></label><input id="fWallet" placeholder="EQ..."></div>
-    <div class="field"><label id="fDescLabel"></label><textarea id="fDesc"></textarea></div>
-    <div class="sheet-actions"><button id="closeModal"></button><button class="create" id="saveRaise"></button></div>
+    <h2 id="modalTitle">Create a Raise</h2>
+    <div class="field"><label id="fNameLabel">RAISE NAME</label><input id="fName"></div>
+    <div class="field"><label id="fPurposeLabel">PURPOSE</label><select id="fPurpose"><option value="Liquidity"></option><option value="Development"></option><option value="Community"></option><option value="Marketing"></option><option value="Launch"></option><option value="Other"></option></select></div>
+    <div class="field"><label id="fTargetLabel">TARGET (TON)</label><input id="fTarget" type="number" min="1" step="0.1"></div>
+    <div class="field"><label id="fWalletLabel">FUND WALLET ADDRESS</label><input id="fWallet" placeholder="EQ..."></div>
+    <div class="field"><label id="fDescLabel">DESCRIPTION</label><textarea id="fDesc"></textarea></div>
+    <div class="sheet-actions"><button id="closeModal">Cancel</button><button class="create" id="saveRaise">Create Raise</button></div>
   </div>
 </div>
 <div class="toast" id="toast"></div>
@@ -374,13 +453,15 @@ function renderActivity(){
   box.innerHTML=txs.slice(0,8).map(x=>`<div class="activity"><div class="dot"></div><div class="tx"><b>${short(x.from)}</b><small>${new Date(x.time).toLocaleString(lang==="tr"?"tr-TR":"en-US")}</small></div><div class="txamt">+${Number(x.amount).toFixed(2)} TON</div></div>`).join("");
 }
 
-const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-  manifestUrl: CONFIG.manifestUrl,
-  buttonRootId: "ton-connect",
-  uiPreferences: { theme: "DARK", borderRadius: "m" }
-});
-
-tonConnectUI.onStatusChange(wallet=>{
+let tonConnectUI = null;
+if (window.TON_CONNECT_UI && window.TON_CONNECT_UI.TonConnectUI) {
+  try {
+    tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+      manifestUrl: CONFIG.manifestUrl,
+      buttonRootId: "ton-connect",
+      uiPreferences: { theme: "DARK", borderRadius: "m" }
+    });
+    tonConnectUI.onStatusChange(wallet=>{
   if(wallet){
     $("creatorWallet").textContent=short(wallet.account.address);
     $("sendBtn").textContent=raise.wallet ? `${t().send} ${selected} TON` : t().configure;
@@ -388,7 +469,15 @@ tonConnectUI.onStatusChange(wallet=>{
     $("creatorWallet").textContent=t().notConnected;
     $("sendBtn").textContent=raise.wallet ? t().connect : t().configure;
   }
-});
+    });
+  } catch (e) {
+    console.warn("TON Connect unavailable:", e);
+  }
+}
+
+if (!tonConnectUI) {
+  $("creatorWallet").textContent = t().notConnected;
+}
 
 document.querySelectorAll(".amt").forEach(b=>b.onclick=()=>{
   selected=Number(b.dataset.value);$("customAmount").value="";
@@ -401,7 +490,7 @@ $("customAmount").oninput=()=>{
 
 $("sendBtn").onclick=async()=>{
   if(!raise.wallet){toast(t().configure);return}
-  if(!tonConnectUI.connected){await tonConnectUI.openModal();return}
+  if(!tonConnectUI){toast("TON Connect unavailable. Check your connection.");return} if(!tonConnectUI.connected){await tonConnectUI.openModal();return}
   const amount=Number(selected);
   if(!amount || amount<=0){toast(t().invalid);return}
   if(raise.raised>=raise.target){toast(t().reachedToast);return}
@@ -433,7 +522,7 @@ $("saveRaise").onclick=()=>{
 };
 lang = I18N[lang] ? lang : "en";
 $("language").value = lang;
-setLanguage(lang);
+try{ setLanguage(lang); }catch(e){ console.warn("Localization init failed:",e); }
 </script>
 </body>
 </html>
