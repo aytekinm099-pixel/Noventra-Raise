@@ -18,8 +18,8 @@ button,input,select,textarea{font:inherit}
 .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .brand{display:flex;align-items:center;gap:10px}.logo{width:38px;height:38px;border:1px solid #2b8e60;border-radius:12px;display:grid;place-items:center;background:#07110c;box-shadow:0 0 22px #19c96822;font-weight:900;color:var(--green)}
 .brand b{letter-spacing:.5px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
-.connect{min-width:0;display:flex;align-items:center;gap:7px}
-.lang{border:1px solid var(--line);background:#0b100d;color:#dce6df;border-radius:11px;padding:9px 8px;font-size:11px;outline:none}
+.connect{min-width:0;display:flex;align-items:center;gap:7px;flex-wrap:nowrap}
+.lang{border:1px solid #20382b;background:#0a100d;color:#e7eee9;border-radius:12px;padding:10px 30px 10px 11px;font-size:12px;font-weight:700;outline:none;min-width:118px;box-shadow:inset 0 0 0 1px #07100b;appearance:auto}
 .connect button{border-radius:12px!important}
 .hero{border:1px solid #1c382b;border-radius:24px;background:linear-gradient(145deg,#0b1510,#080b09);padding:20px;box-shadow:0 20px 60px #0008}
 .kicker{color:var(--green);font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase}
@@ -52,10 +52,16 @@ body.rtl .field input,body.rtl .field textarea,body.rtl .field select{text-align
 <div class="app">
   <div class="top">
     <div class="brand"><div class="logo">N</div><div><b>NOVENTRA</b><small>RAISE · ON-CHAIN FUNDING</small></div></div>
-    <div class="connect"><select id="language" class="lang" aria-label="Language">
-      <option value="en">🇬🇧 EN</option><option value="tr">🇹🇷 TR</option><option value="ru">🇷🇺 RU</option>
-      <option value="zh">🇨🇳 中文</option><option value="ar">🇸🇦 العربية</option><option value="es">🇪🇸 ES</option>
-      <option value="fr">🇫🇷 FR</option><option value="de">🇩🇪 DE</option><option value="ja">🇯🇵 日本語</option>
+    <div class="connect"><select id="language" class="lang" aria-label="Select language">
+      <option value="en">🇬🇧 English</option>
+      <option value="tr">🇹🇷 Türkçe</option>
+      <option value="ru">🇷🇺 Русский</option>
+      <option value="zh">🇨🇳 简体中文</option>
+      <option value="ar">🇸🇦 العربية</option>
+      <option value="es">🇪🇸 Español</option>
+      <option value="fr">🇫🇷 Français</option>
+      <option value="de">🇩🇪 Deutsch</option>
+      <option value="ja">🇯🇵 日本語</option>
     </select><div id="ton-connect"></div></div>
   </div>
 
@@ -292,7 +298,8 @@ const I18N = {
     purposeMap:{Liquidity:"流動性",Development:"開発",Community:"コミュニティ",Marketing:"マーケティング",Launch:"ローンチ",Other:"その他"}
   }
 };
-let lang = localStorage.getItem("noventra_raise_lang") || "en";
+let lang = (localStorage.getItem("noventra_raise_lang") || "en").toLowerCase();
+if(!I18N[lang]) lang = "en";
 const t = () => I18N[lang];
 
 const CONFIG = {
@@ -424,6 +431,8 @@ $("saveRaise").onclick=()=>{
   raise={...raise,name,purpose:$("fPurpose").value,target,wallet,desc:$("fDesc").value.trim()||t().defaultDesc};
   save();render();$("modal").classList.remove("open");toast(t().saved);
 };
+lang = I18N[lang] ? lang : "en";
+$("language").value = lang;
 setLanguage(lang);
 </script>
 </body>
