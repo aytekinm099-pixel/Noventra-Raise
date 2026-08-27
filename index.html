@@ -18,7 +18,9 @@ button,input,select,textarea{font:inherit}
 .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .brand{display:flex;align-items:center;gap:10px}.logo{width:38px;height:38px;border:1px solid #2b8e60;border-radius:12px;display:grid;place-items:center;background:#07110c;box-shadow:0 0 22px #19c96822;font-weight:900;color:var(--green)}
 .brand b{letter-spacing:.5px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
-.connect{min-width:0}.connect button{border-radius:12px!important}
+.connect{min-width:0;display:flex;align-items:center;gap:7px}
+.lang{border:1px solid var(--line);background:#0b100d;color:#dce6df;border-radius:11px;padding:9px 8px;font-size:11px;outline:none}
+.connect button{border-radius:12px!important}
 .hero{border:1px solid #1c382b;border-radius:24px;background:linear-gradient(145deg,#0b1510,#080b09);padding:20px;box-shadow:0 20px 60px #0008}
 .kicker{color:var(--green);font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase}
 h1{font-size:31px;margin:8px 0 5px;letter-spacing:-1px}.desc{color:#a7b1ac;line-height:1.45;font-size:14px;margin:0 0 18px}
@@ -39,6 +41,10 @@ h1{font-size:31px;margin:8px 0 5px;letter-spacing:-1px}.desc{color:#a7b1ac;line-
 .sheet h2{margin:0 0 14px}.field{margin:10px 0}.field label{display:block;color:#829087;font-size:11px;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;background:#070b09;border:1px solid var(--line);border-radius:12px;padding:12px;color:#fff;outline:none}.field textarea{min-height:78px;resize:vertical}.sheet-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.sheet-actions button{padding:13px;border-radius:12px;border:1px solid var(--line);background:#111713;color:#fff}.sheet-actions .create{background:var(--green);color:#031009;border:0;font-weight:900}
 .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#111914;border:1px solid #2b513b;color:#eaf6ef;border-radius:12px;padding:11px 14px;font-size:12px;display:none;z-index:30;max-width:90%}
 .toast.show{display:block}
+body.rtl .row b{text-align:left}
+body.rtl .progressline{direction:rtl}
+body.rtl .sheet{text-align:right}
+body.rtl .field input,body.rtl .field textarea,body.rtl .field select{text-align:right}
 @media(min-width:700px){body{padding:20px}.app{border:1px solid #142019;border-radius:28px;background:#050806}}
 </style>
 </head>
@@ -46,22 +52,26 @@ h1{font-size:31px;margin:8px 0 5px;letter-spacing:-1px}.desc{color:#a7b1ac;line-
 <div class="app">
   <div class="top">
     <div class="brand"><div class="logo">N</div><div><b>NOVENTRA</b><small>RAISE · ON-CHAIN FUNDING</small></div></div>
-    <div class="connect" id="ton-connect"></div>
+    <div class="connect"><select id="language" class="lang" aria-label="Language">
+      <option value="en">🇬🇧 EN</option><option value="tr">🇹🇷 TR</option><option value="ru">🇷🇺 RU</option>
+      <option value="zh">🇨🇳 中文</option><option value="ar">🇸🇦 العربية</option><option value="es">🇪🇸 ES</option>
+      <option value="fr">🇫🇷 FR</option><option value="de">🇩🇪 DE</option><option value="ja">🇯🇵 日本語</option>
+    </select><div id="ton-connect"></div></div>
   </div>
 
   <main class="hero">
-    <div class="kicker">Community Raise · NVR-7F29A</div>
-    <h1 id="raiseName">TON Community Build</h1>
-    <p class="desc" id="raiseDesc">A transparent community raise powered by TON. Every contribution is sent directly to the configured fund wallet.</p>
+    <div class="kicker" id="kicker"></div>
+    <h1 id="raiseName"></h1>
+    <p class="desc" id="raiseDesc"></p>
     <div class="meta">
-      <span class="pill" id="purpose">Development</span><span class="pill">TON</span><span class="pill" id="status">ACTIVE</span>
+      <span class="pill" id="purpose"></span><span class="pill">TON</span><span class="pill" id="status"></span>
     </div>
 
     <div class="stats">
-      <div class="stat"><span>RAISED</span><strong id="raised">0 TON</strong></div>
-      <div class="stat"><span>TARGET</span><strong id="target">100 TON</strong></div>
-      <div class="stat"><span>CONTRIBUTORS</span><strong id="contributors">0</strong></div>
-      <div class="stat"><span>TIME LEFT</span><strong id="timeLeft">Open</strong></div>
+      <div class="stat"><span id="labelRaised"></span><strong id="raised">0 TON</strong></div>
+      <div class="stat"><span id="labelTarget"></span><strong id="target">100 TON</strong></div>
+      <div class="stat"><span id="labelContributors"></span><strong id="contributors">0</strong></div>
+      <div class="stat"><span id="labelTime"></span><strong id="timeLeft">Open</strong></div>
     </div>
 
     <div class="progress"><div class="bar" id="bar"></div></div>
@@ -73,13 +83,13 @@ h1{font-size:31px;margin:8px 0 5px;letter-spacing:-1px}.desc{color:#a7b1ac;line-
         <button class="amt active" data-value="5">5 TON</button>
         <button class="amt" data-value="10">10 TON</button>
       </div>
-      <input class="custom" id="customAmount" type="number" min="0.1" step="0.1" placeholder="Custom amount (TON)">
-      <button class="send" id="sendBtn">Connect wallet to contribute</button>
+      <input class="custom" id="customAmount" type="number" min="0.1" step="0.1">
+      <button class="send" id="sendBtn"></button>
     </div>
   </main>
 
   <div class="nav">
-    <button class="primary" id="createBtn">＋ Fon Oluştur</button>
+    <button class="primary" id="createBtn"></button>
     <button id="settingsBtn">⚙ Fon Ayarları</button>
   </div>
 
@@ -106,24 +116,191 @@ h1{font-size:31px;margin:8px 0 5px;letter-spacing:-1px}.desc{color:#a7b1ac;line-
 
 <div class="modal" id="modal">
   <div class="sheet">
-    <h2>Fon Oluştur</h2>
-    <div class="field"><label>RAISE NAME</label><input id="fName" placeholder="e.g. Community Liquidity Raise"></div>
-    <div class="field"><label>PURPOSE</label><select id="fPurpose"><option>Liquidity</option><option>Development</option><option>Community</option><option>Marketing</option><option>Launch</option><option>Other</option></select></div>
-    <div class="field"><label>TARGET (TON)</label><input id="fTarget" type="number" min="1" step="0.1" placeholder="100"></div>
-    <div class="field"><label>FUND WALLET ADDRESS</label><input id="fWallet" placeholder="EQ..."></div>
-    <div class="field"><label>DESCRIPTION</label><textarea id="fDesc" placeholder="What is this raise for?"></textarea></div>
-    <div class="sheet-actions"><button id="closeModal">İptal</button><button class="create" id="saveRaise">Fon Oluştur</button></div>
+    <h2 id="modalTitle"></h2>
+    <div class="field"><label id="fNameLabel"></label><input id="fName"></div>
+    <div class="field"><label id="fPurposeLabel"></label><select id="fPurpose"><option value="Liquidity"></option><option value="Development"></option><option value="Community"></option><option value="Marketing"></option><option value="Launch"></option><option value="Other"></option></select></div>
+    <div class="field"><label id="fTargetLabel"></label><input id="fTarget" type="number" min="1" step="0.1"></div>
+    <div class="field"><label id="fWalletLabel"></label><input id="fWallet" placeholder="EQ..."></div>
+    <div class="field"><label id="fDescLabel"></label><textarea id="fDesc"></textarea></div>
+    <div class="sheet-actions"><button id="closeModal"></button><button class="create" id="saveRaise"></button></div>
   </div>
 </div>
 <div class="toast" id="toast"></div>
 
 <script>
+const I18N = {
+  en: {
+    native:"English", flag:"🇬🇧", dir:"ltr",
+    kicker:"Community Raise · NVR-7F29A", raised:"RAISED", target:"TARGET", contributors:"CONTRIBUTORS", time:"TIME LEFT",
+    funded:"% funded", remaining:"remaining", active:"ACTIVE", reached:"TARGET REACHED", open:"Open",
+    create:"＋ Create Raise", settings:"⚙ Raise Settings", details:"ON-CHAIN DETAILS", raiseId:"Raise ID",
+    fundWallet:"Fund wallet", creator:"Creator", network:"Network", activity:"RECENT ACTIVITY",
+    noActivity:"No contributions yet. The first transaction will appear here.",
+    footer:"NOVENTRA RAISE · Non-custodial interface<br>Always verify the destination wallet before signing a transaction.",
+    modalTitle:"Create a Raise", name:"RAISE NAME", namePh:"e.g. Community Liquidity Raise", purpose:"PURPOSE",
+    targetLabel:"TARGET (TON)", wallet:"FUND WALLET ADDRESS", description:"DESCRIPTION", descPh:"What is this raise for?",
+    cancel:"Cancel", save:"Create Raise", custom:"Custom amount (TON)", connect:"Connect wallet to contribute",
+    configure:"Configure fund wallet first", notConfigured:"Not configured", notConnected:"Not connected",
+    networkName:"TON Mainnet", send:"Send", submitted:"Transaction submitted successfully.",
+    failed:"Transaction cancelled or failed.", invalid:"Enter a valid TON amount.",
+    reachedToast:"This raise has reached its target.", required:"Name, target and fund wallet are required.",
+    saved:"Raise configuration saved.", defaultDesc:"A transparent community raise powered by TON. Every contribution is sent directly to the configured fund wallet.",
+    purposeMap:{Liquidity:"Liquidity",Development:"Development",Community:"Community",Marketing:"Marketing",Launch:"Launch",Other:"Other"}
+  },
+  tr: {
+    native:"Türkçe", flag:"🇹🇷", dir:"ltr",
+    kicker:"Topluluk Fonu · NVR-7F29A", raised:"TOPLANAN", target:"HEDEF", contributors:"KATKICILAR", time:"KALAN SÜRE",
+    funded:"% fonlandı", remaining:"kaldı", active:"AÇIK", reached:"HEDEFE ULAŞILDI", open:"Açık",
+    create:"＋ Fon Oluştur", settings:"⚙ Fon Ayarları", details:"ZİNCİR ÜZERİNDEKİ AYRINTILAR", raiseId:"Fon Kimliği",
+    fundWallet:"Fon cüzdanı", creator:"Oluşturucu", network:"Ağ", activity:"SON AKTİVİTELER",
+    noActivity:"Henüz katkı yapılmadı. İlk işlem burada görünecek.",
+    footer:"NOVENTRA RAISE · Saklama gerektirmeyen arayüz<br>İşlemi imzalamadan önce her zaman hedef cüzdanı doğrulayın.",
+    modalTitle:"Fon Oluştur", name:"FON ADI", namePh:"örn. Topluluk Likidite Fonu", purpose:"AMAÇ",
+    targetLabel:"HEDEF (TON)", wallet:"FON CÜZDANI ADRESİ", description:"AÇIKLAMA", descPh:"Bu fon ne için kullanılacak?",
+    cancel:"İptal", save:"Fon Oluştur", custom:"Özel miktar (TON)", connect:"Katkı yapmak için cüzdanı bağlayın",
+    configure:"Önce fon cüzdanını yapılandırın", notConfigured:"Yapılandırılmamış", notConnected:"Bağlı değil",
+    networkName:"TON Ana Ağı", send:"Gönder", submitted:"İşlem başarıyla gönderildi.",
+    failed:"İşlem iptal edildi veya başarısız oldu.", invalid:"Geçerli bir TON miktarı girin.",
+    reachedToast:"Bu fon hedefine ulaştı.", required:"Fon adı, hedef ve fon cüzdanı zorunludur.",
+    saved:"Fon ayarları kaydedildi.", defaultDesc:"TON ile çalışan şeffaf bir topluluk fonu. Her katkı doğrudan yapılandırılan fon cüzdanına gönderilir.",
+    purposeMap:{Liquidity:"Likidite",Development:"Geliştirme",Community:"Topluluk",Marketing:"Pazarlama",Launch:"Lansman",Other:"Diğer"}
+  },
+  ru: {
+    native:"Русский", flag:"🇷🇺", dir:"ltr",
+    kicker:"Сбор сообщества · NVR-7F29A", raised:"СОБРАНО", target:"ЦЕЛЬ", contributors:"УЧАСТНИКИ", time:"ОСТАЛОСЬ",
+    funded:"% собрано", remaining:"осталось", active:"АКТИВЕН", reached:"ЦЕЛЬ ДОСТИГНУТА", open:"Открыт",
+    create:"＋ Создать сбор", settings:"⚙ Настройки сбора", details:"ДЕТАЛИ В БЛОКЧЕЙНЕ", raiseId:"ID сбора",
+    fundWallet:"Кошелёк фонда", creator:"Создатель", network:"Сеть", activity:"ПОСЛЕДНИЕ ОПЕРАЦИИ",
+    noActivity:"Пока нет взносов. Первая транзакция появится здесь.",
+    footer:"NOVENTRA RAISE · Некастодиальный интерфейс<br>Всегда проверяйте адрес назначения перед подписью транзакции.",
+    modalTitle:"Создать сбор", name:"НАЗВАНИЕ СБОРА", namePh:"например, Сбор на ликвидность сообщества", purpose:"ЦЕЛЬ",
+    targetLabel:"ЦЕЛЬ (TON)", wallet:"АДРЕС КОШЕЛЬКА ФОНДА", description:"ОПИСАНИЕ", descPh:"Для чего предназначен этот сбор?",
+    cancel:"Отмена", save:"Создать сбор", custom:"Своя сумма (TON)", connect:"Подключите кошелёк для взноса",
+    configure:"Сначала настройте кошелёк фонда", notConfigured:"Не настроен", notConnected:"Не подключён",
+    networkName:"TON Mainnet", send:"Отправить", submitted:"Транзакция успешно отправлена.",
+    failed:"Транзакция отменена или завершилась ошибкой.", invalid:"Введите корректную сумму TON.",
+    reachedToast:"Сбор достиг цели.", required:"Название, цель и кошелёк фонда обязательны.",
+    saved:"Настройки сбора сохранены.", defaultDesc:"Прозрачный сбор сообщества на TON. Каждый взнос отправляется непосредственно на указанный кошелёк фонда.",
+    purposeMap:{Liquidity:"Ликвидность",Development:"Разработка",Community:"Сообщество",Marketing:"Маркетинг",Launch:"Запуск",Other:"Другое"}
+  },
+  zh: {
+    native:"简体中文", flag:"🇨🇳", dir:"ltr",
+    kicker:"社区募资 · NVR-7F29A", raised:"已筹集", target:"目标", contributors:"参与者", time:"剩余时间",
+    funded:"% 已完成", remaining:"剩余", active:"进行中", reached:"已达到目标", open:"开放",
+    create:"＋ 创建募资", settings:"⚙ 募资设置", details:"链上详情", raiseId:"募资 ID",
+    fundWallet:"资金钱包", creator:"创建者", network:"网络", activity:"最近活动",
+    noActivity:"暂无贡献。第一笔交易将在这里显示。",
+    footer:"NOVENTRA RAISE · 非托管界面<br>签署交易前请务必核对目标钱包地址。",
+    modalTitle:"创建募资", name:"募资名称", namePh:"例如：社区流动性募资", purpose:"用途",
+    targetLabel:"目标（TON）", wallet:"资金钱包地址", description:"描述", descPh:"这笔募资用于什么？",
+    cancel:"取消", save:"创建募资", custom:"自定义金额（TON）", connect:"连接钱包后参与",
+    configure:"请先设置资金钱包", notConfigured:"未设置", notConnected:"未连接",
+    networkName:"TON 主网", send:"发送", submitted:"交易已成功提交。",
+    failed:"交易已取消或失败。", invalid:"请输入有效的 TON 金额。",
+    reachedToast:"该募资已达到目标。", required:"募资名称、目标和资金钱包为必填项。",
+    saved:"募资设置已保存。", defaultDesc:"基于 TON 的透明社区募资。每笔贡献都会直接发送到指定的资金钱包。",
+    purposeMap:{Liquidity:"流动性",Development:"开发",Community:"社区",Marketing:"营销",Launch:"上线",Other:"其他"}
+  },
+  ar: {
+    native:"العربية", flag:"🇸🇦", dir:"rtl",
+    kicker:"تمويل المجتمع · NVR-7F29A", raised:"المجموع", target:"الهدف", contributors:"المساهمون", time:"الوقت المتبقي",
+    funded:"% ممول", remaining:"متبقي", active:"نشط", reached:"تم الوصول إلى الهدف", open:"مفتوح",
+    create:"＋ إنشاء تمويل", settings:"⚙ إعدادات التمويل", details:"تفاصيل على السلسلة", raiseId:"معرّف التمويل",
+    fundWallet:"محفظة التمويل", creator:"المنشئ", network:"الشبكة", activity:"آخر النشاطات",
+    noActivity:"لا توجد مساهمات بعد. ستظهر أول معاملة هنا.",
+    footer:"NOVENTRA RAISE · واجهة غير احتجازية<br>تحقق دائماً من محفظة الوجهة قبل توقيع المعاملة.",
+    modalTitle:"إنشاء تمويل", name:"اسم التمويل", namePh:"مثال: تمويل سيولة المجتمع", purpose:"الغرض",
+    targetLabel:"الهدف (TON)", wallet:"عنوان محفظة التمويل", description:"الوصف", descPh:"ما الغرض من هذا التمويل؟",
+    cancel:"إلغاء", save:"إنشاء تمويل", custom:"مبلغ مخصص (TON)", connect:"اربط محفظتك للمساهمة",
+    configure:"قم بإعداد محفظة التمويل أولاً", notConfigured:"غير مُعد", notConnected:"غير متصل",
+    networkName:"شبكة TON الرئيسية", send:"إرسال", submitted:"تم إرسال المعاملة بنجاح.",
+    failed:"تم إلغاء المعاملة أو فشلت.", invalid:"أدخل مبلغ TON صالحاً.",
+    reachedToast:"تم الوصول إلى هدف التمويل.", required:"اسم التمويل والهدف ومحفظة التمويل مطلوبة.",
+    saved:"تم حفظ إعدادات التمويل.", defaultDesc:"تمويل مجتمعي شفاف يعمل على TON. يتم إرسال كل مساهمة مباشرة إلى محفظة التمويل المحددة.",
+    purposeMap:{Liquidity:"السيولة",Development:"التطوير",Community:"المجتمع",Marketing:"التسويق",Launch:"الإطلاق",Other:"أخرى"}
+  },
+  es: {
+    native:"Español", flag:"🇪🇸", dir:"ltr",
+    kicker:"Financiación comunitaria · NVR-7F29A", raised:"RECAUDADO", target:"OBJETIVO", contributors:"COLABORADORES", time:"TIEMPO RESTANTE",
+    funded:"% financiado", remaining:"restante", active:"ACTIVO", reached:"OBJETIVO ALCANZADO", open:"Abierto",
+    create:"＋ Crear financiación", settings:"⚙ Ajustes de financiación", details:"DETALLES ON-CHAIN", raiseId:"ID de financiación",
+    fundWallet:"Billetera del fondo", creator:"Creador", network:"Red", activity:"ACTIVIDAD RECIENTE",
+    noActivity:"Aún no hay contribuciones. La primera transacción aparecerá aquí.",
+    footer:"NOVENTRA RAISE · Interfaz no custodial<br>Verifica siempre la billetera de destino antes de firmar una transacción.",
+    modalTitle:"Crear financiación", name:"NOMBRE", namePh:"p. ej. Financiación de liquidez comunitaria", purpose:"PROPÓSITO",
+    targetLabel:"OBJETIVO (TON)", wallet:"DIRECCIÓN DE LA BILLETERA", description:"DESCRIPCIÓN", descPh:"¿Para qué se utilizará esta financiación?",
+    cancel:"Cancelar", save:"Crear financiación", custom:"Cantidad personalizada (TON)", connect:"Conecta tu billetera para contribuir",
+    configure:"Configura primero la billetera del fondo", notConfigured:"No configurada", notConnected:"No conectada",
+    networkName:"TON Mainnet", send:"Enviar", submitted:"Transacción enviada correctamente.",
+    failed:"La transacción fue cancelada o falló.", invalid:"Introduce una cantidad de TON válida.",
+    reachedToast:"Esta financiación ha alcanzado su objetivo.", required:"El nombre, objetivo y billetera son obligatorios.",
+    saved:"Configuración guardada.", defaultDesc:"Financiación comunitaria transparente en TON. Cada contribución se envía directamente a la billetera configurada.",
+    purposeMap:{Liquidity:"Liquidez",Development:"Desarrollo",Community:"Comunidad",Marketing:"Marketing",Launch:"Lanzamiento",Other:"Otro"}
+  },
+  fr: {
+    native:"Français", flag:"🇫🇷", dir:"ltr",
+    kicker:"Collecte communautaire · NVR-7F29A", raised:"COLLECTÉ", target:"OBJECTIF", contributors:"CONTRIBUTEURS", time:"TEMPS RESTANT",
+    funded:"% financé", remaining:"restant", active:"ACTIF", reached:"OBJECTIF ATTEINT", open:"Ouvert",
+    create:"＋ Créer une collecte", settings:"⚙ Paramètres de collecte", details:"DÉTAILS ON-CHAIN", raiseId:"ID de collecte",
+    fundWallet:"Portefeuille du fonds", creator:"Créateur", network:"Réseau", activity:"ACTIVITÉ RÉCENTE",
+    noActivity:"Aucune contribution pour le moment. La première transaction apparaîtra ici.",
+    footer:"NOVENTRA RAISE · Interface non custodiale<br>Vérifiez toujours le portefeuille destinataire avant de signer.",
+    modalTitle:"Créer une collecte", name:"NOM DE LA COLLECTE", namePh:"ex. Collecte de liquidité communautaire", purpose:"OBJECTIF",
+    targetLabel:"OBJECTIF (TON)", wallet:"ADRESSE DU PORTEFEUILLE", description:"DESCRIPTION", descPh:"À quoi servira cette collecte ?",
+    cancel:"Annuler", save:"Créer la collecte", custom:"Montant personnalisé (TON)", connect:"Connectez votre portefeuille pour contribuer",
+    configure:"Configurez d’abord le portefeuille du fonds", notConfigured:"Non configuré", notConnected:"Non connecté",
+    networkName:"TON Mainnet", send:"Envoyer", submitted:"Transaction envoyée avec succès.",
+    failed:"Transaction annulée ou échouée.", invalid:"Saisissez un montant TON valide.",
+    reachedToast:"Cette collecte a atteint son objectif.", required:"Le nom, l’objectif et le portefeuille sont obligatoires.",
+    saved:"Paramètres enregistrés.", defaultDesc:"Une collecte communautaire transparente sur TON. Chaque contribution est envoyée directement au portefeuille configuré.",
+    purposeMap:{Liquidity:"Liquidité",Development:"Développement",Community:"Communauté",Marketing:"Marketing",Launch:"Lancement",Other:"Autre"}
+  },
+  de: {
+    native:"Deutsch", flag:"🇩🇪", dir:"ltr",
+    kicker:"Community-Fundraising · NVR-7F29A", raised:"GESAMMELT", target:"ZIEL", contributors:"BEITRAGENDEN", time:"VERBLEIBEND",
+    funded:"% finanziert", remaining:"verbleibend", active:"AKTIV", reached:"ZIEL ERREICHT", open:"Offen",
+    create:"＋ Fundraiser erstellen", settings:"⚙ Fundraiser-Einstellungen", details:"ON-CHAIN-DETAILS", raiseId:"Fundraiser-ID",
+    fundWallet:"Fund-Wallet", creator:"Ersteller", network:"Netzwerk", activity:"LETZTE AKTIVITÄTEN",
+    noActivity:"Noch keine Beiträge. Die erste Transaktion wird hier angezeigt.",
+    footer:"NOVENTRA RAISE · Non-Custodial-Oberfläche<br>Prüfe vor dem Signieren immer die Ziel-Wallet.",
+    modalTitle:"Fundraiser erstellen", name:"NAME", namePh:"z. B. Community-Liquiditäts-Fundraiser", purpose:"ZWECK",
+    targetLabel:"ZIEL (TON)", wallet:"FUND-WALLET-ADRESSE", description:"BESCHREIBUNG", descPh:"Wofür ist dieser Fundraiser gedacht?",
+    cancel:"Abbrechen", save:"Fundraiser erstellen", custom:"Eigener Betrag (TON)", connect:"Wallet verbinden, um beizutragen",
+    configure:"Zuerst Fund-Wallet konfigurieren", notConfigured:"Nicht konfiguriert", notConnected:"Nicht verbunden",
+    networkName:"TON Mainnet", send:"Senden", submitted:"Transaktion erfolgreich gesendet.",
+    failed:"Transaktion abgebrochen oder fehlgeschlagen.", invalid:"Gib einen gültigen TON-Betrag ein.",
+    reachedToast:"Dieser Fundraiser hat sein Ziel erreicht.", required:"Name, Ziel und Fund-Wallet sind erforderlich.",
+    saved:"Fundraiser-Einstellungen gespeichert.", defaultDesc:"Transparenter Community-Fundraiser auf TON. Jeder Beitrag wird direkt an die konfigurierte Fund-Wallet gesendet.",
+    purposeMap:{Liquidity:"Liquidität",Development:"Entwicklung",Community:"Community",Marketing:"Marketing",Launch:"Launch",Other:"Andere"}
+  },
+  ja: {
+    native:"日本語", flag:"🇯🇵", dir:"ltr",
+    kicker:"コミュニティ・レイズ · NVR-7F29A", raised:"調達額", target:"目標", contributors:"参加者", time:"残り時間",
+    funded:"% 達成", remaining:"残り", active:"募集中", reached:"目標達成", open:"公開中",
+    create:"＋ レイズを作成", settings:"⚙ レイズ設定", details:"オンチェーン詳細", raiseId:"レイズID",
+    fundWallet:"ファンドウォレット", creator:"作成者", network:"ネットワーク", activity:"最近のアクティビティ",
+    noActivity:"まだ支援はありません。最初の取引がここに表示されます。",
+    footer:"NOVENTRA RAISE · ノンカストディアル・インターフェース<br>署名前に必ず送金先ウォレットを確認してください。",
+    modalTitle:"レイズを作成", name:"レイズ名", namePh:"例：コミュニティ流動性レイズ", purpose:"目的",
+    targetLabel:"目標（TON）", wallet:"ファンドウォレットアドレス", description:"説明", descPh:"このレイズの目的は何ですか？",
+    cancel:"キャンセル", save:"レイズを作成", custom:"任意の金額（TON）", connect:"ウォレットを接続して支援",
+    configure:"先にファンドウォレットを設定してください", notConfigured:"未設定", notConnected:"未接続",
+    networkName:"TON メインネット", send:"送信", submitted:"トランザクションを送信しました。",
+    failed:"トランザクションがキャンセルまたは失敗しました。", invalid:"有効なTON金額を入力してください。",
+    reachedToast:"このレイズは目標に達しました。", required:"名前、目標、ファンドウォレットは必須です。",
+    saved:"レイズ設定を保存しました。", defaultDesc:"TON上の透明なコミュニティ・レイズ。すべての支援は設定されたファンドウォレットへ直接送信されます。",
+    purposeMap:{Liquidity:"流動性",Development:"開発",Community:"コミュニティ",Marketing:"マーケティング",Launch:"ローンチ",Other:"その他"}
+  }
+};
+let lang = localStorage.getItem("noventra_raise_lang") || "en";
+const t = () => I18N[lang];
+
 const CONFIG = {
   manifestUrl: "https://getnoventra.org/tonconnect-manifest.json",
   defaultRaise: {
     id:"NVR-7F29A", name:"TON Community Build", purpose:"Development",
     target:100, raised:0, contributors:0, wallet:"",
-    desc:"A transparent community raise powered by TON. Every contribution is sent directly to the configured fund wallet.",
+    desc:"",
     deadline:null
   }
 };
@@ -136,25 +313,58 @@ const $ = id => document.getElementById(id);
 function save(){localStorage.setItem("noventra_raise_v1",JSON.stringify(raise));localStorage.setItem("noventra_raise_txs_v1",JSON.stringify(txs))}
 function short(a){return a && a.length>12 ? a.slice(0,6)+"…"+a.slice(-5) : (a||"Not configured")}
 function toast(s){$("toast").textContent=s;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),2800)}
+function setLanguage(next){
+  lang = I18N[next] ? next : "en";
+  localStorage.setItem("noventra_raise_lang", lang);
+  $("language").value = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = t().dir;
+  document.body.classList.toggle("rtl", t().dir === "rtl");
+  applyLanguage();
+  render();
+}
+function applyLanguage(){
+  const x=t();
+  $("kicker").textContent=x.kicker;
+  $("labelRaised").textContent=x.raised; $("labelTarget").textContent=x.target;
+  $("labelContributors").textContent=x.contributors; $("labelTime").textContent=x.time;
+  $("createBtn").textContent=x.create; $("settingsBtn").textContent=x.settings;
+  $("detailsTitle").textContent=x.details; $("labelRaiseId").textContent=x.raiseId;
+  $("labelFundWallet").textContent=x.fundWallet; $("labelCreator").textContent=x.creator;
+  $("labelNetwork").textContent=x.network; $("networkName").textContent=x.networkName;
+  $("activityTitle").textContent=x.activity; $("footer").innerHTML=x.footer;
+  $("modalTitle").textContent=x.modalTitle; $("fNameLabel").textContent=x.name;
+  $("fName").placeholder=x.namePh; $("fPurposeLabel").textContent=x.purpose;
+  $("fTargetLabel").textContent=x.targetLabel; $("fWalletLabel").textContent=x.wallet;
+  $("fDescLabel").textContent=x.description; $("fDesc").placeholder=x.descPh;
+  $("closeModal").textContent=x.cancel; $("saveRaise").textContent=x.save;
+  $("customAmount").placeholder=x.custom;
+  document.querySelectorAll("#fPurpose option").forEach(o=>o.textContent=x.purposeMap[o.value]||o.value);
+}
+$("language").addEventListener("change", e=>setLanguage(e.target.value));
+
+
 function render(){
+  const x=t();
   $("raiseName").textContent=raise.name;
-  $("raiseDesc").textContent=raise.desc;
-  $("purpose").textContent=raise.purpose;
+  $("raiseDesc").textContent=raise.desc || x.defaultDesc;
+  $("purpose").textContent=x.purposeMap[raise.purpose] || raise.purpose;
   $("raised").textContent=Number(raise.raised).toFixed(2)+" TON";
   $("target").textContent=Number(raise.target).toFixed(2)+" TON";
   $("contributors").textContent=raise.contributors||0;
   $("fundWallet").textContent=short(raise.wallet);
   const pct=raise.target ? Math.min(100,(raise.raised/raise.target)*100) : 0;
-  $("bar").style.width=pct+"%";$("percent").textContent=pct.toFixed(1)+"% funded";
-  $("remaining").textContent=Math.max(0,raise.target-raise.raised).toFixed(2)+" TON remaining";
-  $("sendBtn").textContent=raise.wallet ? `Send ${selected} TON` : "Configure fund wallet first";
-  $("status").textContent=pct>=100?"TARGET REACHED":"ACTIVE";
+  $("bar").style.width=pct+"%";
+  $("percent").textContent=pct.toFixed(1)+x.funded;
+  $("remaining").textContent=Math.max(0,raise.target-raise.raised).toFixed(2)+" TON "+x.remaining;
+  $("sendBtn").textContent=raise.wallet ? `${t().send} ${selected} TON` : x.configure;
+  $("status").textContent=pct>=100?x.reached:x.active;
   renderActivity();
 }
 function renderActivity(){
   const box=$("activity");
-  if(!txs.length){box.innerHTML='<div style="color:#66736b;font-size:12px;padding:6px 0">Henüz katkı yapılmadı. İlk işlem burada görünecek.</div>';return}
-  box.innerHTML=txs.slice(0,8).map(x=>`<div class="activity"><div class="dot"></div><div class="tx"><b>${short(x.from)}</b><small>${new Date(x.time).toLocaleString()}</small></div><div class="txamt">+${Number(x.amount).toFixed(2)} TON</div></div>`).join("");
+  if(!txs.length){box.innerHTML='<div style="color:#66736b;font-size:12px;padding:6px 0">'+t().noActivity+'</div>';return}
+  box.innerHTML=txs.slice(0,8).map(x=>`<div class="activity"><div class="dot"></div><div class="tx"><b>${short(x.from)}</b><small>${new Date(x.time).toLocaleString(lang==="tr"?"tr-TR":"en-US")}</small></div><div class="txamt">+${Number(x.amount).toFixed(2)} TON</div></div>`).join("");
 }
 
 const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
@@ -166,10 +376,10 @@ const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
 tonConnectUI.onStatusChange(wallet=>{
   if(wallet){
     $("creatorWallet").textContent=short(wallet.account.address);
-    $("sendBtn").textContent=raise.wallet ? `Send ${selected} TON` : "Configure fund wallet first";
+    $("sendBtn").textContent=raise.wallet ? `${t().send} ${selected} TON` : t().configure;
   }else{
-    $("creatorWallet").textContent="Not connected";
-    $("sendBtn").textContent=raise.wallet ? `Connect wallet to contribute` : "Configure fund wallet first";
+    $("creatorWallet").textContent=t().notConnected;
+    $("sendBtn").textContent=raise.wallet ? t().connect : t().configure;
   }
 });
 
@@ -183,11 +393,11 @@ $("customAmount").oninput=()=>{
 };
 
 $("sendBtn").onclick=async()=>{
-  if(!raise.wallet){toast("Set a fund wallet address first.");return}
+  if(!raise.wallet){toast(t().configure);return}
   if(!tonConnectUI.connected){await tonConnectUI.openModal();return}
   const amount=Number(selected);
-  if(!amount || amount<=0){toast("Enter a valid TON amount.");return}
-  if(raise.raised>=raise.target){toast("This raise has reached its target.");return}
+  if(!amount || amount<=0){toast(t().invalid);return}
+  if(raise.raised>=raise.target){toast(t().reachedToast);return}
   try{
     await tonConnectUI.sendTransaction({
       validUntil:Math.floor(Date.now()/1000)+300,
@@ -198,8 +408,8 @@ $("sendBtn").onclick=async()=>{
     raise.raised=Number(raise.raised)+amount;
     raise.contributors=Number(raise.contributors)+1;
     txs.unshift({from:addr,amount,time:Date.now()});
-    save();render();toast("Transaction submitted successfully.");
-  }catch(e){console.error(e);toast("Transaction cancelled or failed.")}
+    save();render();toast(t().submitted);
+  }catch(e){console.error(e);toast(t().failed)}
 };
 
 $("createBtn").onclick=()=>$("modal").classList.add("open");
@@ -210,11 +420,11 @@ $("settingsBtn").onclick=()=>{
 };
 $("saveRaise").onclick=()=>{
   const name=$("fName").value.trim(), target=Number($("fTarget").value), wallet=$("fWallet").value.trim();
-  if(!name||!target||!wallet){toast("Name, target and fund wallet are required.");return}
-  raise={...raise,name,purpose:$("fPurpose").value,target,wallet,desc:$("fDesc").value.trim()||"A transparent community raise powered by TON."};
-  save();render();$("modal").classList.remove("open");toast("Raise configuration saved.");
+  if(!name||!target||!wallet){toast(t().required);return}
+  raise={...raise,name,purpose:$("fPurpose").value,target,wallet,desc:$("fDesc").value.trim()||t().defaultDesc};
+  save();render();$("modal").classList.remove("open");toast(t().saved);
 };
-render();
+setLanguage(lang);
 </script>
 </body>
 </html>
